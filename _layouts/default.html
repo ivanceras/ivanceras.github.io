@@ -3,18 +3,17 @@
 
   {% include head.html %}
 
-  <body>
-
+  <body class="mdl-demo mdl-color--grey-100 mdl-color-text--grey-700 mdl-base">
+	<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
     {% include header.html %}
-
-    <div class="page-content">
-      <div class="wrapper">
+	
+	<main class="mdl-layout__content">
         {{ content }}
-      </div>
-    </div>
+	</main>
 
     {% include footer.html %}
-
+	</div>
+	<script src="https://storage.googleapis.com/code.getmdl.io/1.0.6/material.min.js"></script>
   </body>
 
 </html>

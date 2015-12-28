@@ -1,12 +1,12 @@
 # Site settings
-title: Transparent Philippines Initiative
+title: Ivanceras 
 description: >
-  Words from the Rust team
+  Ivanceras
 baseurl: ""
-url: "http://transparent-ph.github.io/blog/"
-logo: "https://avatars1.githubusercontent.com/u/16202237?v=3&s=200"
-twitter_username: rustlang
-github_username:  rust-lang
+url: "http://ivanceras.github.io"
+logo: "https://avatars0.githubusercontent.com/u/7972655?v=3&s=460"
+twitter_username: ivanceras 
+github_username:  ivanceras
 
 # Build settings
 highlighter: pygments
@@ -14,4 +14,4 @@ markdown: redcarpet
 redcarpet:
   extensions: ["with_toc_data", "smart"]
 
-root: http://transparent-ph.github.io/blog/ 
+root: http://ivanceras.github.io 
