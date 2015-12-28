@@ -1,0 +1,17 @@
+# Site settings
+title: Transparent Philippines Initiative
+description: >
+  Words from the Rust team
+baseurl: ""
+url: "http://transparent-ph.github.io/blog/"
+logo: "https://avatars1.githubusercontent.com/u/16202237?v=3&s=200"
+twitter_username: rustlang
+github_username:  rust-lang
+
+# Build settings
+highlighter: pygments
+markdown: redcarpet
+redcarpet:
+  extensions: ["with_toc_data", "smart"]
+
+root: http://transparent-ph.github.io/blog/ 
