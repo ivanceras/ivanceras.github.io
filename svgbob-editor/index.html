@@ -1,5 +1,30 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Svgbob Editor by ivanceras</title>
+<link rel="stylesheet" type="text/css" href="style.css"/>
+</head>
 <body>
-<h1> Hi this is svgbob</h1>
+<h2>Svgbob editor v0.1</h2>
+<div id="container">
+    <div id="svg_with_grip">
+        <div id="svgeditor">
+        Please wait...
+        </div>
+        <div id="grip"></div>
+    </div>
+    <div id="tool">
+    </div>
+    <div id="cursor">
+    </div>
+    <div id="controls">
+        <textarea id="texteditor"></textarea>
+    </div>
+</div>
+<script>
+    var load_wasm = true;
+</script>
+<script src="main.js"></script>
 </body>
 </html>
