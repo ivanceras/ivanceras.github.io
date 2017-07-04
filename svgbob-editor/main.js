@@ -7,10 +7,14 @@ if (q=="?wasm=1"){
 if (q=="?wasm=0"){
     load_wasm = false;
 }
+if (!window.WebAssembly){
+    console.warn("No webassembly support, doing fallback to asmjs");
+    load_wasm = false;
+}
 if (load_wasm){
+    window.Module = {};
     console.log("Loading webassembly version");
     /// fetch wasm file and inject the js file
-    window.Module = {};
     var wasm_file = "svgbob-editor.wasm";
     var wjs_file = "svgbob-editor.w.js";
     fetch(wasm_file)
