@@ -59,6 +59,7 @@ body{
   font-size: 14px;
   white-space: pre;
   word-wrap: normal;
+  resize: none;
 }
 
 #cursor .cursor_cells{

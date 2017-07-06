@@ -1974,9 +1974,9 @@ var ASM_CONSTS = [function($0) { Module.STDWEB.tmp = Module.STDWEB.to_js( $0 ); 
  function($0) { Module.STDWEB.from_js($0, (function(){if (! window.WebAssembly){console.log ("Like yours...");}})()); },
  function($0, $1, $2, $3) { Module.STDWEB.from_js($0, (function(){var container = document.querySelector ("#container"); container.style.top = Module.STDWEB.to_js($1); container.style.left = Module.STDWEB.to_js($2); container.style.width = Module.STDWEB.to_js($3)})()); },
  function($0, $1, $2, $3) { Module.STDWEB.from_js($0, (function(){var svgeditor = document.querySelector ("#svgeditor"); svgeditor.style.width = Module.STDWEB.to_js($1); var texteditor = document.querySelector ("#texteditor"); texteditor.style.width = Module.STDWEB.to_js($2); var set_active_tool_xray = Module.STDWEB.to_js($3); svgeditor.addEventListener ("mouseover" , function (e){set_active_tool_xray ();}); set_active_tool_xray.drop ();})()); },
- function($0, $1, $2) { Module.STDWEB.from_js($0, (function(){var process_keys = Module.STDWEB.to_js($1); var is_editor_focused = Module.STDWEB.to_js($2); window.addEventListener ("keydown" , function (e){if (e.altKey || e.ctrlKey || e.metaKey || is_editor_focused ()){}else {e.preventDefault (); return debounce (process_keys (e.code , e.key), 200)}}); process_keys.drop (); is_editor_focused.drop ();})()); },
+ function($0, $1, $2) { Module.STDWEB.from_js($0, (function(){var process_keys = Module.STDWEB.to_js($1); var is_editor_focused = Module.STDWEB.to_js($2); window.addEventListener ("keydown" , function (e){if (e.altKey || e.ctrlKey || e.metaKey || is_editor_focused ()){return ;}else {e.preventDefault (); var code = e.code ; var key = e.key ; throttle (function (){process_keys (code , key)}, 400)();}}); process_keys.drop (); is_editor_focused.drop ();})()); },
  function($0, $1, $2, $3, $4) { Module.STDWEB.from_js($0, (function(){var process_mouse_position = Module.STDWEB.to_js($1); var set_cursor_position_from_mouse_loc = Module.STDWEB.to_js($2); var set_mouse_up = Module.STDWEB.to_js($3); var set_mouse_down = Module.STDWEB.to_js($4); window.addEventListener ("mousemove" , function (e){var mouseX = e.pageX ; var mouseY = e.pageY ; process_mouse_position (mouseX , mouseY);}); window.addEventListener ("click" , function (e){set_cursor_position_from_mouse_loc ();}); window.addEventListener ("mousedown" , function (e){set_mouse_down ();}); window.addEventListener ("mouseup" , function (e){set_mouse_up ();}); set_mouse_down.drop (); set_mouse_up.drop (); process_mouse_position.drop (); set_cursor_position_from_mouse_loc.drop ();})()); },
- function($0, $1, $2, $3) { Module.STDWEB.from_js($0, (function(){var set_texteditor_focused = Module.STDWEB.to_js($1); var update_grid_from_texteditor = Module.STDWEB.to_js($2); var set_active_tool_none = Module.STDWEB.to_js($3); var texteditor = document.querySelector ("#texteditor"); texteditor.addEventListener ("focusin" , function (e){set_texteditor_focused (true); set_active_tool_none ();}); texteditor.addEventListener ("focusout" , function (e){set_texteditor_focused (false);}); texteditor.addEventListener ("input" , debounce (function (e){update_grid_from_texteditor (texteditor.value);}, 200)); set_texteditor_focused.drop (); update_grid_from_texteditor.drop (); set_active_tool_none.drop ();})()); },
+ function($0, $1, $2, $3) { Module.STDWEB.from_js($0, (function(){var set_texteditor_focused = Module.STDWEB.to_js($1); var update_grid_from_texteditor = Module.STDWEB.to_js($2); var set_active_tool_none = Module.STDWEB.to_js($3); var texteditor = document.querySelector ("#texteditor"); texteditor.addEventListener ("focusin" , function (e){set_texteditor_focused (true); set_active_tool_none ();}); texteditor.addEventListener ("focusout" , function (e){set_texteditor_focused (false);}); texteditor.addEventListener ("input" , throttle (function (e){update_grid_from_texteditor (texteditor.value);}, 400)); set_texteditor_focused.drop (); update_grid_from_texteditor.drop (); set_active_tool_none.drop ();})()); },
  function($0, $1) { Module.STDWEB.from_js($0, (function(){var set_grip_dragging = Module.STDWEB.to_js($1); var grip = document.querySelector ("#grip"); grip.addEventListener ("mousedown" , function (e){set_grip_dragging (true);}); window.addEventListener ("mouseup" , function (e){set_grip_dragging (false);}); set_grip_dragging.drop ();})()); },
  function($0, $1) { Module.STDWEB.from_js($0, (function(){var texteditor = document.querySelector ("#texteditor"); texteditor.value = Module.STDWEB.to_js($1);})()); },
  function($0, $1) { Module.STDWEB.from_js($0, (function(){var texteditor = document.querySelector ("#texteditor"); texteditor.style.height = Module.STDWEB.to_js($1);})()); },
@@ -2030,7 +2030,7 @@ function _emscripten_asm_const_iiiiii(code, a0, a1, a2, a3, a4) {
 
 STATIC_BASE = Runtime.GLOBAL_BASE;
 
-STATICTOP = STATIC_BASE + 56624;
+STATICTOP = STATIC_BASE + 56816;
   /* global initializers */  __ATINIT__.push();
   
 
@@ -2039,7 +2039,7 @@ memoryInitializer = Module["wasmJSMethod"].indexOf("asmjs") >= 0 || Module["wasm
 
 
 
-var STATIC_BUMP = 56624;
+var STATIC_BUMP = 56816;
 Module["STATIC_BASE"] = STATIC_BASE;
 Module["STATIC_BUMP"] = STATIC_BUMP;
 
