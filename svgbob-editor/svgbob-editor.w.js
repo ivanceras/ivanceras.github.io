@@ -69,7 +69,7 @@ if (ENVIRONMENT_IS_NODE) {
   var nodeFS;
   var nodePath;
 
-  Module['read'] = function read(filename, binary) {
+  Module['read'] = function shell_read(filename, binary) {
     if (!nodeFS) nodeFS = require('fs');
     if (!nodePath) nodePath = require('path');
     filename = nodePath['normalize'](filename);
@@ -120,7 +120,7 @@ else if (ENVIRONMENT_IS_SHELL) {
   if (typeof read != 'undefined') {
     Module['read'] = read;
   } else {
-    Module['read'] = function read() { throw 'no read() available' };
+    Module['read'] = function shell_read() { throw 'no read() available' };
   }
 
   Module['readBinary'] = function readBinary(f) {
@@ -146,7 +146,7 @@ else if (ENVIRONMENT_IS_SHELL) {
 
 }
 else if (ENVIRONMENT_IS_WEB || ENVIRONMENT_IS_WORKER) {
-  Module['read'] = function read(url) {
+  Module['read'] = function shell_read(url) {
     var xhr = new XMLHttpRequest();
     xhr.open('GET', url, false);
     xhr.send(null);
@@ -154,12 +154,12 @@ else if (ENVIRONMENT_IS_WEB || ENVIRONMENT_IS_WORKER) {
   };
 
   if (ENVIRONMENT_IS_WORKER) {
-    Module['readBinary'] = function read(url) {
+    Module['readBinary'] = function readBinary(url) {
       var xhr = new XMLHttpRequest();
       xhr.open('GET', url, false);
       xhr.responseType = 'arraybuffer';
       xhr.send(null);
-      return xhr.response;
+      return new Uint8Array(xhr.response);
     };
   }
 
@@ -183,10 +183,10 @@ else if (ENVIRONMENT_IS_WEB || ENVIRONMENT_IS_WORKER) {
   }
 
   if (typeof console !== 'undefined') {
-    if (!Module['print']) Module['print'] = function print(x) {
+    if (!Module['print']) Module['print'] = function shell_print(x) {
       console.log(x);
     };
-    if (!Module['printErr']) Module['printErr'] = function printErr(x) {
+    if (!Module['printErr']) Module['printErr'] = function shell_printErr(x) {
       console.warn(x);
     };
   } else {
@@ -416,6 +416,7 @@ Module["Runtime"] = Runtime;
 var ABORT = 0; // whether we are quitting the application. no code should run after this. set in exit() and abort()
 var EXITSTATUS = 0;
 
+/** @type {function(*, string=)} */
 function assert(condition, text) {
   if (!condition) {
     abort('Assertion failed: ' + text);
@@ -574,6 +575,7 @@ var cwrap, ccall;
 Module["ccall"] = ccall;
 Module["cwrap"] = cwrap;
 
+/** @type {function(number, number, string, boolean=)} */
 function setValue(ptr, value, type, noSafe) {
   type = type || 'i8';
   if (type.charAt(type.length-1) === '*') type = 'i32'; // pointers are 32-bit
@@ -590,7 +592,7 @@ function setValue(ptr, value, type, noSafe) {
 }
 Module["setValue"] = setValue;
 
-
+/** @type {function(number, string, boolean=)} */
 function getValue(ptr, type, noSafe) {
   type = type || 'i8';
   if (type.charAt(type.length-1) === '*') type = 'i32'; // pointers are 32-bit
@@ -632,6 +634,7 @@ Module["ALLOC_NONE"] = ALLOC_NONE;
 //         is initial data - if @slab is a number, then this does not matter at all and is
 //         ignored.
 // @allocator: How to allocate memory, see ALLOC_*
+/** @type {function((TypedArray|Array<number>|number), string, number, number=)} */
 function allocate(slab, types, allocator, ptr) {
   var zeroinit, size;
   if (typeof slab === 'number') {
@@ -667,7 +670,7 @@ function allocate(slab, types, allocator, ptr) {
 
   if (singleType === 'i8') {
     if (slab.subarray || slab.slice) {
-      HEAPU8.set(slab, ret);
+      HEAPU8.set(/** @type {!Uint8Array} */ (slab), ret);
     } else {
       HEAPU8.set(new Uint8Array(slab), ret);
     }
@@ -713,7 +716,8 @@ function getMemory(size) {
 }
 Module["getMemory"] = getMemory;
 
-function Pointer_stringify(ptr, /* optional */ length) {
+/** @type {function(number, number=)} */
+function Pointer_stringify(ptr, length) {
   if (length === 0 || !ptr) return '';
   // TODO: use TextDecoder
   // Find the length, and check for UTF while doing so
@@ -1155,9 +1159,25 @@ function alignUp(x, multiple) {
   return x;
 }
 
-var HEAP;
-var buffer;
-var HEAP8, HEAPU8, HEAP16, HEAPU16, HEAP32, HEAPU32, HEAPF32, HEAPF64;
+var HEAP,
+/** @type {ArrayBuffer} */
+  buffer,
+/** @type {Int8Array} */
+  HEAP8,
+/** @type {Uint8Array} */
+  HEAPU8,
+/** @type {Int16Array} */
+  HEAP16,
+/** @type {Uint16Array} */
+  HEAPU16,
+/** @type {Int32Array} */
+  HEAP32,
+/** @type {Uint32Array} */
+  HEAPU32,
+/** @type {Float32Array} */
+  HEAPF32,
+/** @type {Float64Array} */
+  HEAPF64;
 
 function updateGlobalBuffer(buf) {
   Module['buffer'] = buffer = buf;
@@ -1217,7 +1237,7 @@ if (TOTAL_MEMORY < TOTAL_STACK) Module.printErr('TOTAL_MEMORY should be larger t
 
 // Initialize the runtime's memory
 // check for full engine support (use string 'subarray' to avoid closure compiler confusion)
-assert(typeof Int32Array !== 'undefined' && typeof Float64Array !== 'undefined' && !!(new Int32Array(1)['subarray']) && !!(new Int32Array(1)['set']),
+assert(typeof Int32Array !== 'undefined' && typeof Float64Array !== 'undefined' && Int32Array.prototype.subarray !== undefined && Int32Array.prototype.set !== undefined,
        'JS engine does not provide full typed array support');
 
 
@@ -1359,8 +1379,8 @@ Module["addOnPostRun"] = addOnPostRun;
 
 // Tools
 
-
-function intArrayFromString(stringy, dontAddNull, length /* optional */) {
+/** @type {function(string, boolean=, number=)} */
+function intArrayFromString(stringy, dontAddNull, length) {
   var len = length > 0 ? length : lengthBytesUTF8(stringy)+1;
   var u8array = new Array(len);
   var numBytesWritten = stringToUTF8Array(stringy, u8array, 0, u8array.length);
@@ -1387,10 +1407,11 @@ Module["intArrayToString"] = intArrayToString;
 // a maximum length limit of how many bytes it is allowed to write. Prefer calling the
 // function stringToUTF8Array() instead, which takes in a maximum length that can be used
 // to be secure from out of bounds writes.
+/** @deprecated */
 function writeStringToMemory(string, buffer, dontAddNull) {
   Runtime.warnOnce('writeStringToMemory is deprecated and should not be called! Use stringToUTF8() instead!');
 
-  var lastChar, end;
+  var /** @type {number} */ lastChar, /** @type {number} */ end;
   if (dontAddNull) {
     // stringToUTF8Array always appends null. If we don't want to do that, remember the
     // character that existed at the location where the null will be placed, and restore
@@ -1601,9 +1622,15 @@ function integrateWasmJS(Module) {
   var method = Module['wasmJSMethod'] || 'native-wasm';
   Module['wasmJSMethod'] = method;
 
-  var wasmTextFile = Module['wasmTextFile'] || 'svgbob_editor-038c6d0c7c410178.wast';
-  var wasmBinaryFile = Module['wasmBinaryFile'] || 'svgbob_editor-038c6d0c7c410178.wasm';
-  var asmjsCodeFile = Module['asmjsCodeFile'] || 'svgbob_editor-038c6d0c7c410178.asm.js';
+  var wasmTextFile = Module['wasmTextFile'] || 'svgbob_editor-de60025e64151d40.wast';
+  var wasmBinaryFile = Module['wasmBinaryFile'] || 'svgbob_editor-de60025e64151d40.wasm';
+  var asmjsCodeFile = Module['asmjsCodeFile'] || 'svgbob_editor-de60025e64151d40.asm.js';
+
+  if (typeof Module['locateFile'] === 'function') {
+    wasmTextFile = Module['locateFile'](wasmTextFile);
+    wasmBinaryFile = Module['locateFile'](wasmBinaryFile);
+    asmjsCodeFile = Module['locateFile'](asmjsCodeFile);
+  }
 
   // utilities
 
@@ -1717,7 +1744,12 @@ function integrateWasmJS(Module) {
   function getBinaryPromise() {
     // if we don't have the binary yet, and have the Fetch api, use that
     if (!Module['wasmBinary'] && typeof fetch === 'function') {
-      return fetch(wasmBinaryFile).then(function(response) { return response['arrayBuffer']() });
+      return fetch(wasmBinaryFile, { credentials: 'same-origin' }).then(function(response) {
+        if (!response['ok']) {
+          throw "failed to load wasm binary file at '" + wasmBinaryFile + "'";
+        }
+        return response['arrayBuffer']();
+      });
     }
     // Otherwise, getBinary should be able to get it synchronously
     return new Promise(function(resolve, reject) {
@@ -1787,7 +1819,6 @@ function integrateWasmJS(Module) {
       }
     }
 
-    Module['printErr']('asynchronously preparing wasm');
     getBinaryPromise().then(function(binary) {
       return WebAssembly.instantiate(binary, info)
     }).then(function(output) {
@@ -1870,12 +1901,16 @@ function integrateWasmJS(Module) {
   Module['asmPreload'] = Module['asm'];
 
   // Memory growth integration code
-  Module['reallocBuffer'] = function(size) {
+
+  var asmjsReallocBuffer = Module['reallocBuffer'];
+
+  var wasmReallocBuffer = function(size) {
     var PAGE_MULTIPLE = Module["usingWasm"] ? WASM_PAGE_SIZE : ASMJS_PAGE_SIZE; // In wasm, heap size must be a multiple of 64KB. In asm.js, they need to be multiples of 16MB.
     size = alignUp(size, PAGE_MULTIPLE); // round up to wasm page size
     var old = Module['buffer'];
     var oldSize = old.byteLength;
     if (Module["usingWasm"]) {
+      // native wasm support
       try {
         var result = Module['wasmMemory'].grow((size - oldSize) / wasmPageSize); // .grow() takes a delta compared to the previous size
         if (result !== (-1 | 0)) {
@@ -1889,11 +1924,23 @@ function integrateWasmJS(Module) {
         return null;
       }
     } else {
+      // wasm interpreter support
       exports['__growWasmMemory']((size - oldSize) / wasmPageSize); // tiny wasm method that just does grow_memory
       // in interpreter, we replace Module.buffer if we allocate
       return Module['buffer'] !== old ? Module['buffer'] : null; // if it was reallocated, it changed
     }
   };
+
+  Module['reallocBuffer'] = function(size) {
+    if (finalMethod === 'asmjs') {
+      return asmjsReallocBuffer(size);
+    } else {
+      return wasmReallocBuffer(size);
+    }
+  };
+
+  // we may try more than one; this is the final one, that worked and we are using
+  var finalMethod = '';
 
   // Provide an "asm.js function" for the application, called to "link" the asm.js module. We instantiate
   // the wasm module at that time, and it receives imports and provides exports and so forth, the app
@@ -1935,7 +1982,8 @@ function integrateWasmJS(Module) {
     for (var i = 0; i < methods.length; i++) {
       var curr = methods[i];
 
-      Module['printErr']('trying binaryen method: ' + curr);
+
+      finalMethod = curr;
 
       if (curr === 'native-wasm') {
         if (exports = doNativeWasm(global, env, providedBuffer)) break;
@@ -1950,7 +1998,6 @@ function integrateWasmJS(Module) {
 
     if (!exports) throw 'no binaryen method succeeded. consider enabling more options, like interpreting, if you want that: https://github.com/kripken/emscripten/wiki/WebAssembly#binaryen-methods';
 
-    Module['printErr']('binaryen method succeeded.');
 
     return exports;
   };
@@ -1963,12 +2010,12 @@ integrateWasmJS(Module);
 // === Body ===
 
 var ASM_CONSTS = [function($0) { Module.STDWEB.tmp = Module.STDWEB.to_js( $0 ); },
- function($0) { Module.STDWEB.decrement_refcount( $0 ); },
  function($0, $1) { Module.STDWEB.from_js($0, (function(){return Module.STDWEB.to_js($1). firstChild ;})()); },
  function($0, $1) { Module.STDWEB.to_js($0). appendChild (Module.STDWEB.to_js($1)); },
  function($0, $1, $2) { Module.STDWEB.to_js($0). replaceChild (Module.STDWEB.to_js($1), Module.STDWEB.to_js($2)); },
  function($0, $1) { Module.STDWEB.from_js($0, (function(){return Module.STDWEB.to_js($1). classList ;})()); },
  function($0) { Module.STDWEB.increment_refcount( $0 ); },
+ function($0) { Module.STDWEB.decrement_refcount( $0 ); },
  function($0) { return (Module.STDWEB.acquire_js_reference( $0 ) instanceof Node) | 0; },
  function($0) { return (Module.STDWEB.acquire_js_reference( $0 ) instanceof HTMLElement) | 0; },
  function($0) { Module.STDWEB.from_js($0, (function(){if (! window.WebAssembly){console.log ("Like yours...");}})()); },
@@ -2005,43 +2052,43 @@ var ASM_CONSTS = [function($0) { Module.STDWEB.tmp = Module.STDWEB.to_js( $0 ); 
  function($0, $1) { Module.STDWEB.to_js($0). add (Module.STDWEB.to_js($1)); }];
 
 function _emscripten_asm_const_iiiii(code, a0, a1, a2, a3) {
- return ASM_CONSTS[code](a0, a1, a2, a3);
+  return ASM_CONSTS[code](a0, a1, a2, a3);
 }
 
 function _emscripten_asm_const_i(code) {
- return ASM_CONSTS[code]();
+  return ASM_CONSTS[code]();
 }
 
 function _emscripten_asm_const_ii(code, a0) {
- return ASM_CONSTS[code](a0);
+  return ASM_CONSTS[code](a0);
 }
 
 function _emscripten_asm_const_iiii(code, a0, a1, a2) {
- return ASM_CONSTS[code](a0, a1, a2);
+  return ASM_CONSTS[code](a0, a1, a2);
 }
 
 function _emscripten_asm_const_iii(code, a0, a1) {
- return ASM_CONSTS[code](a0, a1);
+  return ASM_CONSTS[code](a0, a1);
 }
 
 function _emscripten_asm_const_iiiiii(code, a0, a1, a2, a3, a4) {
- return ASM_CONSTS[code](a0, a1, a2, a3, a4);
+  return ASM_CONSTS[code](a0, a1, a2, a3, a4);
 }
 
 
 
 STATIC_BASE = Runtime.GLOBAL_BASE;
 
-STATICTOP = STATIC_BASE + 59888;
-  /* global initializers */  __ATINIT__.push();
-  
-
-memoryInitializer = Module["wasmJSMethod"].indexOf("asmjs") >= 0 || Module["wasmJSMethod"].indexOf("interpret-asm2wasm") >= 0 ? "svgbob_editor-038c6d0c7c410178.js.mem" : null;
+STATICTOP = STATIC_BASE + 60224;
+/* global initializers */  __ATINIT__.push();
 
 
+memoryInitializer = Module["wasmJSMethod"].indexOf("asmjs") >= 0 || Module["wasmJSMethod"].indexOf("interpret-asm2wasm") >= 0 ? "svgbob_editor-de60025e64151d40.js.mem" : null;
 
 
-var STATIC_BUMP = 59888;
+
+
+var STATIC_BUMP = 60224;
 Module["STATIC_BASE"] = STATIC_BASE;
 Module["STATIC_BUMP"] = STATIC_BUMP;
 
@@ -2998,10 +3045,7 @@ function copyTempDouble(ptr) {
 
   function _pthread_condattr_destroy() { return 0; }
 
-  
-  function _free() {
-  }
-  Module["_free"] = _free;function ___cxa_free_exception(ptr) {
+  function ___cxa_free_exception(ptr) {
       try {
         return _free(ptr);
       } catch(e) { // XXX FIXME
@@ -3063,17 +3107,7 @@ function copyTempDouble(ptr) {
   Module["_memcpy"] = _memcpy; 
   Module["_memmove"] = _memmove;
 
-  
-  function _malloc(bytes) {
-      /* Over-allocate to make sure it is byte-aligned by 8.
-       * This will leak memory, but this is only the dummy
-       * implementation (replaced by dlmalloc normally) so
-       * not an issue.
-       */
-      var ptr = Runtime.dynamicAlloc(bytes + 8);
-      return (ptr+8) & 0xFFFFFFF8;
-    }
-  Module["_malloc"] = _malloc;function ___cxa_allocate_exception(size) {
+  function ___cxa_allocate_exception(size) {
       return _malloc(size);
     }
 
@@ -6489,8 +6523,8 @@ function copyTempDouble(ptr) {
   try {
    // llseek
       var stream = SYSCALLS.getStreamFromFD(), offset_high = SYSCALLS.get(), offset_low = SYSCALLS.get(), result = SYSCALLS.get(), whence = SYSCALLS.get();
+      // NOTE: offset_high is unused - Emscripten's off_t is 32-bit
       var offset = offset_low;
-      assert(offset_high === 0);
       FS.llseek(stream, offset, whence);
       HEAP32[((result)>>2)]=stream.position;
       if (stream.getdents && offset === 0 && whence === 0) stream.getdents = null; // reset readdir state
@@ -6610,7 +6644,6 @@ staticSealed = true; // seal the static portion of memory
 assert(DYNAMIC_BASE < TOTAL_MEMORY, "TOTAL_MEMORY not big enough for stack");
 
 
-
 function nullFunc_viiiii(x) { Module["printErr"]("Invalid function pointer called with signature 'viiiii'. Perhaps this is an invalid value (e.g. caused by calling a virtual method on a NULL pointer)? Or calling a function with an incorrect type, which will fail? (it is worth building your source files with -Werror (warnings are errors), as warnings can indicate undefined behavior which can cause this)");  Module["printErr"]("Build with ASSERTIONS=2 for more info.");abort(x) }
 
 function nullFunc_vif(x) { Module["printErr"]("Invalid function pointer called with signature 'vif'. Perhaps this is an invalid value (e.g. caused by calling a virtual method on a NULL pointer)? Or calling a function with an incorrect type, which will fail? (it is worth building your source files with -Werror (warnings are errors), as warnings can indicate undefined behavior which can cause this)");  Module["printErr"]("Build with ASSERTIONS=2 for more info.");abort(x) }
@@ -6628,6 +6661,8 @@ function nullFunc_fff(x) { Module["printErr"]("Invalid function pointer called w
 function nullFunc_if(x) { Module["printErr"]("Invalid function pointer called with signature 'if'. Perhaps this is an invalid value (e.g. caused by calling a virtual method on a NULL pointer)? Or calling a function with an incorrect type, which will fail? (it is worth building your source files with -Werror (warnings are errors), as warnings can indicate undefined behavior which can cause this)");  Module["printErr"]("Build with ASSERTIONS=2 for more info.");abort(x) }
 
 function nullFunc_viiif(x) { Module["printErr"]("Invalid function pointer called with signature 'viiif'. Perhaps this is an invalid value (e.g. caused by calling a virtual method on a NULL pointer)? Or calling a function with an incorrect type, which will fail? (it is worth building your source files with -Werror (warnings are errors), as warnings can indicate undefined behavior which can cause this)");  Module["printErr"]("Build with ASSERTIONS=2 for more info.");abort(x) }
+
+function nullFunc_vidd(x) { Module["printErr"]("Invalid function pointer called with signature 'vidd'. Perhaps this is an invalid value (e.g. caused by calling a virtual method on a NULL pointer)? Or calling a function with an incorrect type, which will fail? (it is worth building your source files with -Werror (warnings are errors), as warnings can indicate undefined behavior which can cause this)");  Module["printErr"]("Build with ASSERTIONS=2 for more info.");abort(x) }
 
 function nullFunc_iiii(x) { Module["printErr"]("Invalid function pointer called with signature 'iiii'. Perhaps this is an invalid value (e.g. caused by calling a virtual method on a NULL pointer)? Or calling a function with an incorrect type, which will fail? (it is worth building your source files with -Werror (warnings are errors), as warnings can indicate undefined behavior which can cause this)");  Module["printErr"]("Build with ASSERTIONS=2 for more info.");abort(x) }
 
@@ -6655,9 +6690,9 @@ function nullFunc_viif(x) { Module["printErr"]("Invalid function pointer called 
 
 function nullFunc_viiii(x) { Module["printErr"]("Invalid function pointer called with signature 'viiii'. Perhaps this is an invalid value (e.g. caused by calling a virtual method on a NULL pointer)? Or calling a function with an incorrect type, which will fail? (it is worth building your source files with -Werror (warnings are errors), as warnings can indicate undefined behavior which can cause this)");  Module["printErr"]("Build with ASSERTIONS=2 for more info.");abort(x) }
 
-Module['wasmTableSize'] = 40960;
+Module['wasmTableSize'] = 43008;
 
-Module['wasmMaxTableSize'] = 40960;
+Module['wasmMaxTableSize'] = 43008;
 
 function invoke_viiiii(index,a1,a2,a3,a4,a5) {
   try {
@@ -6734,6 +6769,15 @@ function invoke_if(index,a1) {
 function invoke_viiif(index,a1,a2,a3,a4) {
   try {
     Module["dynCall_viiif"](index,a1,a2,a3,a4);
+  } catch(e) {
+    if (typeof e !== 'number' && e !== 'longjmp') throw e;
+    Module["setThrew"](1, 0);
+  }
+}
+
+function invoke_vidd(index,a1,a2,a3) {
+  try {
+    Module["dynCall_vidd"](index,a1,a2,a3);
   } catch(e) {
     if (typeof e !== 'number' && e !== 'longjmp') throw e;
     Module["setThrew"](1, 0);
@@ -6859,7 +6903,7 @@ function invoke_viiii(index,a1,a2,a3,a4) {
 
 Module.asmGlobalArg = { "Math": Math, "Int8Array": Int8Array, "Int16Array": Int16Array, "Int32Array": Int32Array, "Uint8Array": Uint8Array, "Uint16Array": Uint16Array, "Uint32Array": Uint32Array, "Float32Array": Float32Array, "Float64Array": Float64Array, "NaN": NaN, "Infinity": Infinity };
 
-Module.asmLibraryArg = { "abort": abort, "assert": assert, "enlargeMemory": enlargeMemory, "getTotalMemory": getTotalMemory, "abortOnCannotGrowMemory": abortOnCannotGrowMemory, "abortStackOverflow": abortStackOverflow, "nullFunc_viiiii": nullFunc_viiiii, "nullFunc_vif": nullFunc_vif, "nullFunc_vi": nullFunc_vi, "nullFunc_vii": nullFunc_vii, "nullFunc_viiiif": nullFunc_viiiif, "nullFunc_ii": nullFunc_ii, "nullFunc_fff": nullFunc_fff, "nullFunc_if": nullFunc_if, "nullFunc_viiif": nullFunc_viiif, "nullFunc_iiii": nullFunc_iiii, "nullFunc_viff": nullFunc_viff, "nullFunc_viiiiii": nullFunc_viiiiii, "nullFunc_ji": nullFunc_ji, "nullFunc_fi": nullFunc_fi, "nullFunc_iii": nullFunc_iii, "nullFunc_iiiiii": nullFunc_iiiiii, "nullFunc_i": nullFunc_i, "nullFunc_iiiii": nullFunc_iiiii, "nullFunc_viii": nullFunc_viii, "nullFunc_v": nullFunc_v, "nullFunc_viif": nullFunc_viif, "nullFunc_viiii": nullFunc_viiii, "invoke_viiiii": invoke_viiiii, "invoke_vif": invoke_vif, "invoke_vi": invoke_vi, "invoke_vii": invoke_vii, "invoke_viiiif": invoke_viiiif, "invoke_ii": invoke_ii, "invoke_fff": invoke_fff, "invoke_if": invoke_if, "invoke_viiif": invoke_viiif, "invoke_iiii": invoke_iiii, "invoke_viff": invoke_viff, "invoke_viiiiii": invoke_viiiiii, "invoke_ji": invoke_ji, "invoke_fi": invoke_fi, "invoke_iii": invoke_iii, "invoke_iiiiii": invoke_iiiiii, "invoke_i": invoke_i, "invoke_iiiii": invoke_iiiii, "invoke_viii": invoke_viii, "invoke_v": invoke_v, "invoke_viif": invoke_viif, "invoke_viiii": invoke_viiii, "___syscall221": ___syscall221, "_pthread_cond_wait": _pthread_cond_wait, "_emscripten_get_now_is_monotonic": _emscripten_get_now_is_monotonic, "_emscripten_asm_const_iiiii": _emscripten_asm_const_iiiii, "_pthread_rwlock_wrlock": _pthread_rwlock_wrlock, "__Unwind_FindEnclosingFunction": __Unwind_FindEnclosingFunction, "_pthread_key_create": _pthread_key_create, "_emscripten_asm_const_iii": _emscripten_asm_const_iii, "_emscripten_set_main_loop_timing": _emscripten_set_main_loop_timing, "___gxx_personality_v0": ___gxx_personality_v0, "_pthread_rwlock_unlock": _pthread_rwlock_unlock, "___cxa_find_matching_catch_2": ___cxa_find_matching_catch_2, "___cxa_find_matching_catch": ___cxa_find_matching_catch, "___buildEnvironment": ___buildEnvironment, "_emscripten_asm_const_ii": _emscripten_asm_const_ii, "_pthread_cond_init": _pthread_cond_init, "__Unwind_GetIPInfo": __Unwind_GetIPInfo, "_emscripten_asm_const_i": _emscripten_asm_const_i, "_clock_gettime": _clock_gettime, "_pthread_mutexattr_destroy": _pthread_mutexattr_destroy, "__emscripten_traverse_stack": __emscripten_traverse_stack, "___setErrNo": ___setErrNo, "___cxa_free_exception": ___cxa_free_exception, "_pthread_key_delete": _pthread_key_delete, "___cxa_allocate_exception": ___cxa_allocate_exception, "_emscripten_memcpy_big": _emscripten_memcpy_big, "___resumeException": ___resumeException, "__ZSt18uncaught_exceptionv": __ZSt18uncaught_exceptionv, "_pthread_condattr_setclock": _pthread_condattr_setclock, "_pthread_getspecific": _pthread_getspecific, "___cxa_find_matching_catch_3": ___cxa_find_matching_catch_3, "_pthread_rwlock_rdlock": _pthread_rwlock_rdlock, "_pthread_cond_signal": _pthread_cond_signal, "_pthread_condattr_init": _pthread_condattr_init, "_abort": _abort, "_pthread_mutex_destroy": _pthread_mutex_destroy, "_pthread_mutexattr_init": _pthread_mutexattr_init, "_pthread_mutexattr_settype": _pthread_mutexattr_settype, "_getenv": _getenv, "_pthread_condattr_destroy": _pthread_condattr_destroy, "_emscripten_pause_main_loop": _emscripten_pause_main_loop, "___syscall54": ___syscall54, "___unlock": ___unlock, "___syscall140": ___syscall140, "_emscripten_set_main_loop": _emscripten_set_main_loop, "_llvm_round_f32": _llvm_round_f32, "_emscripten_asm_const_iiiiii": _emscripten_asm_const_iiiiii, "_pthread_setspecific": _pthread_setspecific, "_emscripten_asm_const_iiii": _emscripten_asm_const_iiii, "_dladdr": _dladdr, "___syscall3": ___syscall3, "___lock": ___lock, "___syscall6": ___syscall6, "___syscall5": ___syscall5, "___syscall4": ___syscall4, "_emscripten_get_now": _emscripten_get_now, "___cxa_throw": ___cxa_throw, "_pthread_cond_destroy": _pthread_cond_destroy, "_llvm_trap": _llvm_trap, "_pthread_mutex_init": _pthread_mutex_init, "__Unwind_Backtrace": __Unwind_Backtrace, "___syscall146": ___syscall146, "_emscripten_get_callstack_js": _emscripten_get_callstack_js, "DYNAMICTOP_PTR": DYNAMICTOP_PTR, "tempDoublePtr": tempDoublePtr, "ABORT": ABORT, "STACKTOP": STACKTOP, "STACK_MAX": STACK_MAX };
+Module.asmLibraryArg = { "abort": abort, "assert": assert, "enlargeMemory": enlargeMemory, "getTotalMemory": getTotalMemory, "abortOnCannotGrowMemory": abortOnCannotGrowMemory, "abortStackOverflow": abortStackOverflow, "nullFunc_viiiii": nullFunc_viiiii, "nullFunc_vif": nullFunc_vif, "nullFunc_vi": nullFunc_vi, "nullFunc_vii": nullFunc_vii, "nullFunc_viiiif": nullFunc_viiiif, "nullFunc_ii": nullFunc_ii, "nullFunc_fff": nullFunc_fff, "nullFunc_if": nullFunc_if, "nullFunc_viiif": nullFunc_viiif, "nullFunc_vidd": nullFunc_vidd, "nullFunc_iiii": nullFunc_iiii, "nullFunc_viff": nullFunc_viff, "nullFunc_viiiiii": nullFunc_viiiiii, "nullFunc_ji": nullFunc_ji, "nullFunc_fi": nullFunc_fi, "nullFunc_iii": nullFunc_iii, "nullFunc_iiiiii": nullFunc_iiiiii, "nullFunc_i": nullFunc_i, "nullFunc_iiiii": nullFunc_iiiii, "nullFunc_viii": nullFunc_viii, "nullFunc_v": nullFunc_v, "nullFunc_viif": nullFunc_viif, "nullFunc_viiii": nullFunc_viiii, "invoke_viiiii": invoke_viiiii, "invoke_vif": invoke_vif, "invoke_vi": invoke_vi, "invoke_vii": invoke_vii, "invoke_viiiif": invoke_viiiif, "invoke_ii": invoke_ii, "invoke_fff": invoke_fff, "invoke_if": invoke_if, "invoke_viiif": invoke_viiif, "invoke_vidd": invoke_vidd, "invoke_iiii": invoke_iiii, "invoke_viff": invoke_viff, "invoke_viiiiii": invoke_viiiiii, "invoke_ji": invoke_ji, "invoke_fi": invoke_fi, "invoke_iii": invoke_iii, "invoke_iiiiii": invoke_iiiiii, "invoke_i": invoke_i, "invoke_iiiii": invoke_iiiii, "invoke_viii": invoke_viii, "invoke_v": invoke_v, "invoke_viif": invoke_viif, "invoke_viiii": invoke_viiii, "___syscall221": ___syscall221, "_pthread_cond_wait": _pthread_cond_wait, "_emscripten_get_now_is_monotonic": _emscripten_get_now_is_monotonic, "_emscripten_asm_const_iiiii": _emscripten_asm_const_iiiii, "_pthread_rwlock_wrlock": _pthread_rwlock_wrlock, "__Unwind_FindEnclosingFunction": __Unwind_FindEnclosingFunction, "_pthread_key_create": _pthread_key_create, "_emscripten_asm_const_iii": _emscripten_asm_const_iii, "_emscripten_set_main_loop_timing": _emscripten_set_main_loop_timing, "___gxx_personality_v0": ___gxx_personality_v0, "_pthread_rwlock_unlock": _pthread_rwlock_unlock, "___cxa_find_matching_catch_2": ___cxa_find_matching_catch_2, "___cxa_find_matching_catch": ___cxa_find_matching_catch, "___buildEnvironment": ___buildEnvironment, "_emscripten_asm_const_ii": _emscripten_asm_const_ii, "_pthread_cond_init": _pthread_cond_init, "__Unwind_GetIPInfo": __Unwind_GetIPInfo, "_emscripten_asm_const_i": _emscripten_asm_const_i, "_clock_gettime": _clock_gettime, "_pthread_mutexattr_destroy": _pthread_mutexattr_destroy, "__emscripten_traverse_stack": __emscripten_traverse_stack, "___setErrNo": ___setErrNo, "___cxa_free_exception": ___cxa_free_exception, "_pthread_key_delete": _pthread_key_delete, "___cxa_allocate_exception": ___cxa_allocate_exception, "_emscripten_memcpy_big": _emscripten_memcpy_big, "___resumeException": ___resumeException, "__ZSt18uncaught_exceptionv": __ZSt18uncaught_exceptionv, "_pthread_condattr_setclock": _pthread_condattr_setclock, "_pthread_getspecific": _pthread_getspecific, "___cxa_find_matching_catch_3": ___cxa_find_matching_catch_3, "_pthread_rwlock_rdlock": _pthread_rwlock_rdlock, "_pthread_cond_signal": _pthread_cond_signal, "_pthread_condattr_init": _pthread_condattr_init, "_abort": _abort, "_pthread_mutex_destroy": _pthread_mutex_destroy, "_pthread_mutexattr_init": _pthread_mutexattr_init, "_pthread_mutexattr_settype": _pthread_mutexattr_settype, "_getenv": _getenv, "_pthread_condattr_destroy": _pthread_condattr_destroy, "_emscripten_pause_main_loop": _emscripten_pause_main_loop, "___syscall54": ___syscall54, "___unlock": ___unlock, "___syscall140": ___syscall140, "_emscripten_set_main_loop": _emscripten_set_main_loop, "_llvm_round_f32": _llvm_round_f32, "_emscripten_asm_const_iiiiii": _emscripten_asm_const_iiiiii, "_pthread_setspecific": _pthread_setspecific, "_emscripten_asm_const_iiii": _emscripten_asm_const_iiii, "_dladdr": _dladdr, "___cxa_throw": ___cxa_throw, "___lock": ___lock, "___syscall6": ___syscall6, "___syscall5": ___syscall5, "___syscall4": ___syscall4, "_emscripten_get_now": _emscripten_get_now, "___syscall3": ___syscall3, "_pthread_cond_destroy": _pthread_cond_destroy, "_llvm_trap": _llvm_trap, "_pthread_mutex_init": _pthread_mutex_init, "__Unwind_Backtrace": __Unwind_Backtrace, "___syscall146": ___syscall146, "_emscripten_get_callstack_js": _emscripten_get_callstack_js, "DYNAMICTOP_PTR": DYNAMICTOP_PTR, "tempDoublePtr": tempDoublePtr, "ABORT": ABORT, "STACKTOP": STACKTOP, "STACK_MAX": STACK_MAX };
 // EMSCRIPTEN_START_ASM
 var asm =Module["asm"]// EMSCRIPTEN_END_ASM
 (Module.asmGlobalArg, Module.asmLibraryArg, buffer);
@@ -7044,6 +7088,7 @@ var dynCall_ii = Module["dynCall_ii"] = function() { return Module["asm"]["dynCa
 var dynCall_fff = Module["dynCall_fff"] = function() { return Module["asm"]["dynCall_fff"].apply(null, arguments) };
 var dynCall_if = Module["dynCall_if"] = function() { return Module["asm"]["dynCall_if"].apply(null, arguments) };
 var dynCall_viiif = Module["dynCall_viiif"] = function() { return Module["asm"]["dynCall_viiif"].apply(null, arguments) };
+var dynCall_vidd = Module["dynCall_vidd"] = function() { return Module["asm"]["dynCall_vidd"].apply(null, arguments) };
 var dynCall_iiii = Module["dynCall_iiii"] = function() { return Module["asm"]["dynCall_iiii"].apply(null, arguments) };
 var dynCall_viff = Module["dynCall_viff"] = function() { return Module["asm"]["dynCall_viff"].apply(null, arguments) };
 var dynCall_viiiiii = Module["dynCall_viiiiii"] = function() { return Module["asm"]["dynCall_viiiiii"].apply(null, arguments) };
@@ -7058,15 +7103,12 @@ var dynCall_v = Module["dynCall_v"] = function() { return Module["asm"]["dynCall
 var dynCall_viif = Module["dynCall_viif"] = function() { return Module["asm"]["dynCall_viif"].apply(null, arguments) };
 var dynCall_viiii = Module["dynCall_viiii"] = function() { return Module["asm"]["dynCall_viiii"].apply(null, arguments) };
 ;
-
 Runtime.stackAlloc = Module['stackAlloc'];
 Runtime.stackSave = Module['stackSave'];
 Runtime.stackRestore = Module['stackRestore'];
 Runtime.establishStackSpace = Module['establishStackSpace'];
-
 Runtime.setTempRet0 = Module['setTempRet0'];
 Runtime.getTempRet0 = Module['getTempRet0'];
-
 
 
 // === Auto-generated postamble setup entry stuff ===
@@ -7131,6 +7173,10 @@ if (memoryInitializer) {
 
 
 
+/**
+ * @constructor
+ * @extends {Error}
+ */
 function ExitStatus(status) {
   this.name = "ExitStatus";
   this.message = "Program terminated with exit(" + status + ")";
@@ -7206,13 +7252,13 @@ Module['callMain'] = Module.callMain = function callMain(args) {
 
 
 
+/** @type {function(Array=)} */
 function run(args) {
   args = args || Module['arguments'];
 
   if (preloadStartTime === null) preloadStartTime = Date.now();
 
   if (runDependencies > 0) {
-    Module.printErr('run() called, but dependencies remain, so not running');
     return;
   }
 
@@ -7339,4 +7385,3 @@ run();
 
 
 
-//# sourceMappingURL=svgbob_editor-038c6d0c7c410178.js.map
