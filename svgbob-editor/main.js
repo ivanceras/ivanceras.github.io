@@ -73,3 +73,26 @@ function throttle(func, wait, options) {
     return result;
   };
 };
+
+function download_svg(filename, content){
+    download(filename, content, "image/svg+xml");
+}
+function download_txt(filename, content){
+    download(filename, content, "text/plain");
+}
+
+function download(filename, content, mime){
+    var pom = document.createElement('a');
+    pom.setAttribute('href','data:'+mime+';charset=utf-8,'+encodeURIComponent(content));
+    pom.setAttribute('download', filename);
+    if (document.createEvent){
+        var event = document.createEvent('MouseEvents');
+        event.initEvent('click', true, true);
+        pom.dispatchEvent(event);
+        console.log("click event dispatched");
+    }
+    else{
+        pom.click();
+        console.log("clicked");
+    }
+}

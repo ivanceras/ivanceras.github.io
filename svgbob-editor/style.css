@@ -49,7 +49,7 @@ body{
   cursor: ew-resize;
 }
 
-#controls{
+#text_group{
   position: relative;
   display: block;
 }
@@ -105,3 +105,13 @@ body{
   50% { opacity: 0; }
 }
 
+#controls{
+  margin-top: 50px;
+  margin-bottom: 200px;
+  width: 100%;
+  text-align: right;
+}
+#controls button{
+  height: 40px;
+  width: 120px;
+}

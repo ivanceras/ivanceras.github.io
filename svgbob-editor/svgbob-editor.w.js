@@ -1972,6 +1972,8 @@ var ASM_CONSTS = [function($0) { Module.STDWEB.tmp = Module.STDWEB.to_js( $0 ); 
  function($0) { return (Module.STDWEB.acquire_js_reference( $0 ) instanceof Node) | 0; },
  function($0) { return (Module.STDWEB.acquire_js_reference( $0 ) instanceof HTMLElement) | 0; },
  function($0) { Module.STDWEB.from_js($0, (function(){if (! window.WebAssembly){console.log ("Like yours...");}})()); },
+ function($0) { Module.STDWEB.from_js($0, (function(){var loading = document.querySelector ("#loading"); document.body.removeChild (loading); var container = document.querySelector ("#container"); container.style.visibility = "visible" ;})()); },
+ function($0, $1, $2) { Module.STDWEB.from_js($0, (function(){var get_svg = Module.STDWEB.to_js($1); var get_text = Module.STDWEB.to_js($2); var dl_svg = document.querySelector ("#download_svg"); var dl_txt = document.querySelector ("#download_txt"); dl_svg.addEventListener ("click" , function (e){download_svg ("bob.svg" , get_svg ());}); dl_txt.addEventListener ("click" , function (e){download_txt ("bob.txt" , get_text ());});})()); },
  function($0, $1, $2, $3) { Module.STDWEB.from_js($0, (function(){var container = document.querySelector ("#container"); container.style.top = Module.STDWEB.to_js($1); container.style.left = Module.STDWEB.to_js($2); container.style.width = Module.STDWEB.to_js($3)})()); },
  function($0, $1, $2, $3) { Module.STDWEB.from_js($0, (function(){var svgeditor = document.querySelector ("#svgeditor"); svgeditor.style.width = Module.STDWEB.to_js($1); var texteditor = document.querySelector ("#texteditor"); texteditor.style.width = Module.STDWEB.to_js($2); var set_active_tool_xray = Module.STDWEB.to_js($3); svgeditor.addEventListener ("mouseover" , function (e){set_active_tool_xray ();}); set_active_tool_xray.drop ();})()); },
  function($0, $1, $2) { Module.STDWEB.from_js($0, (function(){var process_keys = Module.STDWEB.to_js($1); var is_editor_focused = Module.STDWEB.to_js($2); window.addEventListener ("keydown" , function (e){if (e.altKey || e.ctrlKey || e.metaKey || is_editor_focused ()){return ;}else {e.preventDefault (); var code = e.code ; var key = e.key ; throttle (function (){process_keys (code , key)}, 400)();}}); process_keys.drop (); is_editor_focused.drop ();})()); },
@@ -2002,16 +2004,16 @@ var ASM_CONSTS = [function($0) { Module.STDWEB.tmp = Module.STDWEB.to_js( $0 ); 
  function($0, $1, $2) { Module.STDWEB.from_js($0, (function(){return Module.STDWEB.to_js($1). createTextNode (Module.STDWEB.to_js($2));})()); },
  function($0, $1) { Module.STDWEB.to_js($0). add (Module.STDWEB.to_js($1)); }];
 
-function _emscripten_asm_const_ii(code, a0) {
- return ASM_CONSTS[code](a0);
+function _emscripten_asm_const_iiiii(code, a0, a1, a2, a3) {
+ return ASM_CONSTS[code](a0, a1, a2, a3);
 }
 
 function _emscripten_asm_const_i(code) {
  return ASM_CONSTS[code]();
 }
 
-function _emscripten_asm_const_iiiii(code, a0, a1, a2, a3) {
- return ASM_CONSTS[code](a0, a1, a2, a3);
+function _emscripten_asm_const_ii(code, a0) {
+ return ASM_CONSTS[code](a0);
 }
 
 function _emscripten_asm_const_iiii(code, a0, a1, a2) {
@@ -2030,7 +2032,7 @@ function _emscripten_asm_const_iiiiii(code, a0, a1, a2, a3, a4) {
 
 STATIC_BASE = Runtime.GLOBAL_BASE;
 
-STATICTOP = STATIC_BASE + 56816;
+STATICTOP = STATIC_BASE + 59888;
   /* global initializers */  __ATINIT__.push();
   
 
@@ -2039,7 +2041,7 @@ memoryInitializer = Module["wasmJSMethod"].indexOf("asmjs") >= 0 || Module["wasm
 
 
 
-var STATIC_BUMP = 56816;
+var STATIC_BUMP = 59888;
 Module["STATIC_BASE"] = STATIC_BASE;
 Module["STATIC_BUMP"] = STATIC_BUMP;
 

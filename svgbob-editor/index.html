@@ -7,10 +7,12 @@
 <link rel="stylesheet" type="text/css" href="style.css"/>
 </head>
 <body>
-<div id="container">
+<div id="loading">
+    Please wait...
+</div>
+<div id="container" style="visibility:hidden" >
     <div id="svg_with_grip">
         <div id="svgeditor">
-        Please wait...
         </div>
         <div id="grip"></div>
     </div>
@@ -18,8 +20,12 @@
     </div>
     <div id="cursor">
     </div>
-    <div id="controls">
+    <div id="text_group">
         <textarea id="texteditor"></textarea>
+    </div>
+    <div id="controls">
+        <button id="download_svg">Download SVG</button>
+        <button id="download_txt">Download txt</button>
     </div>
 </div>
 <script>
