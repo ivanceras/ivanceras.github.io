@@ -1,0 +1,44 @@
+#render{
+    padding-left: 20px;
+    font-family: arial;
+}
+#render h1{
+    font-size: 1.5em;
+}
+#render h2{
+    font-size: 1.4em;
+}
+#render h3{
+    font-size: 1.3em;
+}
+#render h4{
+    font-size: 1.2em;
+}
+#render h5{
+    font-size: 1.1em;
+}
+#render h6{
+    font-size: 1em;
+}
+#render table{
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+#render th{
+    background-color: #ebebeb;
+}
+
+#render th, #render td{
+    border:1px solid #ccc;
+    padding: 5px;
+}
+#render pre {
+    font-family:monospace;
+    overflow:auto;
+}
+
+#render blockquote {
+    padding: 0 1em;
+    color: #777;
+    border-left: 0.25em solid #ddd
+}
