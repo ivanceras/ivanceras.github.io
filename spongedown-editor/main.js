@@ -1,4 +1,5 @@
 var ace = ace.edit("texteditor");
+ace.setShowPrintMargin(false);
 ace.setTheme("ace/theme/dawn");
 //ace.setKeyboardHandler("ace/keyboard/vim");
 //ace.setTheme("ace/theme/solarized_dark");
@@ -116,7 +117,7 @@ function respondToResize(){
 }
 
 var behaviors = ["full_size", "condensed_size", "full_card"];
-var active_behavior = "full_size";
+var active_behavior = "full_card";
 
 function setActiveBehavior(){
     if (active_behavior == "full_house"){

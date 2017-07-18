@@ -1,0 +1,115 @@
+body {
+    overflow: hidden;
+    font-family: arial;
+}
+
+.full_size{
+   --texteditor-top: 0;
+   --texteditor-width: 50%;
+   --grip-left: 50%;
+   --grip-width: 0.5%;
+   --render-top: 0;
+   --render-left: 50.5%;
+   --render-width: 49.5%;
+   --control-display: none;
+   --texteditor-visibility: visible;
+   --render-visibility: visible;
+}
+
+.full_card{
+   --texteditor-top: 30px;
+   --texteditor-width: 100%;
+   --grip-left: 0;
+   --grip-width: 0;
+   --render-top: var(--texteditor-top);
+   --render-left: 0%;
+   --render-width: 100%;
+   --control-display: flex;
+   --texteditor-visibility: visible;
+   --render-visibility: hidden;
+}
+
+.condensed_size{
+   --texteditor-top: 30px;
+   --texteditor-width: 100%;
+   --grip-left: 0;
+   --grip-width: 0;
+   --render-top: var(--texteditor-top);
+   --render-left: 0;
+   --render-width: 100%;
+   --control-display: flex;
+   --texteditor-visibility: visible;
+   --render-visibility: hidden;
+}
+
+#texteditor { 
+    margin: 0;
+    position: absolute;
+    top: var(--texteditor-top);
+    bottom: 0;
+    left: 0;
+    width: var(--texteditor-width);
+    visibility: var(--texteditor--visibility);
+}
+
+#grip{
+    position: absolute;
+    top: 0;
+    left: var(--grip-left);
+    width: var(--grip-width);
+    bottom: 0;
+    background-color: #ebebeb;
+    cursor: ew-resize;
+    visibility: var(--render-visibility);
+}
+
+#print-toolbar{
+    position: absolute;
+    top: 5px;
+    right: 10px;
+    width: 20px;
+    height: 20px;
+    color: #aaa;
+}
+
+#render {
+    position: absolute;
+    top:var(--render-top);
+    left: var(--render-left);
+    width: var(--render-width);
+    bottom: 0;
+    right: 0;
+    overflow: auto;
+    visibility: var(--render-visibility);
+}
+
+#controls {
+    display: var(--control-display);
+    justify-content: flex-start;
+    margin-bottom: -1px;
+    padding-left: 50px;
+    background-color: #ebebeb;
+    top: 0;
+    position: absolute;
+    left: 0;
+    right: 0;
+    height: 30px;
+}
+
+#controls button {
+    border-radius: 3px 3px 0 0;
+    display: inline-block;
+    font-size: 14px;
+    line-height: 20px;
+    text-decoration: none;
+    user-select: none;
+    outline: 0;
+    border: 1px solid rgba(0,0,0,0);
+    color: #000;
+    background-color: #ebebeb;
+    border-bottom: 1px solid #ebebeb;
+}
+
+#controls button.selected {
+    background-color: #f9f9f9;
+}

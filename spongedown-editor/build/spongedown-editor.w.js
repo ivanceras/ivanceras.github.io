@@ -1601,9 +1601,9 @@ function integrateWasmJS(Module) {
   var method = Module['wasmJSMethod'] || 'native-wasm';
   Module['wasmJSMethod'] = method;
 
-  var wasmTextFile = Module['wasmTextFile'] || 'spongedown_editor-b26c86c3e0dd0bf9.wast';
-  var wasmBinaryFile = Module['wasmBinaryFile'] || 'spongedown_editor-b26c86c3e0dd0bf9.wasm';
-  var asmjsCodeFile = Module['asmjsCodeFile'] || 'spongedown_editor-b26c86c3e0dd0bf9.asm.js';
+  var wasmTextFile = Module['wasmTextFile'] || 'spongedown_editor-f8a9599e437c1b17.wast';
+  var wasmBinaryFile = Module['wasmBinaryFile'] || 'spongedown_editor-f8a9599e437c1b17.wasm';
+  var asmjsCodeFile = Module['asmjsCodeFile'] || 'spongedown_editor-f8a9599e437c1b17.asm.js';
 
   // utilities
 
@@ -1963,8 +1963,8 @@ integrateWasmJS(Module);
 // === Body ===
 
 var ASM_CONSTS = [function($0) { Module.STDWEB.tmp = Module.STDWEB.to_js( $0 ); },
- function($0) { Module.STDWEB.decrement_refcount( $0 ); },
  function($0) { Module.STDWEB.increment_refcount( $0 ); },
+ function($0) { Module.STDWEB.decrement_refcount( $0 ); },
  function($0, $1) { Module.STDWEB.from_js($0, (function(){console.log ("Hello from stdweb"); var spongedown_parse = Module.STDWEB.to_js($1); window.spongedown_parse = function (s){return spongedown_parse (s);}; console.log ("window.spongedown_parse" , window.spongedown_parse); updateRender ();})()); },
  function() { Module.STDWEB = {}; Module.STDWEB.to_js = function to_js (address){var kind = HEAPU8 [address + 12]; if (kind ===0){return undefined ;}else if (kind ===1){return null ;}else if (kind ===2){return HEAP32 [address / 4];}else if (kind ===3){return HEAPF64 [address / 8];}else if (kind ===4){var pointer = HEAPU32 [address / 4]; var length = HEAPU32 [(address + 4)/ 4]; return Module.STDWEB.to_js_string (pointer , length);}else if (kind ===5){return false ;}else if (kind ===6){return true ;}else if (kind ===7){var pointer = HEAPU32 [address / 4]; var length = HEAPU32 [(address + 4)/ 4]; var output = []; for (var i = 0 ; i < length ; ++i){output.push (Module.STDWEB.to_js (pointer + i * 16));}return output ;}else if (kind ===8){var value_array_pointer = HEAPU32 [address / 4]; var length = HEAPU32 [(address + 4)/ 4]; var key_array_pointer = HEAPU32 [(address + 8)/ 4]; var output = {}; for (var i = 0 ; i < length ; ++i){var key_pointer = HEAPU32 [(key_array_pointer + i * 8)/ 4]; var key_length = HEAPU32 [(key_array_pointer + 4 + i * 8)/ 4]; var key = Module.STDWEB.to_js_string (key_pointer , key_length); var value = Module.STDWEB.to_js (value_array_pointer + i * 16); output [key]= value ;}return output ;}else if (kind ===9){return Module.STDWEB.acquire_js_reference (HEAP32 [address / 4]);}else if (kind ===10){var adapter_pointer = HEAPU32 [address / 4]; var pointer = HEAPU32 [(address + 4)/ 4]; var deallocator_pointer = HEAPU32 [(address + 8)/ 4]; var output = function (){var args = _malloc (16); Module.STDWEB.from_js (args , arguments); Runtime.dynCall ("vii" , adapter_pointer , [pointer , args]); var result = Module.STDWEB.tmp ; Module.STDWEB.tmp = null ; return result ;}; output.drop = function (){output.drop = null ; Runtime.dynCall ("vi" , deallocator_pointer , [pointer]);}; return output ;}}; },
  function() { Module.STDWEB.from_js = function from_js (address , value){var kind = Object.prototype.toString.call (value); if (kind ==="[object String]"){var length = lengthBytesUTF8 (value); var pointer = _malloc (length + 1); stringToUTF8 (value , pointer , length + 1); HEAPU8 [address + 12]= 4 ; HEAPU32 [address / 4]= pointer ; HEAPU32 [(address + 4)/ 4]= length ;}else if (kind ==="[object Number]"){if (value ===(value | 0)){HEAPU8 [address + 12]= 2 ; HEAP32 [address / 4]= value ;}else {HEAPU8 [address + 12]= 3 ; HEAPF64 [address / 8]= value ;}}else if (value ===null){HEAPU8 [address + 12]= 1 ;}else if (value ===undefined){HEAPU8 [address + 12]= 0 ;}else if (value ===false){HEAPU8 [address + 12]= 5 ;}else if (value ===true){HEAPU8 [address + 12]= 6 ;}else if (kind ==="[object Array]" || kind ==="[object Arguments]"){var length = value.length ; var pointer = _malloc (length * 16); HEAPU8 [address + 12]= 7 ; HEAPU32 [address / 4]= pointer ; HEAPU32 [(address + 4)/ 4]= length ; for (var i = 0 ; i < length ; ++i){Module.STDWEB.from_js (pointer + i * 16 , value [i]);}}else if (kind ==="[object Object]"){var keys = Object.keys (value); var length = keys.length ; var key_array_pointer = _malloc (length * 8); var value_array_pointer = _malloc (length * 16); HEAPU8 [address + 12]= 8 ; HEAPU32 [address / 4]= value_array_pointer ; HEAPU32 [(address + 4)/ 4]= length ; HEAPU32 [(address + 8)/ 4]= key_array_pointer ; for (var i = 0 ; i < length ; ++i){var key = keys [i]; var key_length = lengthBytesUTF8 (key); var key_pointer = _malloc (key_length + 1); stringToUTF8 (key , key_pointer , key_length + 1); var key_address = key_array_pointer + i * 8 ; HEAPU32 [key_address / 4]= key_pointer ; HEAPU32 [(key_address + 4)/ 4]= key_length ; Module.STDWEB.from_js (value_array_pointer + i * 16 , value [key]);}}else {var refid = Module.STDWEB.acquire_rust_reference (value); HEAPU8 [address + 12]= 9 ; HEAP32 [address / 4]= refid ;}}; },
@@ -1994,16 +1994,16 @@ function _emscripten_asm_const_i(code) {
 
 STATIC_BASE = Runtime.GLOBAL_BASE;
 
-STATICTOP = STATIC_BASE + 271136;
+STATICTOP = STATIC_BASE + 277680;
   /* global initializers */  __ATINIT__.push();
   
 
-memoryInitializer = Module["wasmJSMethod"].indexOf("asmjs") >= 0 || Module["wasmJSMethod"].indexOf("interpret-asm2wasm") >= 0 ? "spongedown_editor-b26c86c3e0dd0bf9.js.mem" : null;
+memoryInitializer = Module["wasmJSMethod"].indexOf("asmjs") >= 0 || Module["wasmJSMethod"].indexOf("interpret-asm2wasm") >= 0 ? "spongedown_editor-f8a9599e437c1b17.js.mem" : null;
 
 
 
 
-var STATIC_BUMP = 271136;
+var STATIC_BUMP = 277680;
 Module["STATIC_BASE"] = STATIC_BASE;
 Module["STATIC_BUMP"] = STATIC_BUMP;
 
@@ -6622,9 +6622,9 @@ function nullFunc_viiiff(x) { Module["printErr"]("Invalid function pointer calle
 
 function nullFunc_viiii(x) { Module["printErr"]("Invalid function pointer called with signature 'viiii'. Perhaps this is an invalid value (e.g. caused by calling a virtual method on a NULL pointer)? Or calling a function with an incorrect type, which will fail? (it is worth building your source files with -Werror (warnings are errors), as warnings can indicate undefined behavior which can cause this)");  Module["printErr"]("Build with ASSERTIONS=2 for more info.");abort(x) }
 
-Module['wasmTableSize'] = 184320;
+Module['wasmTableSize'] = 192512;
 
-Module['wasmMaxTableSize'] = 184320;
+Module['wasmMaxTableSize'] = 192512;
 
 function invoke_viiiii(index,a1,a2,a3,a4,a5) {
   try {
@@ -6849,16 +6849,22 @@ Module.asmLibraryArg = { "abort": abort, "assert": assert, "enlargeMemory": enla
 var asm =Module["asm"]// EMSCRIPTEN_END_ASM
 (Module.asmGlobalArg, Module.asmLibraryArg, buffer);
 
-var real__llvm_bswap_i32 = asm["_llvm_bswap_i32"]; asm["_llvm_bswap_i32"] = function() {
+var real____rdl_dealloc = asm["___rdl_dealloc"]; asm["___rdl_dealloc"] = function() {
 assert(runtimeInitialized, 'you need to wait for the runtime to be ready (e.g. wait for main() to be called)');
 assert(!runtimeExited, 'the runtime was exited (use NO_EXIT_RUNTIME to keep it alive after main() exits)');
-return real__llvm_bswap_i32.apply(null, arguments);
+return real____rdl_dealloc.apply(null, arguments);
 };
 
 var real__main = asm["_main"]; asm["_main"] = function() {
 assert(runtimeInitialized, 'you need to wait for the runtime to be ready (e.g. wait for main() to be called)');
 assert(!runtimeExited, 'the runtime was exited (use NO_EXIT_RUNTIME to keep it alive after main() exits)');
 return real__main.apply(null, arguments);
+};
+
+var real____rdl_usable_size = asm["___rdl_usable_size"]; asm["___rdl_usable_size"] = function() {
+assert(runtimeInitialized, 'you need to wait for the runtime to be ready (e.g. wait for main() to be called)');
+assert(!runtimeExited, 'the runtime was exited (use NO_EXIT_RUNTIME to keep it alive after main() exits)');
+return real____rdl_usable_size.apply(null, arguments);
 };
 
 var real_stackSave = asm["stackSave"]; asm["stackSave"] = function() {
@@ -6873,10 +6879,22 @@ assert(!runtimeExited, 'the runtime was exited (use NO_EXIT_RUNTIME to keep it a
 return real__rust_eh_personality.apply(null, arguments);
 };
 
+var real____rdl_grow_in_place = asm["___rdl_grow_in_place"]; asm["___rdl_grow_in_place"] = function() {
+assert(runtimeInitialized, 'you need to wait for the runtime to be ready (e.g. wait for main() to be called)');
+assert(!runtimeExited, 'the runtime was exited (use NO_EXIT_RUNTIME to keep it alive after main() exits)');
+return real____rdl_grow_in_place.apply(null, arguments);
+};
+
 var real_setThrew = asm["setThrew"]; asm["setThrew"] = function() {
 assert(runtimeInitialized, 'you need to wait for the runtime to be ready (e.g. wait for main() to be called)');
 assert(!runtimeExited, 'the runtime was exited (use NO_EXIT_RUNTIME to keep it alive after main() exits)');
 return real_setThrew.apply(null, arguments);
+};
+
+var real____rdl_alloc_zeroed = asm["___rdl_alloc_zeroed"]; asm["___rdl_alloc_zeroed"] = function() {
+assert(runtimeInitialized, 'you need to wait for the runtime to be ready (e.g. wait for main() to be called)');
+assert(!runtimeExited, 'the runtime was exited (use NO_EXIT_RUNTIME to keep it alive after main() exits)');
+return real____rdl_alloc_zeroed.apply(null, arguments);
 };
 
 var real__fflush = asm["_fflush"]; asm["_fflush"] = function() {
@@ -6891,16 +6909,28 @@ assert(!runtimeExited, 'the runtime was exited (use NO_EXIT_RUNTIME to keep it a
 return real_setTempRet0.apply(null, arguments);
 };
 
-var real__llvm_ctlz_i64 = asm["_llvm_ctlz_i64"]; asm["_llvm_ctlz_i64"] = function() {
+var real____rdl_alloc_excess = asm["___rdl_alloc_excess"]; asm["___rdl_alloc_excess"] = function() {
 assert(runtimeInitialized, 'you need to wait for the runtime to be ready (e.g. wait for main() to be called)');
 assert(!runtimeExited, 'the runtime was exited (use NO_EXIT_RUNTIME to keep it alive after main() exits)');
-return real__llvm_ctlz_i64.apply(null, arguments);
+return real____rdl_alloc_excess.apply(null, arguments);
 };
 
 var real__sbrk = asm["_sbrk"]; asm["_sbrk"] = function() {
 assert(runtimeInitialized, 'you need to wait for the runtime to be ready (e.g. wait for main() to be called)');
 assert(!runtimeExited, 'the runtime was exited (use NO_EXIT_RUNTIME to keep it alive after main() exits)');
 return real__sbrk.apply(null, arguments);
+};
+
+var real__llvm_bswap_i32 = asm["_llvm_bswap_i32"]; asm["_llvm_bswap_i32"] = function() {
+assert(runtimeInitialized, 'you need to wait for the runtime to be ready (e.g. wait for main() to be called)');
+assert(!runtimeExited, 'the runtime was exited (use NO_EXIT_RUNTIME to keep it alive after main() exits)');
+return real__llvm_bswap_i32.apply(null, arguments);
+};
+
+var real____rdl_oom = asm["___rdl_oom"]; asm["___rdl_oom"] = function() {
+assert(runtimeInitialized, 'you need to wait for the runtime to be ready (e.g. wait for main() to be called)');
+assert(!runtimeExited, 'the runtime was exited (use NO_EXIT_RUNTIME to keep it alive after main() exits)');
+return real____rdl_oom.apply(null, arguments);
 };
 
 var real_stackAlloc = asm["stackAlloc"]; asm["stackAlloc"] = function() {
@@ -6939,6 +6969,12 @@ assert(!runtimeExited, 'the runtime was exited (use NO_EXIT_RUNTIME to keep it a
 return real__llvm_bswap_i16.apply(null, arguments);
 };
 
+var real____rdl_realloc_excess = asm["___rdl_realloc_excess"]; asm["___rdl_realloc_excess"] = function() {
+assert(runtimeInitialized, 'you need to wait for the runtime to be ready (e.g. wait for main() to be called)');
+assert(!runtimeExited, 'the runtime was exited (use NO_EXIT_RUNTIME to keep it alive after main() exits)');
+return real____rdl_realloc_excess.apply(null, arguments);
+};
+
 var real__emscripten_get_global_libc = asm["_emscripten_get_global_libc"]; asm["_emscripten_get_global_libc"] = function() {
 assert(runtimeInitialized, 'you need to wait for the runtime to be ready (e.g. wait for main() to be called)');
 assert(!runtimeExited, 'the runtime was exited (use NO_EXIT_RUNTIME to keep it alive after main() exits)');
@@ -6975,6 +7011,12 @@ assert(!runtimeExited, 'the runtime was exited (use NO_EXIT_RUNTIME to keep it a
 return real__memmove.apply(null, arguments);
 };
 
+var real____rdl_realloc = asm["___rdl_realloc"]; asm["___rdl_realloc"] = function() {
+assert(runtimeInitialized, 'you need to wait for the runtime to be ready (e.g. wait for main() to be called)');
+assert(!runtimeExited, 'the runtime was exited (use NO_EXIT_RUNTIME to keep it alive after main() exits)');
+return real____rdl_realloc.apply(null, arguments);
+};
+
 var real_stackRestore = asm["stackRestore"]; asm["stackRestore"] = function() {
 assert(runtimeInitialized, 'you need to wait for the runtime to be ready (e.g. wait for main() to be called)');
 assert(!runtimeExited, 'the runtime was exited (use NO_EXIT_RUNTIME to keep it alive after main() exits)');
@@ -6993,29 +7035,53 @@ assert(!runtimeExited, 'the runtime was exited (use NO_EXIT_RUNTIME to keep it a
 return real__malloc.apply(null, arguments);
 };
 
+var real__llvm_ctlz_i64 = asm["_llvm_ctlz_i64"]; asm["_llvm_ctlz_i64"] = function() {
+assert(runtimeInitialized, 'you need to wait for the runtime to be ready (e.g. wait for main() to be called)');
+assert(!runtimeExited, 'the runtime was exited (use NO_EXIT_RUNTIME to keep it alive after main() exits)');
+return real__llvm_ctlz_i64.apply(null, arguments);
+};
+
 var real__pthread_mutex_lock = asm["_pthread_mutex_lock"]; asm["_pthread_mutex_lock"] = function() {
 assert(runtimeInitialized, 'you need to wait for the runtime to be ready (e.g. wait for main() to be called)');
 assert(!runtimeExited, 'the runtime was exited (use NO_EXIT_RUNTIME to keep it alive after main() exits)');
 return real__pthread_mutex_lock.apply(null, arguments);
 };
+
+var real____rdl_shrink_in_place = asm["___rdl_shrink_in_place"]; asm["___rdl_shrink_in_place"] = function() {
+assert(runtimeInitialized, 'you need to wait for the runtime to be ready (e.g. wait for main() to be called)');
+assert(!runtimeExited, 'the runtime was exited (use NO_EXIT_RUNTIME to keep it alive after main() exits)');
+return real____rdl_shrink_in_place.apply(null, arguments);
+};
+
+var real____rdl_alloc = asm["___rdl_alloc"]; asm["___rdl_alloc"] = function() {
+assert(runtimeInitialized, 'you need to wait for the runtime to be ready (e.g. wait for main() to be called)');
+assert(!runtimeExited, 'the runtime was exited (use NO_EXIT_RUNTIME to keep it alive after main() exits)');
+return real____rdl_alloc.apply(null, arguments);
+};
 Module["asm"] = asm;
-var _llvm_bswap_i32 = Module["_llvm_bswap_i32"] = function() { return Module["asm"]["_llvm_bswap_i32"].apply(null, arguments) };
+var ___rdl_dealloc = Module["___rdl_dealloc"] = function() { return Module["asm"]["___rdl_dealloc"].apply(null, arguments) };
 var _main = Module["_main"] = function() { return Module["asm"]["_main"].apply(null, arguments) };
+var ___rdl_usable_size = Module["___rdl_usable_size"] = function() { return Module["asm"]["___rdl_usable_size"].apply(null, arguments) };
 var stackSave = Module["stackSave"] = function() { return Module["asm"]["stackSave"].apply(null, arguments) };
 var _rust_eh_personality = Module["_rust_eh_personality"] = function() { return Module["asm"]["_rust_eh_personality"].apply(null, arguments) };
+var ___rdl_grow_in_place = Module["___rdl_grow_in_place"] = function() { return Module["asm"]["___rdl_grow_in_place"].apply(null, arguments) };
 var setThrew = Module["setThrew"] = function() { return Module["asm"]["setThrew"].apply(null, arguments) };
+var ___rdl_alloc_zeroed = Module["___rdl_alloc_zeroed"] = function() { return Module["asm"]["___rdl_alloc_zeroed"].apply(null, arguments) };
 var _fflush = Module["_fflush"] = function() { return Module["asm"]["_fflush"].apply(null, arguments) };
 var setTempRet0 = Module["setTempRet0"] = function() { return Module["asm"]["setTempRet0"].apply(null, arguments) };
-var _llvm_ctlz_i64 = Module["_llvm_ctlz_i64"] = function() { return Module["asm"]["_llvm_ctlz_i64"].apply(null, arguments) };
+var ___rdl_alloc_excess = Module["___rdl_alloc_excess"] = function() { return Module["asm"]["___rdl_alloc_excess"].apply(null, arguments) };
 var _memset = Module["_memset"] = function() { return Module["asm"]["_memset"].apply(null, arguments) };
 var _sbrk = Module["_sbrk"] = function() { return Module["asm"]["_sbrk"].apply(null, arguments) };
 var _memcpy = Module["_memcpy"] = function() { return Module["asm"]["_memcpy"].apply(null, arguments) };
+var _llvm_bswap_i32 = Module["_llvm_bswap_i32"] = function() { return Module["asm"]["_llvm_bswap_i32"].apply(null, arguments) };
+var ___rdl_oom = Module["___rdl_oom"] = function() { return Module["asm"]["___rdl_oom"].apply(null, arguments) };
 var stackAlloc = Module["stackAlloc"] = function() { return Module["asm"]["stackAlloc"].apply(null, arguments) };
 var getTempRet0 = Module["getTempRet0"] = function() { return Module["asm"]["getTempRet0"].apply(null, arguments) };
 var _ntohs = Module["_ntohs"] = function() { return Module["asm"]["_ntohs"].apply(null, arguments) };
 var _htonl = Module["_htonl"] = function() { return Module["asm"]["_htonl"].apply(null, arguments) };
 var _pthread_mutex_unlock = Module["_pthread_mutex_unlock"] = function() { return Module["asm"]["_pthread_mutex_unlock"].apply(null, arguments) };
 var _llvm_bswap_i16 = Module["_llvm_bswap_i16"] = function() { return Module["asm"]["_llvm_bswap_i16"].apply(null, arguments) };
+var ___rdl_realloc_excess = Module["___rdl_realloc_excess"] = function() { return Module["asm"]["___rdl_realloc_excess"].apply(null, arguments) };
 var _emscripten_get_global_libc = Module["_emscripten_get_global_libc"] = function() { return Module["asm"]["_emscripten_get_global_libc"].apply(null, arguments) };
 var _htons = Module["_htons"] = function() { return Module["asm"]["_htons"].apply(null, arguments) };
 var ___errno_location = Module["___errno_location"] = function() { return Module["asm"]["___errno_location"].apply(null, arguments) };
@@ -7023,10 +7089,14 @@ var _free = Module["_free"] = function() { return Module["asm"]["_free"].apply(n
 var runPostSets = Module["runPostSets"] = function() { return Module["asm"]["runPostSets"].apply(null, arguments) };
 var establishStackSpace = Module["establishStackSpace"] = function() { return Module["asm"]["establishStackSpace"].apply(null, arguments) };
 var _memmove = Module["_memmove"] = function() { return Module["asm"]["_memmove"].apply(null, arguments) };
+var ___rdl_realloc = Module["___rdl_realloc"] = function() { return Module["asm"]["___rdl_realloc"].apply(null, arguments) };
 var stackRestore = Module["stackRestore"] = function() { return Module["asm"]["stackRestore"].apply(null, arguments) };
 var _llvm_ctpop_i32 = Module["_llvm_ctpop_i32"] = function() { return Module["asm"]["_llvm_ctpop_i32"].apply(null, arguments) };
 var _malloc = Module["_malloc"] = function() { return Module["asm"]["_malloc"].apply(null, arguments) };
+var _llvm_ctlz_i64 = Module["_llvm_ctlz_i64"] = function() { return Module["asm"]["_llvm_ctlz_i64"].apply(null, arguments) };
 var _pthread_mutex_lock = Module["_pthread_mutex_lock"] = function() { return Module["asm"]["_pthread_mutex_lock"].apply(null, arguments) };
+var ___rdl_shrink_in_place = Module["___rdl_shrink_in_place"] = function() { return Module["asm"]["___rdl_shrink_in_place"].apply(null, arguments) };
+var ___rdl_alloc = Module["___rdl_alloc"] = function() { return Module["asm"]["___rdl_alloc"].apply(null, arguments) };
 var dynCall_viiiii = Module["dynCall_viiiii"] = function() { return Module["asm"]["dynCall_viiiii"].apply(null, arguments) };
 var dynCall_vif = Module["dynCall_vif"] = function() { return Module["asm"]["dynCall_vif"].apply(null, arguments) };
 var dynCall_vi = Module["dynCall_vi"] = function() { return Module["asm"]["dynCall_vi"].apply(null, arguments) };
@@ -7333,4 +7403,4 @@ run();
 
 
 
-//# sourceMappingURL=spongedown_editor-b26c86c3e0dd0bf9.js.map
+//# sourceMappingURL=spongedown_editor-f8a9599e437c1b17.js.map
