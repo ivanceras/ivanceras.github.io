@@ -63,6 +63,15 @@ body {
     visibility: var(--render-visibility);
 }
 
+#print-toolbar{
+    position: absolute;
+    top: 5px;
+    right: 10px;
+    width: 20px;
+    height: 20px;
+    color: #aaa;
+}
+
 #render {
     position: absolute;
     top:var(--render-top);

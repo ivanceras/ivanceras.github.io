@@ -15,24 +15,14 @@ ace.on("change",
     throttle(updateRender,1000)
 );
 
-var first = true;
 function updateRender(){
     //console.log("ace editor change: "+txt);
     if (window.spongedown_parse){
         var txt = ace.getValue();
         var render_html = window.spongedown_parse(txt);
         render.innerHTML = render_html;
-        if (first){
-            var mathjax = document.createElement("script");
-            mathjax.type = "text/javascript";
-            mathjax.src = "MathJax/MathJax.js?config=TeX-AMS-MML_SVG-full";
-            document.body.appendChild(mathjax);
-            first = false;
-        }
-        else{
-            console.log("Typesetting..");
-            MathJax.Hub.Typeset(render);
-        }
+        console.log("Typesetting..");
+        MathJax.Hub.Typeset(render);
     }
     else{
         console.log("spongedown has not yet loaded.. Please wait..");
@@ -117,7 +107,7 @@ function respondToResize(){
 }
 
 var behaviors = ["full_size", "condensed_size", "full_card"];
-var active_behavior = "full_card";
+var active_behavior = "full_size";
 
 function setActiveBehavior(){
     if (active_behavior == "full_house"){

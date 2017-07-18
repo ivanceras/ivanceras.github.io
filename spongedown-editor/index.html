@@ -7,6 +7,7 @@
   <link rel="stylesheet" href="style.css"/>
   <link rel="stylesheet" href="md_render.css"/>
   <link rel="stylesheet" href="indicator.css"/>
+  <link rel="stylesheet" href="font-awesome-4.7.0/css/font-awesome.min.css">
 </head>
 <body>
 <nav id="controls">
@@ -73,7 +74,7 @@ equations, diagrams and comics together with markdown.
                                                                    \      ____   __ 
                                                                     '--->|    | |==|
                                                                          |____| |  | 
-                                                                         /:::/  |__|
+                                                                         /::::/ |__|
 
 ```
 Support for table works as is.
@@ -205,6 +206,9 @@ $$ \mu = \frac{1}{N} \sum_{i=0} x_i $$
     <div id="inTurnFadingTextG"><div id="inTurnFadingTextG_1" class="inTurnFadingTextG">P</div><div id="inTurnFadingTextG_2" class="inTurnFadingTextG">r</div><div id="inTurnFadingTextG_3" class="inTurnFadingTextG">o</div><div id="inTurnFadingTextG_4" class="inTurnFadingTextG">c</div><div id="inTurnFadingTextG_5" class="inTurnFadingTextG">e</div><div id="inTurnFadingTextG_6" class="inTurnFadingTextG">s</div><div id="inTurnFadingTextG_7" class="inTurnFadingTextG">s</div><div id="inTurnFadingTextG_8" class="inTurnFadingTextG">i</div><div id="inTurnFadingTextG_9" class="inTurnFadingTextG">n</div><div id="inTurnFadingTextG_10" class="inTurnFadingTextG">g</div><div id="inTurnFadingTextG_11" class="inTurnFadingTextG">.</div><div id="inTurnFadingTextG_12" class="inTurnFadingTextG">.</div><div id="inTurnFadingTextG_13" class="inTurnFadingTextG">.</div></div>
     <!-- rendered html goes here -->
 </div>
+<div id="print-toolbar">
+    <i id="print-icon" class="fa fa-print" title="Print this document"></i> 
+</div>
     
 <!-- load ace -->
 <script src="ace/ace.js"></script>
@@ -217,5 +221,6 @@ MathJax.Hub.Config({
   messageStyle: 'none'
 });
 </script>
+<script src="MathJax/MathJax.js?config=TeX-AMS-MML_SVG-full"></script>
 </body>
 </html>

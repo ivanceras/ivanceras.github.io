@@ -1,6 +1,9 @@
 #inTurnFadingTextG{
+    position:absolute;
 	width:234px;
 	margin:auto;
+    top: 30%;
+    left: 40%;
 }
 
 .inTurnFadingTextG{
