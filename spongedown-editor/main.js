@@ -1,7 +1,6 @@
 var ace = ace.edit("texteditor");
 ace.setShowPrintMargin(false);
 ace.setTheme("ace/theme/dawn");
-//ace.setKeyboardHandler("ace/keyboard/vim");
 //ace.setTheme("ace/theme/solarized_dark");
 ace.session.setMode("ace/mode/markdown");
 
@@ -10,9 +9,12 @@ var selectedView = "#edit";
 var grip = document.querySelector("#grip");
 var texteditor = document.querySelector("#texteditor");
 var render = document.querySelector("#render");
+var behaviors = ["full_size", "condensed_size", "full_card"];
+var active_behavior = "full_size";
+var active_keybinding = "";
 
 ace.on("change", 
-    throttle(updateRender,1000)
+    throttle(updateRender,2000)
 );
 
 function updateRender(){
@@ -106,8 +108,6 @@ function respondToResize(){
     resetWidths();
 }
 
-var behaviors = ["full_size", "condensed_size", "full_card"];
-var active_behavior = "full_size";
 
 function setActiveBehavior(){
     if (active_behavior == "full_house"){
@@ -171,6 +171,31 @@ function resetVisibility(){
     texteditor.style.visibility = "var(--texteditor-visibility)";
     render.style.visibility = "var(--render-visibility)";
     grip.style.visibility = "var(--grip-visibility)";
+}
+
+var keybinding_default = document.querySelector("#keybinding-default");
+var keybinding_vim = document.querySelector("#keybinding-vim");
+var keybinding_emacs = document.querySelector("#keybinding-emacs");
+keybinding_default.addEventListener("click",
+    () => {setKeybindingDefault();}
+);
+keybinding_vim.addEventListener("click",
+    () => {setKeybindingVim();}
+);
+keybinding_emacs.addEventListener("click",
+    () => {setKeybindingEmacs();}
+);
+
+function setKeybindingDefault(){
+    ace.setKeyboardHandler("");
+}
+
+function setKeybindingVim(){
+    ace.setKeyboardHandler("ace/keyboard/vim");
+}
+
+function setKeybindingEmacs(){
+    ace.setKeyboardHandler("ace/keyboard/emacs");
 }
 
 respondToResize();

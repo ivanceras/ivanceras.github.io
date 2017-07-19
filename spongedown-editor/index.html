@@ -13,7 +13,7 @@
 <nav id="controls">
     <button id="edit_btn">Edit</button>
     <button id="view_btn">View</button>
-    <button id="print_btn">Print</button>
+    <button id="open_btn"><i class="fa fa-folder-open"></i></button>
 </nav>
 <pre id="texteditor">
 # Spongedown
@@ -208,6 +208,13 @@ $$ \mu = \frac{1}{N} \sum_{i=0} x_i $$
 </div>
 <div id="print-toolbar">
     <i id="print-icon" class="fa fa-print" title="Print this document"></i> 
+    <i id="download-md-btn" class="fa fa-file-text-o" title="Download .txt"></i> 
+</div>
+<div id="keybinding-controls">
+    <label><i class="fa fa-lg fa-keyboard-o"></i></label>
+    <label><input id="keybinding-default" type="radio" name="keybinding" value="" checked/> default</label>
+    <label><input id="keybinding-vim" type="radio" name="keybinding" value="vim"/> vim</label>
+    <label><input id="keybinding-emacs" type="radio" name="keybinding" value="emacs"/> emacs</label>
 </div>
     
 <!-- load ace -->

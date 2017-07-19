@@ -1,12 +1,17 @@
-var print_btn = document.querySelector("#print_btn");
 var print_icon = document.querySelector("#print-icon");
+var download_md_btn = document.querySelector("#download-md-btn");
 
-print_btn.addEventListener("click", 
-    ()=> { printDoc(); }
-);
 
 print_icon.addEventListener("click", 
     ()=> { printDoc(); }
+);
+
+download_md_btn.addEventListener("click",
+    () => { 
+        var filename = document.title+".md";
+        var content = ace.getValue();
+        download_txt(filename, content);
+    }
 );
 
 function printDoc(){
@@ -28,4 +33,24 @@ function printDoc(){
     doc.write("</script>");
     doc.write("</body></html>");
     doc.close();
+}
+
+function download_txt(filename, content){
+    download(filename, content, "text/plain");
+}
+
+function download(filename, content, mime){
+    var pom = document.createElement('a');
+    pom.setAttribute('href','data:'+mime+';charset=utf-8,'+encodeURIComponent(content));
+    pom.setAttribute('download', filename);
+    if (document.createEvent){
+        var event = document.createEvent('MouseEvents');
+        event.initEvent('click', true, true);
+        pom.dispatchEvent(event);
+        console.log("click event dispatched");
+    }
+    else{
+        pom.click();
+        console.log("clicked");
+    }
 }
