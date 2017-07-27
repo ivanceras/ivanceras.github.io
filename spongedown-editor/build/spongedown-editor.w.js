@@ -1601,9 +1601,9 @@ function integrateWasmJS(Module) {
   var method = Module['wasmJSMethod'] || 'native-wasm';
   Module['wasmJSMethod'] = method;
 
-  var wasmTextFile = Module['wasmTextFile'] || 'spongedown_editor-f8a9599e437c1b17.wast';
-  var wasmBinaryFile = Module['wasmBinaryFile'] || 'spongedown_editor-f8a9599e437c1b17.wasm';
-  var asmjsCodeFile = Module['asmjsCodeFile'] || 'spongedown_editor-f8a9599e437c1b17.asm.js';
+  var wasmTextFile = Module['wasmTextFile'] || 'spongedown_editor-ada07322be1548a2.wast';
+  var wasmBinaryFile = Module['wasmBinaryFile'] || 'spongedown_editor-ada07322be1548a2.wasm';
+  var asmjsCodeFile = Module['asmjsCodeFile'] || 'spongedown_editor-ada07322be1548a2.asm.js';
 
   // utilities
 
@@ -1994,16 +1994,16 @@ function _emscripten_asm_const_i(code) {
 
 STATIC_BASE = Runtime.GLOBAL_BASE;
 
-STATICTOP = STATIC_BASE + 277616;
+STATICTOP = STATIC_BASE + 277520;
   /* global initializers */  __ATINIT__.push();
   
 
-memoryInitializer = Module["wasmJSMethod"].indexOf("asmjs") >= 0 || Module["wasmJSMethod"].indexOf("interpret-asm2wasm") >= 0 ? "spongedown_editor-f8a9599e437c1b17.js.mem" : null;
+memoryInitializer = Module["wasmJSMethod"].indexOf("asmjs") >= 0 || Module["wasmJSMethod"].indexOf("interpret-asm2wasm") >= 0 ? "spongedown_editor-ada07322be1548a2.js.mem" : null;
 
 
 
 
-var STATIC_BUMP = 277616;
+var STATIC_BUMP = 277520;
 Module["STATIC_BASE"] = STATIC_BASE;
 Module["STATIC_BUMP"] = STATIC_BUMP;
 
@@ -7403,4 +7403,4 @@ run();
 
 
 
-//# sourceMappingURL=spongedown_editor-f8a9599e437c1b17.js.map
+//# sourceMappingURL=spongedown_editor-ada07322be1548a2.js.map

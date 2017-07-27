@@ -1,30 +1,65 @@
-var ace = ace.edit("texteditor");
-ace.setShowPrintMargin(false);
-ace.setTheme("ace/theme/dawn");
-//ace.setTheme("ace/theme/solarized_dark");
-ace.session.setMode("ace/mode/markdown");
+var open_file = "example.md";
+
+var specified_file = getParameterByName("file");
+if (specified_file){
+    open_file = specified_file
+}
+
+var texteditor = document.querySelector("#texteditor");
+var ace_edit;
+ace_edit = ace.edit("texteditor");
+
+function fetchDoc(url){
+    console.log("fetching..."+url);
+    fetch(url).then(function(response) {
+        console.log("got response: ", response);
+      return response.text();
+    }).then(function(content) {
+        /*
+        texteditor.innerHTML = content;
+        ace_edit.destroy();
+        updateAceListener();
+        console.log("has undo: ", ace_edit.getSession().getUndoManager().hasUndo());
+        */
+        ace_edit.setValue(content);
+        updateRender();
+    });
+}
+
+function updateAceListener(){
+    ace_edit = ace.edit("texteditor");
+    ace_edit.setShowPrintMargin(false);
+    ace_edit.setTheme("ace/theme/dawn");
+    //ace_edit.setTheme("ace/theme/solarized_dark");
+    ace_edit.session.setMode("ace/mode/markdown");
+    ace_edit.on("change", 
+        throttle(updateRender,2000)
+    );
+}
+
+window.onload = (e) => {
+    fetchDoc(open_file);
+};
+
 
 var dragged = false;
 var selectedView = "#edit";
 var grip = document.querySelector("#grip");
-var texteditor = document.querySelector("#texteditor");
 var render = document.querySelector("#render");
 var behaviors = ["full_size", "condensed_size", "full_card"];
 var active_behavior = "full_size";
 var active_keybinding = "";
 
-ace.on("change", 
-    throttle(updateRender,2000)
-);
 
 function updateRender(){
-    //console.log("ace editor change: "+txt);
+    console.log("ace editor change: "+txt);
     if (window.spongedown_parse){
-        var txt = ace.getValue();
+        var txt = ace_edit.getValue();
         var render_html = window.spongedown_parse(txt);
         render.innerHTML = render_html;
         console.log("Typesetting..");
-        MathJax.Hub.Typeset(render);
+        //MathJax.Hub.Typeset(render);
+        renderMathInElement(render);
     }
     else{
         console.log("spongedown has not yet loaded.. Please wait..");
@@ -54,7 +89,7 @@ window.addEventListener("mousemove",
                 texteditor.style.width  = percent+'%';
                 render.style.left = (percent + 0.5)+'%';
                 grip.style.left = percent+'%';
-                ace.resize();
+                ace_edit.resize();
              }
         },200)
 );
@@ -164,7 +199,7 @@ function resetWidths(){
 
     grip.style.left =  "var(--grip-left)";
     grip.style.width = "var(--grip-width)";
-    ace.resize();
+    ace_edit.resize();
 }
 
 function resetVisibility(){
@@ -187,15 +222,15 @@ keybinding_emacs.addEventListener("click",
 );
 
 function setKeybindingDefault(){
-    ace.setKeyboardHandler("");
+    ace_edit.setKeyboardHandler("");
 }
 
 function setKeybindingVim(){
-    ace.setKeyboardHandler("ace/keyboard/vim");
+    ace_edit.setKeyboardHandler("ace/keyboard/vim");
 }
 
 function setKeybindingEmacs(){
-    ace.setKeyboardHandler("ace/keyboard/emacs");
+    ace_edit.setKeyboardHandler("ace/keyboard/emacs");
 }
 
 respondToResize();
@@ -237,3 +272,13 @@ function throttle(func, wait, options) {
         return result;
     };
 } 
+
+function getParameterByName(name, url) {
+    if (!url) url = window.location.href;
+    name = name.replace(/[\[\]]/g, "\\$&");
+    var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+        results = regex.exec(url);
+    if (!results) return null;
+    if (!results[2]) return '';
+    return decodeURIComponent(results[2].replace(/\+/g, " "));
+}

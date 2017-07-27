@@ -8,8 +8,8 @@ print_icon.addEventListener("click",
 
 download_md_btn.addEventListener("click",
     () => { 
-        var filename = document.title+".md";
-        var content = ace.getValue();
+        var filename = document.title+".md.txt";
+        var content = ace_edit.getValue();
         download_txt(filename, content);
     }
 );
