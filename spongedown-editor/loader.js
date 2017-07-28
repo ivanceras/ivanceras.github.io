@@ -19,19 +19,18 @@ if (!window.WebAssembly){
 }
 if (load_wasm){
     if (use_worker){
-        console.log("using worker in wasm...");
+        console.log("using wasm with web worker...");
         worker = new Worker("wasm_worker.js");
     }
     else{
         Module = {}
-        console.log("Loading webassembly version");
+        console.log("Using wasm with NO webworker");
         /// fetch wasm file and inject the js file
         fetch(wasm_file)
           .then(response => response.arrayBuffer())
           .then(bytes => {
                 Module.wasmBinary = bytes;
                 console.log("wasm has loaded..");
-                console.log("attaching as script");
                 var script = document.createElement('script');
                 script.src = wjs_file
                 document.body.appendChild(script);
@@ -39,7 +38,7 @@ if (load_wasm){
     }
 }else{
     if (use_worker){
-        console.log("loading worker...");
+        console.log("Using asmjs with web worker...");
         worker = new Worker(asmjs_file);
     }
     else{
