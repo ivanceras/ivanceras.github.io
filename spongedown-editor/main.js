@@ -12,17 +12,13 @@ ace_edit = ace.edit("texteditor");
 function fetchDoc(url){
     console.log("fetching..."+url);
     fetch(url).then(function(response) {
-        console.log("got response: ", response);
       return response.text();
     }).then(function(content) {
-        /*
-        texteditor.innerHTML = content;
+        texteditor.textContent = content;
         ace_edit.destroy();
         updateAceListener();
-        console.log("has undo: ", ace_edit.getSession().getUndoManager().hasUndo());
-        */
-        ace_edit.setValue(content);
-        updateRender();
+        //ace_edit.setValue(content);
+        initiateRender();
     });
 }
 
@@ -33,7 +29,7 @@ function updateAceListener(){
     //ace_edit.setTheme("ace/theme/solarized_dark");
     ace_edit.session.setMode("ace/mode/markdown");
     ace_edit.on("change", 
-        throttle(updateRender,2000)
+        throttle(initiateRender,1000)
     );
 }
 
@@ -51,13 +47,94 @@ var active_behavior = "full_size";
 var active_keybinding = "";
 
 
-function updateRender(){
-    console.log("ace editor change: "+txt);
+function spongedown_parse(md){
+    worker.postMessage(
+        {'cmd':'spongedown_parse',
+         'data':md
+        });
+}
+
+function parse_bob(bob){
+    worker.postMessage(
+        {'cmd':'parse_bob',
+         'data':bob
+        });
+}
+
+function parse_comic(comic){
+    worker.postMessage(
+        {'cmd':'parse_comic',
+         'data':comic
+        });
+}
+
+function parse_csv(csv){
+    worker.postMessage(
+        {'cmd':'parse_csv',
+         'data':csv
+        });
+}
+
+function initiateRender(){
+    console.log("ace editor is changed...");
+    var input = ace_edit.getValue();
+    if (open_file.endsWith(".md")){ 
+        spongedown_parse(input);
+    }
+    else if (open_file.endsWith(".bob")){
+        parse_bob(input)
+    }
+    else if (open_file.endsWith(".comic")){
+        parse_comic(input);
+    }
+    else if (open_file.endsWith(".csv")){
+        parse_csv(input);
+    }
+}
+
+worker.addEventListener("message", (e)=>{
+    let evt = e.data.event;
+    switch (evt){
+        case "load":
+            console.log("wasm is now ready");
+            initiateRender();
+            break;
+        default:
+            console.log("unknown event:", evt, e.data);
+    }
+});
+
+if (worker){
+    console.log("Listening to worker");
+    worker.addEventListener("message", (e)=>{
+        let caller = e.data.caller;
+        let data = e.data.data;
+        switch (caller){
+            case "spongedown_parse":
+                updateRender(data);
+                break;
+            case "parse_bob":
+                updateRender(data);
+                break;
+            case "parse_comic":
+                updateRender(data);
+                break;
+            case "parse_csv":
+                updateRender(data)
+                break;
+            default:
+                console.log("unknown caller:", caller, e.data);
+        }
+    });
+}else{
+    console.log("worker is still not yet loaded...");
+}
+
+
+function updateRender(render_html){
     if (window.spongedown_parse){
         var txt = ace_edit.getValue();
-        var render_html = window.spongedown_parse(txt);
         render.innerHTML = render_html;
-        console.log("Typesetting..");
         //MathJax.Hub.Typeset(render);
         renderMathInElement(render);
     }
@@ -235,50 +312,3 @@ function setKeybindingEmacs(){
 
 respondToResize();
 
-//#https://stackoverflow.com/questions/27078285/simple-throttle-in-js
-// Returns a function, that, when invoked, will only be triggered at most once
-// during a given window of time. Normally, the throttled function will run
-// as much as it can, without ever going more than once per `wait` duration;
-// but if you'd like to disable the execution on the leading edge, pass
-// `{leading: false}`. To disable execution on the trailing edge, ditto.
-function throttle(func, wait, options) {
-    var context, args, result;
-    var timeout = null;
-    var previous = 0;
-    if (!options) options = {};
-    var later = function() {
-        previous = options.leading === false ? 0 : Date.now();
-        timeout = null;
-        result = func.apply(context, args);
-        if (!timeout) context = args = null;
-    };
-    return function() {
-        var now = Date.now();
-        if (!previous && options.leading === false) previous = now;
-        var remaining = wait - (now - previous);
-        context = this;
-        args = arguments;
-        if (remaining <= 0 || remaining > wait) {
-            if (timeout) {
-               clearTimeout(timeout);
-               timeout = null;
-            }
-            previous = now;
-            result = func.apply(context, args);
-            if (!timeout) context = args = null;
-        } else if (!timeout && options.trailing !== false) {
-            timeout = setTimeout(later, remaining);
-        }
-        return result;
-    };
-} 
-
-function getParameterByName(name, url) {
-    if (!url) url = window.location.href;
-    name = name.replace(/[\[\]]/g, "\\$&");
-    var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
-        results = regex.exec(url);
-    if (!results) return null;
-    if (!results[2]) return '';
-    return decodeURIComponent(results[2].replace(/\+/g, " "));
-}
