@@ -22,15 +22,23 @@ function fetchDoc(url){
     });
 }
 
-function updateAceListener(){
-    ace_edit = ace.edit("texteditor");
+function initAceEditor(){
     ace_edit.setShowPrintMargin(false);
     ace_edit.setTheme("ace/theme/dawn");
     //ace_edit.setTheme("ace/theme/solarized_dark");
     ace_edit.session.setMode("ace/mode/markdown");
+    ace_edit.setOptions({enableBasicAutocompletion: false, 
+        enableLiveAutocompletion: false});
+    ace_edit = ace.edit("texteditor");
     ace_edit.on("change", 
         throttle(initiateRender,1000)
     );
+}
+
+initAceEditor();
+
+function updateAceListener(){
+    initAceEditor();
 }
 
 window.onload = (e) => {
@@ -135,7 +143,7 @@ function updateRender(render_html){
     if (window.spongedown_parse){
         var txt = ace_edit.getValue();
         render.innerHTML = render_html;
-        //MathJax.Hub.Typeset(render);
+        initiateBob();
         renderMathInElement(render);
     }
     else{

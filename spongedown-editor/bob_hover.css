@@ -1,0 +1,35 @@
+.bob_container{
+    position: relative;
+    border: 1px solid #333;
+}
+.bob{
+    position: absolute;
+}
+.content{
+    position: absolute;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    top: 0px;
+    left: 0px;
+    background-color: #fff;
+    font-family: monospace;
+}
+
+.lens{
+    position: absolute;
+    display: flex;
+    width: 200px;
+    height: 200px;
+    flex-wrap: wrap;
+    border: 1px solid #eee;
+    border-radius: 50%;
+    top: 0px;
+    left: 0px;
+    overflow: hidden;
+}
+.content div{
+    width: 8px;
+    height: 16px;
+}
+
