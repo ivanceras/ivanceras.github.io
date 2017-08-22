@@ -138,12 +138,21 @@ if (worker){
     console.log("worker is still not yet loaded...");
 }
 
+function highlightCode(){
+    let pre_code = document.querySelectorAll("pre code[class^='language']");
+    console.log('pre code[class^="language"]', pre_code);
+    pre_code.forEach(function(block) {
+        hljs.highlightBlock(block);
+    });
+}
 
 function updateRender(render_html){
     if (window.spongedown_parse){
         var txt = ace_edit.getValue();
         render.innerHTML = render_html;
         initiateBob();
+        highlightCode();
+        //hljs.initHighlighting();
         renderMathInElement(render);
     }
     else{
