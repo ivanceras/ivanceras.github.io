@@ -32,8 +32,15 @@ btn_dark_theme.addEventListener("click", (e) => {
 });
 
 function initiateTheming(){
+    let use_dark_theme = true;
     let dark_theme = getParameterByName("dark");
-    let use_dark_theme = parseInt(dark_theme) > 0;
+    let off_dark_theme = parseInt(dark_theme) == 0;
+    if (off_dark_theme){
+        use_dark_theme = false;
+    }
+    else{
+        use_dark_theme = true;
+    }
     console.log("using dark theme");
     if (use_dark_theme){
         setDarkTheme();

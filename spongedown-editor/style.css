@@ -164,7 +164,7 @@ pre code {
 	width: 15px;
 	height: 15px;
 	margin: 0 auto;
-	border: 2px solid rgb(0,0,0);
+	border: 2px solid var(--fg);
 	border-radius: 50%;
 	border-left-color: transparent;
 	border-right-color: transparent;
