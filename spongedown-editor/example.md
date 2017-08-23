@@ -326,5 +326,11 @@ What can you do with svgbob?
 ```
 
 
+## Links:
+
+- [Spongedown code](https://github.com/ivanceras/spongedown)
+- [Svgbob code](https://github.com/ivanceras/svgbobrus)
+- [Svgbob spec](https://ivanceras.github.io/spongedown-editor/?file=https://raw.githubusercontent.com/ivanceras/svgbobrus/master/spec.md)
+- [Patreon](https://www.patreon.com/ivanceras)
 
 
