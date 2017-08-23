@@ -21,7 +21,7 @@ function printDoc(){
     var headContent = document.getElementsByTagName('head')[0].innerHTML;
     doc.write("<html><head>"+headContent);
     doc.write("<link rel='stylesheet' href='print.css'/>");
-    doc.write("</head><body style='overflow:auto'>");
+    doc.write("</head><body style='overflow:auto' class='light'>");
     doc.write(render_html);
     doc.write("<script src='MathJax/MathJax.js?config=TeX-AMS-MML_SVG-full'></script>");
     doc.write("<script type='text/x-mathjax-config'>");
