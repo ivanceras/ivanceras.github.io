@@ -17,7 +17,6 @@
 <nav id="controls">
     <button id="edit_btn">Edit</button>
     <button id="view_btn">View</button>
-    <button id="open_btn"><i class="fa fa-folder-open"></i></button>
 </nav>
 <pre id="texteditor">
 Please wait...
@@ -36,6 +35,11 @@ Please wait...
     <label><input id="keybinding-default" type="radio" name="keybinding" value="" checked/> default</label>
     <label><input id="keybinding-vim" type="radio" name="keybinding" value="vim"/> vim</label>
     <label><input id="keybinding-emacs" type="radio" name="keybinding" value="emacs"/> emacs</label>
+</div>
+<div id="processing-indicator">
+    <div class="cssload-container">
+        <div class="cssload-speeding-wheel"></div>
+    </div>
 </div>
     
 <!-- load ace -->

@@ -1,18 +1,10 @@
 
 # Spongedown
 
-[Spongedown](https://github.com/ivanceras/spongedown) is a wrapper of markdown with
-different elements added.
+[Spongedown](https://github.com/ivanceras/spongedown) is an extension of Github Flavored Markdown
+with more components added, maily [svgbob](https://github.com/ivanceras/svgbobrus/)
 
-Including:
-* [bob](https://github.com/ivanceras/svgbobrus/) diagrams
-* csv
-* comic/emoji faces
 
-Wouldn't it be just cool if you could just incorporate
-equations, diagrams and comics together with markdown.
-
-## Example
 
 ```bob
 
@@ -49,40 +41,40 @@ equations, diagrams and comics together with markdown.
    | Diagrams |                    \    \      |   `-, .-'  |  .-----.   |
    '----------'                     \    `---> |    /,'     | (       )  |
                                      \         |   /'       |  `-. .-'   |
-                                      \        |            |     `.\    |
-                                       \       | ٩(̾●̮̮̃ ̾•̃̾)۶    |       `\   |
-                                        \      |            |            |
-                                         \     +------------|   (,⊙–⊙,)७ |
-                                          `--.              +------------+
-                                              \
-                                               v           .-,(  ),-.    
-                                            ___  _      .-(          )-.                                       
-                                           [___]|=| -->(                )      __________ 
-                                           /::/ |_|     '-(          ).-' --->[_...__...°]
-                                                           '-.( ).-'                         
-                                                                   \      ____   __ 
-                                                                    '--->|    | |==|
-                                                                         |____| |  | 
-                                                                         /::::/ |__|
+                                      \        |   .-.      |     `.\    |
+                                       \       | ٩(●̮̮̃ ̾•̃̾)۶    |       `\   |
+                                        \      |   `-'      |      .-.   |
+                                         \     +------------|     (⊙–⊙)७ |
+                                          \                 |      `-'   |
+                                           `--.             +------------+
+                                               \
+                                                v              .-,(  ),-.    
+                                                ___  _      .-(          )-.                                       
+                                               [___]|=| -->(                )      __________ 
+                                               /::/ |_|     '-(          ).-' --->[_...__...°]
+                                                               '-.( ).-'                         
+                                                                       \      ____   __ 
+                                                                        '--->|    | |==|
+                                                                             |____| |  | 
+                                                                             /::::/ |__|
 
 ```
+
 Support for table works as is.
 
 
-
-
-### Tables
+## Tables
 
 Tables are supported as commonly markdown implementation does.
 
 
-  中文处理  | Data  |   CJK      
+  中文处理  | Data  |   CJK
 -----------|-------|------------
-**Table**  | `are` | supported  
- as        | well  |            
+**Table**  | `are` | supported
+ as        | well  |
 
 
-#### CSV
+## CSV
 
 CSV data are rendered as tables
 
@@ -102,6 +94,8 @@ apple,banana,carrots
 rust,haskel,c
 ```
 
+Codes syntax highlighted.
+
 ```sql
 
 select * from data limit 1
@@ -114,11 +108,22 @@ fn main(){
 }
 ```
 
-```bob
+## Math equations
+\\[ E = m * c ^ 2 \\]
+
+\\[ \frac{1}{\Bigl(\sqrt{\phi \sqrt{5}}-\phi\Bigr) e^{\frac25 \pi}} = 1+\frac{e^{-2\pi}} {1+\frac{e^{-4\pi}} {1+\frac{e^{-6\pi}} {1+\frac{e^{-8\pi}} {1+\cdots} } } } \\]
+
+\\[ \left( \sum_{k=1}^n a_k b_k \right)^2 \leq \left( \sum_{k=1}^n a_k^2 \right) \left( \sum_{k=1}^n b_k^2 \right) \\]
+
+
+## Svgbob
 
 Svgbob is a diagramming model
 which uses a set of typing characters
 to approximate the intended shape.
+
+```bob
+
 
        .---.
       /-o-/--
@@ -127,12 +132,16 @@ to approximate the intended shape.
    '-.  \
       \ /
        ' 
+```
+
 It uses a combination of these characters "`[(/<^.|+v*>\)]'",
 which are readily available on your keyboards.
 
-What can it do?
+What can you do with svgbob?
 
- o->  Basic shapes
+### Basic shapes
+
+```bob
                                                         .
        +------+   .------.    .------.      /\        .' `.
        |      |   |      |   (        )    /  \     .'     `.
@@ -147,9 +156,106 @@ What can it do?
        (             )     (      )    (     )          \  \
         '-----+ ,---'       `>   '      `  <'            \  v
               |/
-          
+              '
+             _   .-.    .--.
+            (_) (   )  (    ) 
+                 `-'    `--'
 
- o->  Quick logo scribbles
+
+       _
+     .' '.
+    (  3  )
+     `._.'
+
+
+        .-.
+      .'   `.
+     (   3   )
+      `.   ,'
+        `-'
+
+        _.-._
+      .'     `.
+     (    4    )
+      `._   _,'
+         `-'
+
+        ____
+      ,'    `.
+     /        \
+    |    5     |
+     \        /
+      `.____,'
+         
+
+        _.--._
+      ,'      `.
+     /          \
+    |     6      |
+     \          /
+      `._    _,'
+         `'''
+
+
+        _.----._
+      ,'        `.
+     /            \
+    |      7       |
+    |              |
+     \            /
+      `._      _,'
+         `'''''
+
+      _.--''''--._
+    ,"            ".
+   /                \
+  /                  \
+ |         8          |
+ |                    |
+  \                  /
+   \                /
+    `-._        _.-'
+        `'----''
+
+
+             ____
+       _.-'''    '''-._
+     .'                '.
+    /                    \
+   '                      '
+  /                        \
+ |                          |
+ |            9             | 
+ |                          |
+  \                        /
+   .                      .
+    \                    /
+     `-.              .-'
+        ''-..____..-'' 
+
+
+             _...._
+        _.-''      ''-._
+      .'                '.
+    .'                    '.
+   /                        \ 
+  /                          \
+ |                            |
+ |                            | 
+ |             10             |
+ |                            |
+  \                          /
+   \                        /
+    `.                    .'
+      `-._            _.-'
+          '-._    _.-'  
+              ''''
+
+```          
+
+### Quick logo scribbles
+
+```bob
         .---.                      _
        /-o-/--       .--.         |-|               .--.
     .-/ / /->       /--. \     .--)-|    .--.-.    //.-.\
@@ -157,25 +263,30 @@ What can it do?
     '-.  \        /\ |-/ /     .  * |    '--'-'    \\'-'/
        \ /        \ '+' /       \__/                '--'
         '          '---'            
+```
 
- o->  Even unicode box drawing characters are supported
+###  Unicode box drawing
+
+```bob
             ┌─┬┐  ╔═╦╗  ╓─╥╖  ╒═╤╕
             ├─┼┤  ╠═╬╣  ╟─╫╢  ╞═╪╡
             └─┴┘  ╚═╩╝  ╙─╨╜  ╘═╧╛
+```
 
-
- o->  Sequence Diagrams                                     
+###  Sequence Diagrams                                     
                                
+```bob
                                    .--->  F
           A       B      C  D     /     
           *-------*-----*---*----*----->  E
                    \            ^ \
                     v          /   '--->  G
                      B --> C -'
+```
 
+### Crude Statistical charts
 
- o-> Statistical charts
-
+```bob
                                                                           
     E +-------------------------*--+     E |                         o    
     D |-------------------*--*--|--*     D |                   o  o  |  o 
@@ -184,24 +295,20 @@ What can it do?
     A +-*--*--+--+--+--+--+--+--+--+     A +-o--o--+--+--+--+--+--+--+--+ 
         5 10 15 20 25 30 35 40 45 50         5 10 15 20 25 30 35 40 45 50 
 
-    
-    
-    
-    
-    
-    
-    
+```
 
 
- o->  Flow charts
-                      .--.            .---.  .---. .---.  .---.    .---.  .---. 
-                      |  |   OS API   '---'  '---' '---'  '---'    '---'  '---' 
+### Flow charts
+
+ ```bob
+                                      .---.  .---. .---.  .---.    .---.  .---. 
+                      .--.   OS API   '---'  '---' '---'  '---'    '---'  '---' 
                       v  |              |      |     |      |        |      |   
              .-. .-. .-. |              v      v     |      v        |      v   
          .-->'-' '-' '-' |            .------------. | .-----------. |  .-----. 
          |     \  |  /   |            | Filesystem | | | Scheduler | |  | MMU | 
          |      v . v    |            '------------' | '-----------' |  '-----' 
-         '_______/ \_____|                   |       |      |        |          
+         |_______/ \_____|                   |       |      |        |          
                  \ /                         v       |      |        v          
                   |     ____              .----.     |      |    .---------.    
                   '--> /___/              | IO |<----'      |    | Network |    
@@ -212,21 +319,26 @@ What can it do?
                                       |                  HAL                  | 
                                       '---------------------------------------' 
    
+```
 
- o->  Block diagrams
+### Block diagrams
 
-                          .-,(  ),-.    
+```bob
+                              .-.
+                          .-,(   ),-.    
            ___  _      .-(          )-.                                       
           [___]|=| -->(                )      __________ 
           /::/ |_|     '-(          ).-' --->[_...__...°]
-                          '-.( ).-'                         
-                                  \      ____   __ 
+                          '-.(   ).-'                         
+                              `-' \      ____   __ 
                                    '--->|    | |==|
                                         |____| |  | 
                                         /::::/ |__|
 
- o-> Mindmaps
+```
+### Mindmaps
 
+```bob
                                             .-->  Alpha
                                            /
                                           .---->  Initial Release
@@ -256,9 +368,11 @@ What can it do?
                      V
                  Bug 
 
+```
 
- o->  It can do complex stuff such as circuit diagrams
+### Circuit diagrams 
 
+```bob
 
      +10-15V           ___0,047R       
       *------o------o-|___|-o--o---------o----o-------.
@@ -297,95 +411,8 @@ What can it do?
                                                    |
                                                   GND
 
-  .-------------.
- / Advantages: /
-'-------------'
- -* Plain text format
-    Ultimately portable, backward compatible and future proof.
- -* Degrades gracefully
-    Even when not using a graphical renderer, it would still looks good
-    as text based diagrams. Paste the text in your source code.
- -* Easiest to use. Anyone knows how to edit text.
-
-
-  About Svgbob editor:
-=======================
-
- -> The editor is a plain text editor in replace and block mode
-    with smarter prediction on where you intended to type next.
-      i.e: typing   / will move the cursor north east to continue the line.
- -> The editor also has an xray lens that reveals the underlying characters
-    underneath that comprises the graph. Move the mouse around to see the characters
-    that build up which image, while holding the mouse down 
-    momentarily cancels the xray
-
- .------------------------------.
-( This page is editable. Try it! )
- '------------------------------'
-
-+----------+
-|   FAQ:   |
-+----------+
-   
-   Q: Why is there too much spacing on words
-   A: It is an intended behaviour as all the text are meant 
-      for labels. Each words of sentences corresponds to each separate text
-      elements in the SVG output in order to maintain
-      a bit of alignment closes to their original location. *[0]
-
-   Q: Do people really type in diagrams in text, isn't that tedious?
-   A: Using simple text editors to make text diagrams like these are really
-      tedious. Power users of vim or emacs can make diagrams with ease.*[1]
-
-   Q: Your editor sucks!
-   A: That's the beauty of plain text. 
-      Use whatever editor you like.
-   
-   Q: How to integrate this in markdown?
-   A: There is a project called [Spongedown](https://ivanceras.github.io/spongedown)
-      which specifically does that. The svgbob diagramming feature is guarded
-      with ```bob code block so as not to pollute the markdown syntax.
-
-
-Footnotes:
-*[0]: Fonts mostly condensed words to look
-      and render nicely. Monospace fonts should have solved this
-      problem, however the monospace fonts used in browsers
-      are not really monospaced (i.e CJK full-width characters
-      are only rendered 1.5x larger than ascii characters,
-      instead of 2x larger). In the terminal however, full-width
-      characters are rendered 2x larger using either monospace
-      or non-monspaced fonts.
-
-           .------------. | .-----------. |  .-----.   Look at that
-           |  文件系统  | | |   调度器  | |  | MMU |   -------------->
-           '------------' | '-----------' |  '-----'   monospace eh?
-      
-      Also using monofont on final output document makes it look like meant
-      something for devs, instead of documents for all.
-      For a more heavy usage of text just use markdown format,
-      there is also [Spongedown](https://ivanceras.github.io/spongedown)
-      which allow you to write in markdown, combine it with svgbob diagrams,
-      together some other features like csv and math equations.
-
-*[1]  In vim, there is a drawIt plugin which helps you easily draw ascii
-      diagrams. For vim without using any plugins, you can use combination
-      of BLOCK mode editing(CTRL-v), REPLACE mode(SHIFT-r), 
-      :set virtualedit=all to easily move the cursor everywhere,
-      cut, copy and paste text in block mode (<C-v> jjll 1vp). 
-      For emacs: there is artist mode.
-
 ```
 
-## Math equations
-
-\\[ \int x = \frac{x^2}{2} \\]
-
-\\[ n = \sum_{j=0} x_1 w_i*n_i \\]
-
-\\[ \mu = \frac{1}{N} \sum_{i=0} x_i \\]
-
-$$ \mu = \frac{1}{N} \sum_{i=0} x_i $$
 
 
 

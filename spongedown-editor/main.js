@@ -86,6 +86,7 @@ function parse_csv(csv){
 function initiateRender(){
     console.log("ace editor is changed...");
     var input = ace_edit.getValue();
+    showProcessingIndicator();
     if (open_file.endsWith(".md")){ 
         spongedown_parse(input);
     }
@@ -139,11 +140,18 @@ if (worker){
 }
 
 function highlightCode(){
-    let pre_code = document.querySelectorAll("pre code[class^='language']");
-    console.log('pre code[class^="language"]', pre_code);
+    let pre_code = document.querySelectorAll("pre code");
     pre_code.forEach(function(block) {
         hljs.highlightBlock(block);
     });
+}
+
+function hideProcessingIndicator(){
+    document.querySelector("#processing-indicator").style.display = "none";
+}
+
+function showProcessingIndicator(){
+    document.querySelector("#processing-indicator").style.display = "block";
 }
 
 function updateRender(render_html){
@@ -152,8 +160,8 @@ function updateRender(render_html){
         render.innerHTML = render_html;
         initiateBob();
         highlightCode();
-        //hljs.initHighlighting();
         renderMathInElement(render);
+        hideProcessingIndicator();
     }
     else{
         console.log("spongedown has not yet loaded.. Please wait..");

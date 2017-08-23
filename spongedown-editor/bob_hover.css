@@ -1,6 +1,5 @@
 .bob_container{
     position: relative;
-    border: 1px solid #333;
 }
 .bob{
     position: absolute;
