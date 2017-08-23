@@ -17,19 +17,17 @@ function fetchDoc(url){
         texteditor.textContent = content;
         ace_edit.destroy();
         updateAceListener();
-        //ace_edit.setValue(content);
         initiateRender();
     });
 }
 
 function initAceEditor(){
+    ace_edit = ace.edit("texteditor");
     ace_edit.setShowPrintMargin(false);
-    ace_edit.setTheme("ace/theme/dawn");
-    //ace_edit.setTheme("ace/theme/solarized_dark");
+    ace_edit.setTheme("ace/theme/github");
     ace_edit.session.setMode("ace/mode/markdown");
     ace_edit.setOptions({enableBasicAutocompletion: false, 
         enableLiveAutocompletion: false});
-    ace_edit = ace.edit("texteditor");
     ace_edit.on("change", 
         throttle(initiateRender,1000)
     );
@@ -41,7 +39,7 @@ function updateAceListener(){
     initAceEditor();
 }
 
-window.onload = (e) => {
+window.onload = () => {
     fetchDoc(open_file);
 };
 
@@ -86,6 +84,7 @@ function parse_csv(csv){
 function initiateRender(){
     console.log("ace editor is changed...");
     var input = ace_edit.getValue();
+    initiateTheming();
     showProcessingIndicator();
     if (open_file.endsWith(".md")){ 
         spongedown_parse(input);

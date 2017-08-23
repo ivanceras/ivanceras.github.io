@@ -1,7 +1,9 @@
 body {
     overflow: hidden;
     font-family: arial;
+    background-color: var(--sidebar-bg);
 }
+
 
 .full_size{
    --texteditor-top: 0;
@@ -52,14 +54,19 @@ body {
     visibility: var(--texteditor--visibility);
 }
 
-#keybinding-controls{
+#editor-tools{
     position: absolute;
-    display: inline;
     bottom: 0;
-    left: 0;
     height: 20px;
+    display: flex;
+    width: var(--texteditor-width);
+}
+
+
+#keybinding-controls{
     font-size: 11px;
     color: #aaa;
+    margin: 0 20px;
 }
 #keybinding-controls input{
     margin-left: 10px;
@@ -79,10 +86,11 @@ body {
     left: var(--grip-left);
     width: var(--grip-width);
     bottom: 0;
-    background-color: #ebebeb;
+    background-color: var(--sidebar-bg);
     cursor: ew-resize;
     visibility: var(--render-visibility);
 }
+
 
 #print-toolbar{
     position: absolute;
@@ -144,11 +152,8 @@ pre code {
 
 
 #processing-indicator{
-    position: absolute;
-    display: block;
-    bottom: 0;
-    left: 300px;
-    height: 20px;
+    position: relative;
+    margin: 0 20px;
 }
 .cssload-container {
 	width: 100%;
@@ -169,3 +174,53 @@ pre code {
 @keyframes cssload-spin {
 	100%{ transform: rotate(360deg); transform: rotate(360deg); }
 }
+
+#theme-select{
+    display: block;
+    margin: 0 20px;
+}
+
+#theme-select button{
+    height: 12px;
+    width: 12px;
+    outline: 0;
+}
+
+#light-theme{
+    background-color: #fff;
+    border: 1px solid #000;
+}
+
+#dark-theme{
+    background-color: #141617;
+    border: 1px solid #fff;
+}
+
+
+/* scrollbar styles */
+.dark ::-webkit-scrollbar {
+    width: 12px;
+    height: 12px; /* for changing the thickness of the horizontal scrollbar*/
+}
+ 
+/* Track */
+.dark ::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3); 
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+}
+ 
+/* Handle */
+.dark ::-webkit-scrollbar-thumb {
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+    background: rgba(78,78,78,0.8); 
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5); 
+}
+.dark ::-webkit-scrollbar-thumb:window-inactive {
+	background: rgba(100,100,100,0.4); 
+}
+.dark ::-webkit-scrollbar-corner {
+    background: rgba(0,0,0,0.3);
+}
+

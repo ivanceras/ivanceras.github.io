@@ -12,6 +12,7 @@
   <link rel="stylesheet" href="katex/katex.min.css">
   <link rel="stylesheet" href="bob_hover.css"/>
   <link rel="stylesheet" href="highlight.css">
+  <link rel="stylesheet" href="tomorrow-night.css" disabled=true>
 </head>
 <body class="light">
 <nav id="controls">
@@ -30,15 +31,21 @@ Please wait...
     <i id="print-icon" class="fa fa-print" title="Print this document"></i> 
     <i id="download-md-btn" class="fa fa-file-text-o" title="Download markdown text"></i> 
 </div>
-<div id="keybinding-controls">
-    <label><i class="fa fa-lg fa-keyboard-o"></i></label>
-    <label><input id="keybinding-default" type="radio" name="keybinding" value="" checked/> default</label>
-    <label><input id="keybinding-vim" type="radio" name="keybinding" value="vim"/> vim</label>
-    <label><input id="keybinding-emacs" type="radio" name="keybinding" value="emacs"/> emacs</label>
-</div>
-<div id="processing-indicator">
-    <div class="cssload-container">
-        <div class="cssload-speeding-wheel"></div>
+<div id="editor-tools">
+    <div id="keybinding-controls">
+        <label><i class="fa fa-lg fa-keyboard-o"></i></label>
+        <label><input id="keybinding-default" type="radio" name="keybinding" value="" checked/> default</label>
+        <label><input id="keybinding-vim" type="radio" name="keybinding" value="vim"/> vim</label>
+        <label><input id="keybinding-emacs" type="radio" name="keybinding" value="emacs"/> emacs</label>
+    </div>
+    <div id="theme-select">
+        <button id="light-theme"></button>
+        <button id="dark-theme"></button>
+    </div>
+    <div id="processing-indicator">
+        <div class="cssload-container">
+            <div class="cssload-speeding-wheel"></div>
+        </div>
     </div>
 </div>
     
@@ -52,5 +59,6 @@ Please wait...
 <script src="katex/katex.js"></script>
 <script src="katex/contrib/auto-render.min.js"></script>
 <script src="highlight.js"></script>
+<script src="theme.js"></script>
 </body>
 </html>
