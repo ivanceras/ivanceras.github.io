@@ -2,7 +2,7 @@
 # Spongedown
 
 [Spongedown](https://github.com/ivanceras/spongedown) is an extension of Github Flavored Markdown
-with more components added, maily [svgbob](https://github.com/ivanceras/svgbobrus/)
+with more components added, mainly [svgbob](https://github.com/ivanceras/svgbobrus/)
 
 
 
