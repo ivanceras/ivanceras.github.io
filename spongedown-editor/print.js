@@ -23,13 +23,11 @@ function printDoc(){
     doc.write("<link rel='stylesheet' href='print.css'/>");
     doc.write("</head><body style='overflow:auto' class='light'>");
     doc.write(render_html);
-    doc.write("<script src='MathJax/MathJax.js?config=TeX-AMS-MML_SVG-full'></script>");
-    doc.write("<script type='text/x-mathjax-config'>");
-    doc.write("MathJax.Hub.Config({ showMathMenu: false, messageStyle: 'none' });");
-    doc.write("</script>");
     doc.write("<script>");
-    doc.write("console.log('queueing..');");
-    doc.write("MathJax.Hub.Queue(() => {console.log('printing');window.print();});");
+    //disable dark theme
+    doc.write("document.querySelector(\"[href='tomorrow-night.css']\").disabled = true;");
+    //enable the light theme
+    doc.write("document.querySelector(\"[href='highlight.css']\").disabled = false;");
     doc.write("</script>");
     doc.write("</body></html>");
     doc.close();
