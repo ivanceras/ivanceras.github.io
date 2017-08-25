@@ -54,6 +54,11 @@ body {
     visibility: var(--texteditor--visibility);
 }
 
+/* change the ace editor font to monospace */
+.ace_editor{
+    font-family: monospace!important;
+}
+
 #editor-tools{
     position: absolute;
     bottom: 0;

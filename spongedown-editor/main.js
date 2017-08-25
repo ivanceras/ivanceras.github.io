@@ -24,7 +24,7 @@ function fetchDoc(url){
 function initAceEditor(){
     ace_edit = ace.edit("texteditor");
     ace_edit.setShowPrintMargin(false);
-    ace_edit.setTheme("ace/theme/github");
+    ace_edit.setTheme("ace/theme/ambiance");
     ace_edit.session.setMode("ace/mode/markdown");
     ace_edit.setOptions({enableBasicAutocompletion: false, 
         enableLiveAutocompletion: false});
