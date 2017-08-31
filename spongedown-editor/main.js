@@ -29,7 +29,7 @@ function initAceEditor(){
     ace_edit.setOptions({enableBasicAutocompletion: false, 
         enableLiveAutocompletion: false});
     ace_edit.on("change", 
-        throttle(initiateRender,1000)
+        debounce(initiateRender,1000)
     );
 }
 
