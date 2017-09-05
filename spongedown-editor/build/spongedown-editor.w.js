@@ -1622,9 +1622,9 @@ function integrateWasmJS(Module) {
   var method = Module['wasmJSMethod'] || 'native-wasm';
   Module['wasmJSMethod'] = method;
 
-  var wasmTextFile = Module['wasmTextFile'] || 'spongedown_editor-9a555163939a9b4a.wast';
-  var wasmBinaryFile = Module['wasmBinaryFile'] || 'spongedown_editor-9a555163939a9b4a.wasm';
-  var asmjsCodeFile = Module['asmjsCodeFile'] || 'spongedown_editor-9a555163939a9b4a.asm.js';
+  var wasmTextFile = Module['wasmTextFile'] || 'spongedown_editor-7b319bcf630a061d.wast';
+  var wasmBinaryFile = Module['wasmBinaryFile'] || 'spongedown_editor-7b319bcf630a061d.wasm';
+  var asmjsCodeFile = Module['asmjsCodeFile'] || 'spongedown_editor-7b319bcf630a061d.asm.js';
 
   if (typeof Module['locateFile'] === 'function') {
     wasmTextFile = Module['locateFile'](wasmTextFile);
@@ -2046,16 +2046,16 @@ function _emscripten_asm_const_iiiiii(code, a0, a1, a2, a3, a4) {
 
 STATIC_BASE = Runtime.GLOBAL_BASE;
 
-STATICTOP = STATIC_BASE + 316912;
+STATICTOP = STATIC_BASE + 316464;
 /* global initializers */  __ATINIT__.push();
 
 
-memoryInitializer = Module["wasmJSMethod"].indexOf("asmjs") >= 0 || Module["wasmJSMethod"].indexOf("interpret-asm2wasm") >= 0 ? "spongedown_editor-9a555163939a9b4a.js.mem" : null;
+memoryInitializer = Module["wasmJSMethod"].indexOf("asmjs") >= 0 || Module["wasmJSMethod"].indexOf("interpret-asm2wasm") >= 0 ? "spongedown_editor-7b319bcf630a061d.js.mem" : null;
 
 
 
 
-var STATIC_BUMP = 316912;
+var STATIC_BUMP = 316464;
 Module["STATIC_BASE"] = STATIC_BASE;
 Module["STATIC_BUMP"] = STATIC_BUMP;
 
