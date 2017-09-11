@@ -1622,9 +1622,9 @@ function integrateWasmJS(Module) {
   var method = Module['wasmJSMethod'] || 'native-wasm';
   Module['wasmJSMethod'] = method;
 
-  var wasmTextFile = Module['wasmTextFile'] || 'spongedown_editor-7b319bcf630a061d.wast';
-  var wasmBinaryFile = Module['wasmBinaryFile'] || 'spongedown_editor-7b319bcf630a061d.wasm';
-  var asmjsCodeFile = Module['asmjsCodeFile'] || 'spongedown_editor-7b319bcf630a061d.asm.js';
+  var wasmTextFile = Module['wasmTextFile'] || 'spongedown_editor-0a32e3221f6f4b51.wast';
+  var wasmBinaryFile = Module['wasmBinaryFile'] || 'spongedown_editor-0a32e3221f6f4b51.wasm';
+  var asmjsCodeFile = Module['asmjsCodeFile'] || 'spongedown_editor-0a32e3221f6f4b51.asm.js';
 
   if (typeof Module['locateFile'] === 'function') {
     wasmTextFile = Module['locateFile'](wasmTextFile);
@@ -2046,16 +2046,16 @@ function _emscripten_asm_const_iiiiii(code, a0, a1, a2, a3, a4) {
 
 STATIC_BASE = Runtime.GLOBAL_BASE;
 
-STATICTOP = STATIC_BASE + 316464;
+STATICTOP = STATIC_BASE + 325056;
 /* global initializers */  __ATINIT__.push();
 
 
-memoryInitializer = Module["wasmJSMethod"].indexOf("asmjs") >= 0 || Module["wasmJSMethod"].indexOf("interpret-asm2wasm") >= 0 ? "spongedown_editor-7b319bcf630a061d.js.mem" : null;
+memoryInitializer = Module["wasmJSMethod"].indexOf("asmjs") >= 0 || Module["wasmJSMethod"].indexOf("interpret-asm2wasm") >= 0 ? "spongedown_editor-0a32e3221f6f4b51.js.mem" : null;
 
 
 
 
-var STATIC_BUMP = 316464;
+var STATIC_BUMP = 325056;
 Module["STATIC_BASE"] = STATIC_BASE;
 Module["STATIC_BUMP"] = STATIC_BUMP;
 
@@ -6662,9 +6662,9 @@ function nullFunc_viif(x) { Module["printErr"]("Invalid function pointer called 
 
 function nullFunc_viiii(x) { Module["printErr"]("Invalid function pointer called with signature 'viiii'. Perhaps this is an invalid value (e.g. caused by calling a virtual method on a NULL pointer)? Or calling a function with an incorrect type, which will fail? (it is worth building your source files with -Werror (warnings are errors), as warnings can indicate undefined behavior which can cause this)");  Module["printErr"]("Build with ASSERTIONS=2 for more info.");abort(x) }
 
-Module['wasmTableSize'] = 194560;
+Module['wasmTableSize'] = 186368;
 
-Module['wasmMaxTableSize'] = 194560;
+Module['wasmMaxTableSize'] = 186368;
 
 function invoke_viiiii(index,a1,a2,a3,a4,a5) {
   try {
