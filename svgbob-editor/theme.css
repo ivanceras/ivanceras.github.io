@@ -1,0 +1,90 @@
+
+.dark {
+  --bg: #141617; /*main background color*/
+  --fg: #98a3ad; /*highlight, color, bloackquote color*/
+
+  --sidebar-bg: #292c2f; /*accent, sidebar background*/
+  --sidebar-fg: #a1adb8;  /*sidebar-fg, side bar color, accent 2 (pre buttons)*/
+  --sidebar-non-existant: #505254; /*list accent*/
+  --sidebar-active: #3473ad; /*list accent 2 (buttons), chapter li active, chapter li a:hover,pre buttons:hover*/
+  --sidebar-spacer: #393939; /*chapter spacer background*/
+
+  --icons: #43484d; /*mobile nav chapter visited, theme-popup*/
+  --icons-hover: #b3c0cc;
+
+  --links: #2b79a2; /* a visited color */
+
+  --theme-popup-bg: #141617;
+  --theme-popup-border: #43484d;
+  --theme-hover: #1f2124; /*theme pop up hover */
+
+  --quote-bg: #242637; /*block quote background */
+  --quote-border: #2c2f44; /*blockquote border*/
+
+  --table-border-color: #1f2223;
+  --table-header-bg: #3f4649; /*tableheader*/
+  --table-alternate-bg: #1b1d1e;
+
+  --code-bg: #1d1f21;
+  --tabnav-border:#6d6d6d;
+  --active-file-bg:#5c5c5c;
+}
+
+.light {
+  --bg: #ffffff;
+  --fg: #333333; 
+
+  --sidebar-bg: #fafafa;
+  --sidebar-fg: #364149; 
+  --sidebar-non-existant: #aaaaaa;
+  --sidebar-active: #008cff; 
+  --sidebar-spacer: #f4f4f4; 
+
+  --icons: #cccccc;
+  --icons-hover: #333333;
+
+  --links: #4183c4;
+
+  --theme-popup-bg: #fafafa;
+  --theme-popup-border: #cccccc;
+  --theme-hover: #e6e6e6; 
+
+  --quote-bg: #f2f7f9;
+  --quote-border: #2c2f44;
+
+  --table-border-color: #ccc;
+  --table-header-bg: #ccc; 
+  --table-alternate-bg: #f7f7f7;
+
+  --code-bg: #fbfbfb;
+  --tabnav-border:#d1d1d1;
+  --active-file-bg:#f1f1f1;
+}
+
+body{
+    color: var(--fg);
+}
+
+body #render{
+    background-color: var(--bg);
+}
+
+svg line,
+svg path,
+svg circle {
+  stroke: var(--fg);
+  stroke-width: 2;
+}
+
+svg text{
+    fill: var(--fg);
+}
+
+svg circle.solid{
+    fill: var(--fg);
+}
+
+svg marker path{
+    fill: var(--fg);
+}
+

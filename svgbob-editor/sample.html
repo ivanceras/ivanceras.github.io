@@ -1,0 +1,136 @@
+<html>
+    <head>
+        <style type="text/css">
+            .bob_container{
+                border: 1px solid blue;
+                position: relative;
+                width: 583px;
+                height: 1631.970px 
+            }
+            .bob{
+                position: absolute;
+            }
+            .content{
+                position: absolute;
+                display: flex;
+                width: 100px;
+                height: 100px;
+                flex-wrap: wrap;
+                border: 1px solid green;
+                top: 0px;
+                left: 0px;
+            }
+
+            .lens{
+                position: absolute;
+                display: flex;
+                width: 200px;
+                height: 200px;
+                flex-wrap: wrap;
+                border: 1px solid red;
+                border-radius: 50%;
+                top: 0px;
+                left: 0px;
+                overflow: hidden;
+            }
+            .content div{
+                width: 16px;
+                height: 8px;
+            }
+        </style>
+        <script src="util.js"></script>
+    </head>
+    <body>
+        <div id="render" style="position:relative">
+            <h1>This is a bob demo with multiple bobs</h1>
+            <h1>This is a bob demo with multiple bobs</h1>
+            <div class="bob_container">
+                <img class="bob" src="circuits.svg">
+                <div class="lens">
+                    <div class="content">
+                        <div>OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO</div>
+                        <div>OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO</div>
+                        <div>OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO</div>
+                        <div>OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO</div>
+                        <div>OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO</div>
+                        <div>OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO</div>
+                        <div>OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO</div>
+                        <div>OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO</div>
+                        <div>OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO</div>
+                        <div>OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO</div>
+                        <div>OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO</div>
+                    </div>
+                </div>
+            </div>
+            <h1>And another bob</h1>
+            <h1>And another 1</h1>
+            <div class="bob_container">
+                <img class="bob" src="circuits.svg">
+                <div class="lens">
+                    <div class="content">
+                        <div>OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO</div>
+                        <div>OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO</div>
+                        <div>OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO</div>
+                        <div>OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO</div>
+                        <div>OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO</div>
+                        <div>OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO</div>
+                        <div>OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO</div>
+                        <div>OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO</div>
+                        <div>OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO</div>
+                        <div>OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO</div>
+                        <div>OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script>
+            var activeBob = [];// the active bob that is hovered
+            var mouseX;
+            var mouseY;
+
+            window.addEventListener("mousemove", (e) => {
+                console.log("active bob:", getActiveBob());
+                let bob_container = getActiveBob();
+                if (bob_container != null) {
+                    let lens = bob_container.querySelector(".lens");
+                    lens.style.visibility = "visible";//make sure it's visible
+                    let content = lens.querySelector(".content");
+                    let top = e.pageY - 100 - bob_container.offsetTop;//50 is box size
+                    let left = e.pageX - 100 - bob_container.offsetLeft;
+                    lens.style.top = top;
+                    lens.style.left = left; 
+                    content.style.marginTop = -top;
+                    content.style.marginLeft = -left;
+                }
+                mouseX = e.pageX;
+                mouseY = e.pageY;
+            });
+
+        // get active bob base on mouse position
+        // all bob container element,
+        // the mouse should be greater than the offset but lesser than the width + offset
+        function getActiveBob(){
+            let bob_containers = document.querySelectorAll(".bob_container");
+            let activeBob;
+            bob_containers.forEach( (elm) => {
+                console.log("elm-> left: "+elm.offsetLeft+" top:"+elm.offsetTop+" ");
+                console.log("elm-> width: "+elm.offsetWidth+" height:"+elm.offsetHeight+" ");
+                console.log("mouse: "+mouseX+" "+mouseY);
+                if (mouseX > elm.offsetLeft 
+                    && mouseX < elm.offsetLeft + elm.offsetWidth
+                    && mouseY > elm.offsetTop
+                    && mouseY < elm.offsetTop + elm.offsetHeight
+                ){
+                    activeBob = elm
+                }
+                else{
+                    //hide lens for the inactive
+                    elm.querySelector(".lens").style.visibility = "hidden";
+                }
+            });
+            return activeBob;
+        }
+        </script>
+    </body>
+</html>
