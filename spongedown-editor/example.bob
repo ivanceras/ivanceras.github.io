@@ -1,4 +1,5 @@
 
+
 ```bob
 
 Svgbob is a diagramming model
@@ -260,3 +261,4 @@ What can it do?
       "cut, copy and paste text in block mode (<C-v> jjll 1vp)". 
       For emacs: there is artist mode.
 
+```

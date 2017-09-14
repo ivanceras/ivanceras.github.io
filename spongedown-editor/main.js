@@ -67,12 +67,6 @@ function parse_bob(bob){
         });
 }
 
-function parse_comic(comic){
-    worker.postMessage(
-        {'cmd':'parse_comic',
-         'data':comic
-        });
-}
 
 function parse_csv(csv){
     worker.postMessage(
@@ -99,9 +93,7 @@ function initiateRender(){
         else if (open_file.endsWith(".bob")){
             render_mode = "bob";
         }
-        else if (open_file.endsWith(".comic")){
-            render_mode = "comic";
-        }
+
         else if (open_file.endsWith(".csv")){
             render_mode = "csv";
         }
@@ -115,9 +107,6 @@ function parse_accdg_to_render(input){
     }
     else if (render_mode == "bob"){
         parse_bob(input);
-    }
-    else if (render_mode == "comic"){
-        parse_comic(input);
     }
     else if (render_mode == "csv"){
         parse_csv(input);
@@ -146,9 +135,6 @@ if (worker){
                 updateRender(data);
                 break;
             case "parse_bob":
-                updateRender(data);
-                break;
-            case "parse_comic":
                 updateRender(data);
                 break;
             case "parse_csv":
