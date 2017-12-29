@@ -29,7 +29,7 @@ function initAceEditor(){
     ace_edit.setOptions({enableBasicAutocompletion: false, 
         enableLiveAutocompletion: false});
     ace_edit.on("change", 
-        throttle(initiateRender,1000)
+        debounce(initiateRender,1000)
     );
 }
 
@@ -67,12 +67,6 @@ function parse_bob(bob){
         });
 }
 
-function parse_comic(comic){
-    worker.postMessage(
-        {'cmd':'parse_comic',
-         'data':comic
-        });
-}
 
 function parse_csv(csv){
     worker.postMessage(
@@ -81,21 +75,40 @@ function parse_csv(csv){
         });
 }
 
+var render_mode = "md";//the default render mode
+if (window.location.pathname.includes("svgbob-editor")){
+    render_mode = "bob";
+    open_file = "example.bob";
+}
+
 function initiateRender(){
     console.log("ace editor is changed...");
     var input = ace_edit.getValue();
     initiateTheming();
     showProcessingIndicator();
-    if (open_file.endsWith(".md")){ 
+    if (open_file){
+        if (open_file.endsWith(".md")){ 
+            render_mode = "md";
+        }
+        else if (open_file.endsWith(".bob")){
+            render_mode = "bob";
+        }
+
+        else if (open_file.endsWith(".csv")){
+            render_mode = "csv";
+        }
+        parse_accdg_to_render(input);
+    }
+}
+
+function parse_accdg_to_render(input){
+    if (render_mode == "md"){
         spongedown_parse(input);
     }
-    else if (open_file.endsWith(".bob")){
-        parse_bob(input)
+    else if (render_mode == "bob"){
+        parse_bob(input);
     }
-    else if (open_file.endsWith(".comic")){
-        parse_comic(input);
-    }
-    else if (open_file.endsWith(".csv")){
+    else if (render_mode == "csv"){
         parse_csv(input);
     }
 }
@@ -122,9 +135,6 @@ if (worker){
                 updateRender(data);
                 break;
             case "parse_bob":
-                updateRender(data);
-                break;
-            case "parse_comic":
                 updateRender(data);
                 break;
             case "parse_csv":

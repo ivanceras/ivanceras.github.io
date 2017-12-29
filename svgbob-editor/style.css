@@ -1,125 +1,231 @@
-
-html, body{
- height: 100%;
-}
-
-body{
-  font-family: monospace;
-  font-size: 14px;
-  height: 2500px;
-}
-
-#container{
-  position: relative;
-  display: flex;
-  flex-direction: row;
-  flex-wrap: nowrap;
-}
-
-#content{
-  display:block;
-}
-
-#cursor{
-  position: absolute;
-  border: 1px solid #ccc;
-  overflow: hidden;
-  user-select: none;
-}
-#tool{
-  position: absolute;
-  border: 1px solid #eee;
-  overflow: hidden;
-  cursor: crosshair;
-  user-select: none;
+body {
+    overflow: hidden;
+    font-family: arial;
+    background-color: var(--sidebar-bg);
 }
 
 
-#svg_with_grip{
-  display: flex;
-  flex-wrap: nowrap;
-  border: 1px solid #ccc;
+.full_size{
+   --texteditor-top: 0;
+   --texteditor-width: 50%;
+   --grip-left: 50%;
+   --grip-width: 0.5%;
+   --render-top: 0;
+   --render-left: 50.5%;
+   --render-width: 49.5%;
+   --control-display: none;
+   --texteditor-visibility: visible;
+   --render-visibility: visible;
 }
 
-#svgeditor{
-  position: relative;
-  overflow: hidden;
+.full_card{
+   --texteditor-top: 30px;
+   --texteditor-width: 100%;
+   --grip-left: 0;
+   --grip-width: 0;
+   --render-top: var(--texteditor-top);
+   --render-left: 0%;
+   --render-width: 100%;
+   --control-display: flex;
+   --texteditor-visibility: visible;
+   --render-visibility: hidden;
+}
+
+.condensed_size{
+   --texteditor-top: 30px;
+   --texteditor-width: 100%;
+   --grip-left: 0;
+   --grip-width: 0;
+   --render-top: var(--texteditor-top);
+   --render-left: 0;
+   --render-width: 100%;
+   --control-display: flex;
+   --texteditor-visibility: visible;
+   --render-visibility: hidden;
+}
+
+#texteditor { 
+    position: absolute;
+    margin: 0;
+    top: var(--texteditor-top);
+    bottom: 20px;
+    left: 0;
+    width: var(--texteditor-width);
+    visibility: var(--texteditor--visibility);
+}
+
+/* change the ace editor font to monospace */
+.ace_editor{
+    font-family: monospace!important;
+}
+
+#editor-tools{
+    position: absolute;
+    bottom: 0;
+    height: 20px;
+    display: flex;
+    width: var(--texteditor-width);
+}
+
+
+#keybinding-controls{
+    font-size: 11px;
+    color: #aaa;
+    margin: 0 20px;
+}
+#keybinding-controls input{
+    margin-left: 10px;
+}
+
+#keybinding-controls input:checked{
+    color: #333;
+}
+
+#keybinding-controls label{
+    margin-left: 10px;
 }
 
 #grip{
-  height: 100%;
-  width:10px;
-  background-color: #777;
-  z-index: 3000;
-  cursor: ew-resize;
-}
-
-#text_group{
-  position: relative;
-  display: block;
-  z-index:4000;
-}
-
-#texteditor{
-  font-family: monospace;
-  font-size: 14px;
-  white-space: pre;
-  word-wrap: normal;
-  resize: none;
-}
-
-#cursor .cursor_cells{
-  position: relative;
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  background-color: #fff;
-  z-index: 2000; /* in front of xray cells */
-}
-
-#cursor .cursor_cells div {
-  position: relative;
-  text-align: center;
-}
-
-.focus_char{
-  background-color: #ccc;
-  animation: blinker 1s linear infinite;
-}
-
-#tool .xray_cells{
-  position: relative;
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  background-color: #fff;
-  user-select: none;
-  z-index: 1000;
-}
-
-#tool .xray_cells div {
-  position: relative;
-  text-align: center;
-  user-select: none;
-}
-
-.hide{
-  visibility: hidden;
+    position: absolute;
+    top: 0;
+    left: var(--grip-left);
+    width: var(--grip-width);
+    bottom: 0;
+    background-color: var(--sidebar-bg);
+    cursor: ew-resize;
+    visibility: var(--render-visibility);
 }
 
 
-
-@keyframes blinker {  
-  50% { opacity: 0; }
+#print-toolbar{
+    position: absolute;
+    top: 5px;
+    right: 10px;
+    height: 20px;
+    color: #aaa;
 }
 
-#controls{
-  margin-top: 50px;
-  margin-bottom: 200px;
-  width: 100%;
-  text-align: right;
+#render {
+    position: absolute;
+    top:var(--render-top);
+    left: var(--render-left);
+    width: var(--render-width);
+    bottom: 0;
+    right: 0;
+    overflow: auto;
+    visibility: var(--render-visibility);
 }
-#controls button{
-  height: 40px;
-  width: 120px;
+
+#controls {
+    display: var(--control-display);
+    justify-content: flex-start;
+    margin-bottom: -1px;
+    padding-left: 50px;
+    background-color: #ebebeb;
+    top: 0;
+    position: absolute;
+    left: 0;
+    right: 0;
+    height: 30px;
 }
+
+#controls button {
+    border-radius: 3px 3px 0 0;
+    display: inline-block;
+    font-size: 14px;
+    line-height: 20px;
+    text-decoration: none;
+    user-select: none;
+    outline: 0;
+    border: 1px solid rgba(0,0,0,0);
+    color: #000;
+    background-color: #ebebeb;
+    border-bottom: 1px solid #ebebeb;
+}
+
+#controls #open_btn{
+    color: #aaa;
+}
+
+#controls button.selected {
+    background-color: #f9f9f9;
+}
+
+pre code {
+    border-radius: 5px;
+}
+
+
+#processing-indicator{
+    position: relative;
+    margin: 0 20px;
+}
+.cssload-container {
+	width: 100%;
+	height: 15px;
+	text-align: center;
+}
+.cssload-speeding-wheel {
+	width: 15px;
+	height: 15px;
+	margin: 0 auto;
+	border: 2px solid var(--fg);
+	border-radius: 50%;
+	border-left-color: transparent;
+	border-right-color: transparent;
+	animation: cssload-spin 1475ms infinite linear;
+}
+
+@keyframes cssload-spin {
+	100%{ transform: rotate(360deg); transform: rotate(360deg); }
+}
+
+#theme-select{
+    display: block;
+    margin: 0 20px;
+}
+
+#theme-select button{
+    height: 12px;
+    width: 12px;
+    outline: 0;
+}
+
+#light-theme{
+    background-color: #fff;
+    border: 1px solid #000;
+}
+
+#dark-theme{
+    background-color: #141617;
+    border: 1px solid #fff;
+}
+
+
+/* scrollbar styles */
+.dark ::-webkit-scrollbar {
+    width: 12px;
+    height: 12px; /* for changing the thickness of the horizontal scrollbar*/
+}
+ 
+/* Track */
+.dark ::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3); 
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+}
+ 
+/* Handle */
+.dark ::-webkit-scrollbar-thumb {
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+    background: rgba(78,78,78,0.8); 
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5); 
+}
+.dark ::-webkit-scrollbar-thumb:window-inactive {
+	background: rgba(100,100,100,0.4); 
+}
+.dark ::-webkit-scrollbar-corner {
+    background: rgba(0,0,0,0.3);
+}
+
