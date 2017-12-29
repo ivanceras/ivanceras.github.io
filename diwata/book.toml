@@ -1,0 +1,6 @@
+title = "Curtain database interface"
+description = "A book about curtain database interface"
+author = "Jovansonlee B. Cesar"
+
+[output.html]
+mathjax-support = true
