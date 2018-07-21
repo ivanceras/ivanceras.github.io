@@ -150,10 +150,12 @@ h3{
     word-wrap: normal;
     font-family: monospace;
     font-size: 14px;
+    min-height: 400px;
 }
 
 .mirror div.svgbob {
     width: 50%;
+    margin-left: 10px;
 }
 
 .mirror div.svgbob div{
