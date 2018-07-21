@@ -1,76 +1,32 @@
+
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, target-densityDpi=medium-dpi">
-  <title>Spongedown editor by ivanceras</title>
-  <link rel="stylesheet" href="style.css"/>
-  <link rel="stylesheet" href="md_render.css"/>
-  <link rel="stylesheet" href="indicator.css"/>
-  <link rel="stylesheet" href="font-awesome-4.7.0/css/font-awesome.min.css">
-  <link rel="stylesheet" href="theme.css"/>
-  <link rel="stylesheet" href="katex/katex.min.css">
-  <link rel="stylesheet" href="bob_hover.css"/>
-  <link rel="stylesheet" href="highlight.css">
-  <link rel="stylesheet" href="tomorrow-night.css" disabled=true>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=1" name="viewport" />
+    <link href="ionicons/css/ionicons.min.css" rel="stylesheet">
+    <link href="style.css" rel="stylesheet">
+    <script>
+        var Module = {};
+        var __cargo_web = {};
+        Object.defineProperty( Module, 'canvas', {
+            get: function() {
+                if( __cargo_web.canvas ) {
+                    return __cargo_web.canvas;
+                }
+
+                var canvas = document.createElement( 'canvas' );
+                document.querySelector( 'body' ).appendChild( canvas );
+                __cargo_web.canvas = canvas;
+
+                return canvas;
+            }
+        });
+        console.log("from static");
+    </script>
 </head>
-<body class="light">
-<nav id="controls">
-    <button id="edit_btn">Edit</button>
-    <button id="view_btn">View</button>
-</nav>
-<pre id="texteditor">
-Please wait...
-</pre>
-<div id="grip"></div>
-<div id="render">
-    <div id="inTurnFadingTextG"><div id="inTurnFadingTextG_1" class="inTurnFadingTextG">P</div><div id="inTurnFadingTextG_2" class="inTurnFadingTextG">r</div><div id="inTurnFadingTextG_3" class="inTurnFadingTextG">o</div><div id="inTurnFadingTextG_4" class="inTurnFadingTextG">c</div><div id="inTurnFadingTextG_5" class="inTurnFadingTextG">e</div><div id="inTurnFadingTextG_6" class="inTurnFadingTextG">s</div><div id="inTurnFadingTextG_7" class="inTurnFadingTextG">s</div><div id="inTurnFadingTextG_8" class="inTurnFadingTextG">i</div><div id="inTurnFadingTextG_9" class="inTurnFadingTextG">n</div><div id="inTurnFadingTextG_10" class="inTurnFadingTextG">g</div><div id="inTurnFadingTextG_11" class="inTurnFadingTextG">.</div><div id="inTurnFadingTextG_12" class="inTurnFadingTextG">.</div><div id="inTurnFadingTextG_13" class="inTurnFadingTextG">.</div></div>
-    <!-- rendered html goes here -->
-</div>
-<div id="print-toolbar">
-    <i id="print-icon" class="fa fa-print" title="Print this document"></i> 
-    <i id="download-md-btn" class="fa fa-file-text-o" title="Download markdown text"></i> 
-</div>
-<div id="editor-tools">
-    <div id="keybinding-controls">
-        <label><i class="fa fa-lg fa-keyboard-o"></i></label>
-        <label><input id="keybinding-default" type="radio" name="keybinding" value="" checked/> default</label>
-        <label><input id="keybinding-vim" type="radio" name="keybinding" value="vim"/> vim</label>
-        <label><input id="keybinding-emacs" type="radio" name="keybinding" value="emacs"/> emacs</label>
-    </div>
-    <div id="theme-select">
-        <button id="light-theme"></button>
-        <button id="dark-theme"></button>
-    </div>
-    <div id="processing-indicator">
-        <div class="cssload-container">
-            <div class="cssload-speeding-wheel"></div>
-        </div>
-    </div>
-</div>
-    
-<!-- load ace -->
-<script src="ace/ace.js"></script>
-<script src="util.js"></script>
-<script src="loader.js"></script>
-<script src="main.js"></script>
-<script src="print.js"></script>
-<script src="bob_hover.js"></script>
-<script src="katex/katex.js"></script>
-<script src="katex/contrib/auto-render.min.js"></script>
-<script src="highlight.js"></script>
-<script src="theme.js"></script>
-
-<script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-
-  ga('create', 'UA-102180261-1', 'auto');
-  ga('send', 'pageview');
-
-</script>
+<body class="hg">
+    <script src="svgeditor-simple.js"></script>
 </body>
 </html>

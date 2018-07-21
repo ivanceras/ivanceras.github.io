@@ -1,231 +1,175 @@
+/* https://github.com/ireade/holy-grail-css-grid/ */
+/* Reset */
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font: inherit;
+	font-size: 100%;
+	vertical-align: baseline;
+}
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+html {
+  box-sizing: border-box;
+}
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+
+
+/* Custom Styles */
+
+
+html {
+	font-size: 62.5%;
+}
+
 body {
-    overflow: hidden;
-    font-family: arial;
-    background-color: var(--sidebar-bg);
+	font-size: 1.5rem;
+	line-height: 1.6;
+	font-family: 'Open Sans';
 }
 
-
-.full_size{
-   --texteditor-top: 0;
-   --texteditor-width: 50%;
-   --grip-left: 50%;
-   --grip-width: 0.5%;
-   --render-top: 0;
-   --render-left: 50.5%;
-   --render-width: 49.5%;
-   --control-display: none;
-   --texteditor-visibility: visible;
-   --render-visibility: visible;
+p {
+	display: block;
+	margin-bottom: 15px;
 }
 
-.full_card{
-   --texteditor-top: 30px;
-   --texteditor-width: 100%;
-   --grip-left: 0;
-   --grip-width: 0;
-   --render-top: var(--texteditor-top);
-   --render-left: 0%;
-   --render-width: 100%;
-   --control-display: flex;
-   --texteditor-visibility: visible;
-   --render-visibility: hidden;
+.hg-header {
+	background-color: #fff;
 }
 
-.condensed_size{
-   --texteditor-top: 30px;
-   --texteditor-width: 100%;
-   --grip-left: 0;
-   --grip-width: 0;
-   --render-top: var(--texteditor-top);
-   --render-left: 0;
-   --render-width: 100%;
-   --control-display: flex;
-   --texteditor-visibility: visible;
-   --render-visibility: hidden;
+.hg-footer {
+	background-color: #fff;
+	color: #333;
+	font-size: 1.2rem;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }
 
-#texteditor { 
-    position: absolute;
-    margin: 0;
-    top: var(--texteditor-top);
-    bottom: 20px;
-    left: 0;
-    width: var(--texteditor-width);
-    visibility: var(--texteditor--visibility);
-}
-
-/* change the ace editor font to monospace */
-.ace_editor{
-    font-family: monospace!important;
-}
-
-#editor-tools{
-    position: absolute;
-    bottom: 0;
-    height: 20px;
-    display: flex;
-    width: var(--texteditor-width);
-}
-
-
-#keybinding-controls{
-    font-size: 11px;
-    color: #aaa;
-    margin: 0 20px;
-}
-#keybinding-controls input{
-    margin-left: 10px;
-}
-
-#keybinding-controls input:checked{
-    color: #333;
-}
-
-#keybinding-controls label{
-    margin-left: 10px;
-}
-
-#grip{
-    position: absolute;
-    top: 0;
-    left: var(--grip-left);
-    width: var(--grip-width);
-    bottom: 0;
-    background-color: var(--sidebar-bg);
-    cursor: ew-resize;
-    visibility: var(--render-visibility);
-}
-
-
-#print-toolbar{
-    position: absolute;
-    top: 5px;
-    right: 10px;
-    height: 20px;
-    color: #aaa;
-}
-
-#render {
-    position: absolute;
-    top:var(--render-top);
-    left: var(--render-left);
-    width: var(--render-width);
-    bottom: 0;
-    right: 0;
-    overflow: auto;
-    visibility: var(--render-visibility);
-}
-
-#controls {
-    display: var(--control-display);
-    justify-content: flex-start;
-    margin-bottom: -1px;
-    padding-left: 50px;
-    background-color: #ebebeb;
-    top: 0;
-    position: absolute;
-    left: 0;
-    right: 0;
-    height: 30px;
-}
-
-#controls button {
-    border-radius: 3px 3px 0 0;
-    display: inline-block;
-    font-size: 14px;
-    line-height: 20px;
-    text-decoration: none;
-    user-select: none;
-    outline: 0;
-    border: 1px solid rgba(0,0,0,0);
-    color: #000;
-    background-color: #ebebeb;
-    border-bottom: 1px solid #ebebeb;
-}
-
-#controls #open_btn{
-    color: #aaa;
-}
-
-#controls button.selected {
-    background-color: #f9f9f9;
-}
-
-pre code {
-    border-radius: 5px;
-}
-
-
-#processing-indicator{
-    position: relative;
-    margin: 0 20px;
-}
-.cssload-container {
-	width: 100%;
-	height: 15px;
+.hg-left,
+.hg-right {
+	background-color: #fff;
 	text-align: center;
 }
-.cssload-speeding-wheel {
-	width: 15px;
-	height: 15px;
-	margin: 0 auto;
-	border: 2px solid var(--fg);
-	border-radius: 50%;
-	border-left-color: transparent;
-	border-right-color: transparent;
-	animation: cssload-spin 1475ms infinite linear;
+
+.hg-header,
+.hg-left,
+.hg-right,
+.hg-main {
+	padding: 15px;
+}
+/* **************************
+	Holy Grail Layout with CSS Grid
+************************** */
+
+/* Define grid areas */
+.hg-header { grid-area: header; }
+.hg-footer { grid-area: footer; }
+.hg-main { grid-area: main; }
+.hg-left { grid-area: navigation; }
+.hg-right { grid-area: ads; }
+
+
+.hg {
+	display: grid;
+	grid-template-areas: "header header header"
+	                     "navigation main ads"
+	                     "footer footer footer";
+
+	grid-template-columns: 150px 1fr 150px;
+
+	grid-template-rows: 100px 
+						1fr 
+						30px;
+
+	min-height: 100vh;
 }
 
-@keyframes cssload-spin {
-	100%{ transform: rotate(360deg); transform: rotate(360deg); }
+
+
+@media screen and (max-width: 600px) {
+	.hg {
+		grid-template-areas: "header"
+		                     "navigation"
+		                     "main"
+		                     "ads"
+		                     "footer";
+
+		grid-template-columns: 100%;
+		grid-template-rows: 100px 
+							50px 
+							1fr
+							50px 
+							30px;
+	}
 }
 
-#theme-select{
+h1{
+    font-size: 24px;
     display: block;
-    margin: 0 20px;
 }
 
-#theme-select button{
-    height: 12px;
-    width: 12px;
-    outline: 0;
+h2{
+    font-size: 20px;
+    display: block;
 }
 
-#light-theme{
-    background-color: #fff;
-    border: 1px solid #000;
+h3{
+    font-size: 16px;
+    display: block;
 }
 
-#dark-theme{
-    background-color: #141617;
-    border: 1px solid #fff;
+.mirror{
+    display: flex;
+    max-width: 100%;
 }
 
-
-/* scrollbar styles */
-.dark ::-webkit-scrollbar {
-    width: 12px;
-    height: 12px; /* for changing the thickness of the horizontal scrollbar*/
-}
- 
-/* Track */
-.dark ::-webkit-scrollbar-track {
-    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3); 
-    -webkit-border-radius: 10px;
-    border-radius: 10px;
-}
- 
-/* Handle */
-.dark ::-webkit-scrollbar-thumb {
-    -webkit-border-radius: 10px;
-    border-radius: 10px;
-    background: rgba(78,78,78,0.8); 
-    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5); 
-}
-.dark ::-webkit-scrollbar-thumb:window-inactive {
-	background: rgba(100,100,100,0.4); 
-}
-.dark ::-webkit-scrollbar-corner {
-    background: rgba(0,0,0,0.3);
+.mirror textarea.raw{
+    width: 50%;
+    height: 100%;
+    white-space: pre;
+    word-wrap: normal;
+    font-family: monospace;
+    font-size: 14px;
 }
 
+.mirror div.svgbob {
+    width: 50%;
+}
+
+.mirror div.svgbob div{
+    overflow: auto;
+    width: 100%;
+    height: 100%
+}
+
+.btn {
+    background-color: #ada402;
+    color: white;
+    padding: 14px 25px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    border-radius: 5px;
+    margin-top: 10px;
+    width: 100%;
+}
