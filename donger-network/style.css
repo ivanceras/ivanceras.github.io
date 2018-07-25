@@ -1,0 +1,179 @@
+/* https://github.com/ireade/holy-grail-css-grid/ */
+/* Reset */
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font: inherit;
+	font-size: 100%;
+	vertical-align: baseline;
+}
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+html {
+  box-sizing: border-box;
+}
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+
+
+/* Custom Styles */
+
+
+html {
+	font-size: 62.5%;
+}
+
+body {
+	font-size: 1.5rem;
+	line-height: 1.6;
+	font-family: 'Arial';
+}
+
+p {
+	display: block;
+	margin-bottom: 15px;
+}
+
+.hg-header {
+	background-color: #fff;
+}
+
+.hg-footer {
+	background-color: #fff;
+	color: #333;
+	font-size: 1.2rem;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.hg-left,
+.hg-right {
+	background-color: #fff;
+	text-align: center;
+}
+
+.hg-header,
+.hg-left,
+.hg-right,
+.hg-main {
+	padding: 15px;
+}
+/* **************************
+	Holy Grail Layout with CSS Grid
+************************** */
+
+/* Define grid areas */
+.hg-header { grid-area: header; }
+.hg-footer { grid-area: footer; }
+.hg-main { grid-area: main; }
+.hg-left { grid-area: navigation; }
+.hg-right { grid-area: ads; }
+
+
+.hg {
+	display: grid;
+	grid-template-areas: "header header header"
+	                     "navigation main ads"
+	                     "footer footer footer";
+
+	grid-template-columns: 150px 1fr 150px;
+
+	grid-template-rows: 100px 
+						1fr 
+						30px;
+
+	min-height: 100vh;
+}
+
+
+
+@media screen and (max-width: 600px) {
+	.hg {
+		grid-template-areas: "header"
+		                     "navigation"
+		                     "main"
+		                     "ads"
+		                     "footer";
+
+		grid-template-columns: 100%;
+		grid-template-rows: 100px 
+							50px 
+							1fr
+							50px 
+							30px;
+	}
+}
+
+h1{
+    font-size: 24px;
+    display: block;
+}
+
+h2{
+    font-size: 20px;
+    display: block;
+}
+
+h3{
+    font-size: 16px;
+    display: block;
+}
+
+.mirror{
+    display: flex;
+    width: 100%;
+    height: 100%;
+}
+
+.mirror textarea.raw{
+    width: 50%;
+    height: 100%;
+    white-space: pre;
+    word-wrap: normal;
+    font-family: monospace;
+    font-size: 14px;
+    min-height: 400px;
+}
+
+.mirror div.svgbob {
+    width: 50%;
+    margin-left: 10px;
+}
+
+.mirror div.svgbob div{
+    overflow: auto;
+    width: 100%;
+    height: 100%
+}
+
+.btn {
+    background-color: #ada402;
+    color: white;
+    padding: 14px 25px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    border-radius: 5px;
+    margin-top: 10px;
+    width: 100%;
+    cursor: pointer;
+}
