@@ -152,6 +152,7 @@ h3{
     font-family: monospace;
     font-size: 14px;
     min-height: 400px;
+    line-height: 16px;
 }
 
 .mirror div.svgbob {
