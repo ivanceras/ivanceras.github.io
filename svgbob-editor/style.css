@@ -75,7 +75,7 @@ p {
 .hg-left,
 .hg-right,
 .hg-main {
-	padding: 15px;
+	padding: 5px;
 }
 /* **************************
 	Holy Grail Layout with CSS Grid
@@ -95,7 +95,7 @@ p {
 	                     "navigation main ads"
 	                     "footer footer footer";
 
-	grid-template-columns: 150px 1fr 150px;
+	grid-template-columns: 150px 1fr 10px;
 
 	grid-template-rows: 100px 
 						1fr 
@@ -118,7 +118,7 @@ p {
 		grid-template-rows: 100px 
 							200px 
 							1fr
-							50px 
+							1px 
 							30px;
 	}
 }
