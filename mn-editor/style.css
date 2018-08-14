@@ -1,0 +1,41 @@
+
+body{
+    font-family: monospace;
+    font-size: 14px;
+}
+
+.line {
+    display: flex;
+    flex-wrap: nowrap; 
+    line-height: 14px;
+}
+
+.char {
+    width: 8px;
+    height: 16px;
+}
+
+
+.focused {
+    background-color: #888;
+    animation: blinker 0.5s linear infinite;
+}
+
+.hovered {
+    background-color: #680;
+    animation: blinker 0.5s linear infinite;
+}
+
+@keyframes blinker {
+  50% {
+    opacity: 0;
+  }
+}
+
+textarea{
+    white-space: pre;
+    word-wrap: normal;
+    font-family: monospace;
+    font-size: 14px;
+    line-height: 16px;
+}
