@@ -13,6 +13,11 @@ body{
 .char {
     width: 8px;
     height: 16px;
+    overflow: hidden;
+}
+
+.charwidth2{
+    width: 16px!important;
 }
 
 
@@ -33,9 +38,18 @@ body{
 }
 
 textarea{
+    top:0px;
+    position:sticky;
     white-space: pre;
     word-wrap: normal;
     font-family: monospace;
     font-size: 14px;
     line-height: 16px;
+    width:0;
+    height:0;
+    resize: none;
+}
+
+.mn-editor{
+    cursor: crosshair;
 }
