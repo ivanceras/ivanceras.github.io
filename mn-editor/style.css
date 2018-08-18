@@ -67,6 +67,7 @@ textarea{
 .mn-editor{
     cursor: crosshair;
     position: relative;
+    line-height: 16px;
     user-select: none;
     -moz-user-select: none;
     -webkit-user-select: none;
@@ -94,12 +95,21 @@ textarea{
 }
 
 .tool-content{
-    /*background-color: #f88;*/
-    border: 0px solid red;
     opacity: 0.8;
     position: absolute;
+}
+
+.tool-content.debug{
+    background-color: red;
 }
 
 .tool-content-cells{
     position: relative;
 }
+
+.tool-content.eraser{
+    opacity: 0.5;
+    border: 2px solid #88f;
+    background-color: #fff;
+}
+
