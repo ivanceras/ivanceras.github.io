@@ -7,7 +7,7 @@ body{
 .line {
     display: flex;
     flex-direction: row;
-    flex-wrap: nowrap; 
+    flex-wrap: nowrap;
 }
 
 .cell {
@@ -101,6 +101,10 @@ textarea{
 
 .tool-content.debug{
     background-color: red;
+}
+
+.tool-content .debug .cell{
+    border: 1px solid blue;
 }
 
 .tool-content-cells{
