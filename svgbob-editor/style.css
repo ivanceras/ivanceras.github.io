@@ -97,8 +97,8 @@ p {
 
 	grid-template-columns: 150px 1fr 10px;
 
-	grid-template-rows: 100px 
-						1fr 
+	grid-template-rows: 100px
+						1fr
 						30px;
 
 	min-height: 100vh;
@@ -115,10 +115,10 @@ p {
 		                     "footer";
 
 		grid-template-columns: 100%;
-		grid-template-rows: 100px 
-							200px 
+		grid-template-rows: 100px
+							200px
 							1fr
-							1px 
+							1px
 							30px;
 	}
 }
@@ -149,16 +149,29 @@ h3{
     height: 100%;
 }
 
-.mirror textarea.raw{
+.mirror .raw {
     width: 50%;
     height: 100%;
     white-space: pre;
-    word-wrap: normal;
+    word-wrap: nowrap;
+    font-family: monospace;
+    font-size: 14px;
+    min-height: 400px;
+    line-height: 16px;
+    border: 1px solid #888;
+}
+
+.mirror .raw_text {
+    width: 50%;
+    height: 100%;
+    white-space: pre;
+    word-wrap: nowrap;
     font-family: monospace;
     font-size: 14px;
     min-height: 400px;
     line-height: 16px;
 }
+
 
 .mirror div.svgbob {
     width: 50%;
@@ -183,3 +196,128 @@ h3{
     width: 100%;
     cursor: pointer;
 }
+
+
+body{
+    font-family: monospace;
+    font-size: 14px;
+}
+
+.line {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+}
+
+.cell {
+    width: 8px;
+    height: 16px;
+    flex: none;
+}
+
+/*
+.tool-content .cell{
+    border-right: 1px solid green;
+}
+
+.tool-content .line{
+    border-bottom: 1px solid blue;
+}
+*/
+
+.charwidth2{
+    width: 16px!important;
+}
+
+
+.focused {
+    background-color: #333;
+    animation: blinker 800ms linear infinite;
+    opacity: 1;
+}
+
+/* style for the cell hovered by the mouse */
+.hovered {
+    /*background-color: #680;
+    animation: blinker 0.5s linear infinite;
+    */
+}
+
+@keyframes blinker {
+  50% {
+    opacity: 0;
+  }
+}
+
+#input, 
+#buffer{
+    top:0px;
+    position:sticky;
+    position: -webkit-sticky;
+    white-space: pre;
+    word-wrap: normal;
+    font-family: monospace;
+    font-size: 14px;
+    line-height: 16px;
+    width:0px;
+    height:0px;
+    resize: none;
+}
+
+p.debug {
+    display:none;
+}
+
+.mn-editor{
+    cursor: crosshair;
+    position: relative;
+    line-height: 16px;
+    user-select: none;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+}
+
+/* use for covering the cell lines, in order to get offset_x and offset_y accurate to the mn-editor
+ * needs to be infront of all the overlays
+ * */
+.cells-overlay{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 999;
+}
+
+/* overlay for tool when user starts dragging mouse */
+.tool-overlay{
+    background-color: #88f;
+    border: 2px solid blue;
+    opacity: 0.2;
+    position: absolute;
+}
+
+.tool-content{
+    opacity: 0.8;
+    position: absolute;
+}
+
+.tool-content.debug{
+    background-color: red;
+}
+
+.tool-content .debug .cell{
+    border: 1px solid blue;
+}
+
+.tool-content-cells{
+    position: relative;
+}
+
+.tool-content.eraser{
+    opacity: 0.5;
+    border: 2px solid #88f;
+    background-color: #fff;
+}
+
