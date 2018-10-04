@@ -53,12 +53,12 @@ p {
 }
 
 .hg-header {
-	background-color: #fff;
+	background-color: var(--bg);
 }
 
 .hg-footer {
-	background-color: #fff;
-	color: #333;
+	background-color: var(--bg);
+	color: var(--fg);
 	font-size: 1.2rem;
 	display: flex;
 	justify-content: center;
@@ -67,7 +67,7 @@ p {
 
 .hg-left,
 .hg-right {
-	background-color: #fff;
+	background-color: var(--bg);
 	text-align: center;
 }
 
@@ -176,8 +176,8 @@ h3{
 }
 
 .btn {
-    background-color: #ada402;
-    color: white;
+    background-color: var(--hl);
+    color: var(--hl-alt);
     padding: 14px 25px;
     text-align: center;
     text-decoration: none;
@@ -188,11 +188,43 @@ h3{
     cursor: pointer;
 }
 
+:root {
+    --bg: #fff;
+    --fg: #000;
+    --accent-bg: #eee;
+    --hl: #ada402;
+    --hl-alt: #fff;
+}
+
+.coal{
+    --bg: #141617;
+    --fg: #98a3ad;
+    --accent-bg: #b7b7b7;
+    --hl: #ada402;
+    --hl-alt: #fff;
+}
+
+.minimal{
+    --bg: #fff;
+    --fg: #000;
+    --accent-bg: #eee;
+    --hl: #ada402;
+    --hl-alt: #fff;
+}
 
 body{
     font-family: monospace;
     font-size: 14px;
+    color: var(--fg);
+    background-color: var(--bg);
 }
+
+/* override the svg backdrop with the theme bg */
+svg rect.backdrop,
+svg .bg_fill{
+    fill: var(--bg) !important;
+}
+
 
 .line {
     display: flex;
@@ -230,12 +262,6 @@ body{
     opacity: 1;
 }
 
-/* style for the cell hovered by the mouse */
-.hovered {
-    /*background-color: #680;
-    animation: blinker 0.5s linear infinite;
-    */
-}
 
 @keyframes blinker {
   50% {
@@ -328,9 +354,9 @@ p.debug {
 }
 
 .loader {
-    border: 16px solid #f3f3f3; 
-    border-top: 16px solid #ada402; 
-    border-bottom: 16px solid #ada402; 
+    border: 16px solid var(--accent-bg); 
+    border-top: 16px solid var(--hl); 
+    border-bottom: 16px solid var(--hl); 
     border-radius: 50%;
     width: 120px;
     height: 120px;
@@ -350,14 +376,14 @@ p.debug {
     border-bottom: 1px solid #888;
     position: sticky;
     top: 0;
-    background-color: #fff;
+    background-color: var(--accent-bg);
     z-index: 2222;
 }
 
 .tool button{
     height: 40px;
     outline: none;
-    background-color: #fff;
+    background-color: transparent;
     border: 0;
     padding: 5px;
     outline: none;
