@@ -200,8 +200,8 @@ h3{
     --bg: #141617;
     --fg: #98a3ad;
     --accent-bg: #b7b7b7;
-    --hl: #ada402;
-    --hl-alt: #fff;
+    --hl: #b7b7b7;
+    --hl-alt: #000;
 }
 
 .minimal{
@@ -220,9 +220,17 @@ body{
 }
 
 /* override the svg backdrop with the theme bg */
-svg rect.backdrop,
-svg .bg_fill{
+svg.bob rect.backdrop,
+svg.bob .bg_fill{
     fill: var(--bg) !important;
+}
+
+svg.bob .fg_fill{
+    fill: var(--fg) !important;
+}
+
+svg.bob .fg_stroke{
+    stroke: var(--fg) !important;
 }
 
 
@@ -354,9 +362,9 @@ p.debug {
 }
 
 .loader {
-    border: 16px solid var(--accent-bg); 
-    border-top: 16px solid var(--hl); 
-    border-bottom: 16px solid var(--hl); 
+    border: 16px solid var(--accent-bg);
+    border-top: 16px solid var(--hl);
+    border-bottom: 16px solid var(--hl);
     border-radius: 50%;
     width: 120px;
     height: 120px;
