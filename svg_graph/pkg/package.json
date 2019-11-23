@@ -1,0 +1,15 @@
+{
+  "name": "svg_graph",
+  "collaborators": [
+    "Jovansonlee Cesar <ivanceras@gmail.com>"
+  ],
+  "version": "0.1.0",
+  "license": "MIT",
+  "files": [
+    "svg_graph_bg.wasm",
+    "svg_graph.js",
+    "svg_graph.d.ts"
+  ],
+  "browser": "svg_graph.js",
+  "types": "svg_graph.d.ts"
+}
