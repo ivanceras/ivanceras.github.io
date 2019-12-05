@@ -1,0 +1,3 @@
+[submodule "sauron-perf"]
+	path = sauron-perf
+	url = https://ivanceras@github.com/ivanceras/sauron-perf.git
