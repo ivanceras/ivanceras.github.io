@@ -1,0 +1,14 @@
+{
+  "name": "gift-cards",
+  "collaborators": [
+    "lee"
+  ],
+  "version": "0.1.0",
+  "files": [
+    "gift_cards_bg.wasm",
+    "gift_cards.js",
+    "gift_cards.d.ts"
+  ],
+  "browser": "gift_cards.js",
+  "types": "gift_cards.d.ts"
+}

@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="style.css"/>
+    <link rel="icon" type="image/png" href="img/favicon-48x48.png" sizes="48x48">
+    <title>Gift cards</title>
+</head>
+<body style='margin: 0; padding: 0; width: 100%; height: 100%;'>
+  <script src='pkg/gift_cards.js'></script>
+  <script type=module>
+        const { initialize } = wasm_bindgen;
+        async function run() {
+            await wasm_bindgen('pkg/gift_cards_bg.wasm');
+            initialize();
+        }
+        run();
+  </script>
+</body>
+</html>
