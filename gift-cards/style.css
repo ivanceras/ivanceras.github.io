@@ -1,11 +1,28 @@
 
-.coupon{
+.form{
     display:flex;
     flex-direction: column;
     width: 200px;
+    padding: 20px;
 }
 
 .backgrounds{
     display:flex;
     flex-direction:row;
+}
+
+.app {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.form_and_svg{
+    display: flex;
+    flex-direction: row;
+}
+
+.svg_and_download{
+    display: flex;
+    flex-direction: column;
 }
