@@ -26,3 +26,16 @@
     display: flex;
     flex-direction: column;
 }
+
+@font-face {
+    font-family: 'sf';
+    src: url('sf.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'duck_shipah';
+    src: url('duck_shipah.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
