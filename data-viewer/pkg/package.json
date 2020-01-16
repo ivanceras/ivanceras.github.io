@@ -1,0 +1,14 @@
+{
+  "name": "data-viewer",
+  "collaborators": [
+    "lee"
+  ],
+  "version": "0.1.0",
+  "files": [
+    "data_viewer_bg.wasm",
+    "data_viewer.js",
+    "data_viewer.d.ts"
+  ],
+  "browser": "data_viewer.js",
+  "types": "data_viewer.d.ts"
+}
