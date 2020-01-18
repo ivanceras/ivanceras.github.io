@@ -3,9 +3,41 @@
  * The main advantage is text searching in vim where it matches the entire
  * class name and treated as identifier
  * */
+
+.light{
+    --text_color: #333;
+    --frozen_column_color:#eefefb;
+    --frozen_row_color: #fefece;
+    --modified_value_color: papayawhip;
+    --immovable_fields_color: #ecfeec;
+    --row_background: #fff;
+    --border_color: #ccc;
+    --resize_grip_color: #ddd;
+    --column_grip_color: #ddd;
+    --column_header_color: #ddd;
+    --normal_row_text_color: #333;
+    --normal_row_background: #fff
+}
+
+.dark{
+    --text_color: #fff;
+    --frozen_column_color:#444;
+    --frozen_row_color: #888;
+    --modified_value_color: blue;
+    --immovable_fields_color: #777;
+    --row_background: #555;
+    --border_color: #fff;
+    --resize_grip_color: #222;
+    --column_grip_color: #111;
+    --column_header_color: #222;
+    --normal_row_text_color: #eee;
+    --normal_row_background: #333;
+}
+
+
 body {
     font-family: system,-apple-system,".SFNSDisplay-Regular","Helvetica Neue",Helvetica,"Segoe UI",sans-serif;
-    color: #333;
+    color: var(--text_color);
     font-size: 13px;
     line-height: 1.6;
 }
@@ -40,13 +72,16 @@ ol, ul, li {
 /* end of generic classes */
 
 .data_view{
-    border: 1px solid #ccc;
+    border: 1px solid var(--border-color);
     box-shadow: 0 1px 6px rgba(57,73,76,0.35);
+    background-color: var(--row_background);
+    overflow-x: scroll;
+    overflow-y: scroll;
 }
 
 
 .data_view__spacer__frozen_column_names{
-    background-color: #ddd;
+    background-color: var(--column_header_color);
 }
 .data_view__spacer {
     height: 70px;
@@ -57,27 +92,32 @@ ol, ul, li {
 
 /* ol, contains the frozen columns and their selection*/
 .data_view__immovable_frozen_columns {
-    border-bottom: 1px dashed #ccc;
+    border-bottom: 1px dashed var(--border_color);
 }
 
 
 .data_view__normal_column_names, .data_view__frozen_column_names {
-    background-color: #ddd;
+    background-color: var(--column_header_color);
 }
 
+.data_view__spacer__frozen_column_names__immovable_frozen_columns {
+    position: sticky;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+}
 
 .column_view{
+    border-right: 1px solid var(--border_color);
+    background-color: var(--column_header_color);
 }
 
 .column_view__grip {
     cursor: col-resize;
 }
-.column_view__grip--left{
-    background-color: red;
-}
 
 .column_view__grip--right {
-    border-right: 1px solid #ccc;
+    background-color: var(--column_grip_color);
 }
 
 .column_view__controls{
@@ -86,12 +126,13 @@ ol, ul, li {
 
 /* remove the dashed border when in frozen column */
 .column_view__column_name--frozen{
-    border-right: 1px dashed #ccc;
+    border-right: 1px dashed var(--border_color);
 }
+
 
 /* if column name is frozen, change the color to something else */
 .column_view__controls--frozen{
-    background-color:#eefefb;
+    background-color:var(--frozen_column_color);
 }
 
 /* column_controls contain the column name and the sort btn */
@@ -137,8 +178,15 @@ input.search_widget__column_filter[type="text"]{
 
 
 .data_view__normal_column_names__frozen_rows{
-    overflow-x: hidden;
+    position: sticky;
+    top: 0;
 }
+
+.data_view__frozen_columns_container {
+    position: sticky;
+    left: 0;
+}
+
 /* add an animation for the transition of margin to smoothen out the
  * transition */
 .normal_column_names__frozen_rows{
@@ -146,7 +194,7 @@ input.search_widget__column_filter[type="text"]{
 }
 
 .data_view__frozen_columns {
-    border-bottom: 1px dashed #ccc;
+    border-bottom: 1px dashed var(--border_color);
 }
 
 .data_view__frozen_rows{
@@ -155,16 +203,14 @@ input.search_widget__column_filter[type="text"]{
 
 
 .field_view__value--frozen_row.field_view__value--frozen_column.field_view__value--modified{
-    background-color: papayawhip;
+    background-color: var(--modified_value_color);
 }
 
 
 /*ol in table_view, listing of normal_rows
  * can move: left, right, up, down */
 .data_view__normal_rows{
-    flex-shrink:0;
-    overflow-y: scroll;
-    overflow-x: scroll;
+    background-color: var(--normal_row_background);
 }
 
 
@@ -175,6 +221,7 @@ input.search_widget__column_filter[type="text"]{
 
 /* the selector and immovable frozen column at the top_right corner of the table*/
 .page_view__selector_box__immovable_rows{
+    background-color: var(--row_background);
 }
 
 .page_view__frozen_columns__selector__frozen_column_rows{
@@ -184,34 +231,39 @@ input.search_widget__column_filter[type="text"]{
 
 .row_view{
     flex-shrink: 0;
-    background-color: #fff;
+    background-color: var(--row_background);
 }
 .row_view.modified{
-    background-color: papayawhip;
+    background-color: var(--modified_value_color);
 }
 
 .row_view--frozen_row, .field_view__value--frozen_row{
-    background-color: #fefece;
+    background-color: var(--frozen_row_color);
 }
 
 
 /* can move up and down */
 .row_view--frozen_column, .field_view__value--frozen_column{
-    background-color: #eefefb;
+    background-color: var(--frozen_column_color);
 }
 
 /* both frozen row and frozen column, immovable */
 .row_view--frozen_row.row_view--frozen_column, .field_view__value--frozen_row.field_view__value--frozen_column {
-    background-color: #ecfeec;
+    background-color: var(--immovable_fields_color);
+}
+
+.selector_box{
+    background-color: var(--normal_row_background);
 }
 
 .field_view{
-    border-right: 1px solid #ccc;
-    background-color: #fff;
+    border-right: 1px solid var(--border_color);
+    background-color: var(--normal_row_background);
+    color: var(--normal_row_text);
 }
 /* dashed border when in frozen column */
 .field_view--frozen_column{
-    border-right: 1px dashed #ccc;
+    border-right: 1px dashed var(--border_color);
 }
 
 .field_view--detail{
@@ -225,7 +277,7 @@ input.search_widget__column_filter[type="text"]{
 
 
 .field_view__value--modified{
-    background-color: papayawhip;
+    background-color: var(--modified_value_color);
 }
 
 input.field_view__value[type="text"],
@@ -233,18 +285,35 @@ input.field_view__value[type="number"],
 input.field_view__value[type="date"]
 {
     border: 0;
-    border-bottom: 1px solid #ccc;
+    border-bottom: 1px solid var(--border_color);
     overflow: hidden;
+    color: var(--text-color);
 }
 input[type="checkbox"] {
     border: 0;
     outline: 0;
 }
 
+input.field_view__value--normal{
+    color: var(--normal_row_text_color);
+    background-color: var(--normal_row_background);
+}
+
+input.field_view__value--normal.field_view__value--modified{
+    background-color: var(--modified_value_color);
+}
+input.field_view__value--frozen_column.field_view__value--modified{
+    background-color: var(--modified_value_color);
+}
+
+input.field_view__value--frozen_column{
+    background-color: var(--frozen_column_color);
+}
+
 /* The wrapper to the checkbox */
 div.checkbox{
     border: 0;
-    border-bottom: 1px solid #ccc;
+    border-bottom: 1px solid var(--border_color);
     overflow: hidden;
 }
 
@@ -257,7 +326,7 @@ div.checkbox{
 }
 
 .resize_wrapper__resize_grip{
-    background-color: #ddd;
+    background-color: var(--resize_grip_color);
 }
 
 .resize_wrapper__resize_grip--right{
