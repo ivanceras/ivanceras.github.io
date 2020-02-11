@@ -2,7 +2,7 @@
 
 Svgbob creates an svg drawing based on the input ascii art diagrams.
 It achieves this by creating a corresponding fragment for each character, and then this little fragments
-are then merged to form lines and arcs. The lines and arcs are endorsed into high level shapes.
+are then merged to form lines and arcs. The lines and arcs are then endorsed into high level shapes such as rect, circles.
 
 ## Name inspiration:
 - svg for svg document and drawing.
@@ -500,13 +500,20 @@ PropertyBuffer is calculated only once for each character, so the succeeding loo
 
 ### Neighbor character
 ```bob
++---------+  +-----+   +---------+
+|  TopLeft|  | Top |   | TopRight|
++---------+--+-----+---+---------+
 
-   TopLeft   Top   TopRight
++---------+  +------+  +--------+
+|  Left   |  |(char)|  | Right  |
++---------+  +------+  +--------+
 
-   Left     (char)     Right
-
- BottomLeft  Bottom   BottomRight
++----------+ +------+  +-----------+
+|BottomLeft| |Bottom|  |BottomRight|
++----------+ +------+  +-----------+
 ```
+
+### Character Grid: a 5x5 grid which covers the most significant points for a character to be converted into drawing elements.
 
 Character grid: / is the line connecting E to U. Dash is connecting K to O, etc.
 ```bob
