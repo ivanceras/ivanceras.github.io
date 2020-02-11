@@ -498,7 +498,7 @@ PropertyBuffer is calculated only once for each character, so the succeeding loo
 
 ### How the fragments are conceived based on a character.
 
-### Neighbor character
+### Neighbor character: There are 8 neighbors of a character and each character on the input is checked agains this 8 neighbor for appropriate drawing element
 ```bob
 +---------+  +-----+   +---------+
 |  TopLeft|  | Top |   | TopRight|
