@@ -140,4 +140,4 @@ voxel-based raytracing, baremetal OS.
 * [Restq](https://github.com/ivanceras/restq) - An alternative to graphql which parses http url to express an api query.
 
 ## References
- <Available upon request>
+ ..Available upon request..
