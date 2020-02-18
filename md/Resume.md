@@ -23,7 +23,7 @@ Opensource programmer with passion for innovative technologies
 ## All Technology Stack
 * Linux, Rust, PostgreSQL, Java, Php, Bash/Shell, Docker
 * Javascript, HTML/CSS, Elm, Webassembly, React, React-native
-* Mysql,Oracle,SQLite, Hadoop/Hive/MapReduce
+* PostgreSQL,Mysql,Oracle,SQLite, Hadoop/Hive/MapReduce
 * git, vim, Eclipse, IntelliJ
 * xls+ods+csv data processing
 
@@ -32,33 +32,22 @@ Opensource programmer with passion for innovative technologies
 
 * **Freelancing and opensource (May 2019 - Present)**
     - Self study rust and freelance contracts.
-    - Projects
-        - dns gateway module - an independent contract project which manages and automate acquisition of ssl certificates from lets-encrypt.
+    - Projects:
+        - **dns gateway module** - an independent contract project which manages and automate acquisition of ssl certificates from lets-encrypt.
             - dynamically serve multiple domains in one server using the appropriate certificate for the requested domain.
             - involves low level parsing of tcp-packets, extracting the SNI/domain name in the handshake process.
-        - open-api parser - generates rust source code from open-api spec.
+        - **open-api parser** - generates rust source code from open-api spec.
 
     - Technolgoies used:
         - rust, tokio, actix-web, rustls
-
-* **Senior Sofware Enginner at Cebu Machine Intelligence Laboratories (Dec 2018 - May 2019 )**
-
-    - Involvement
-        - Create peripheral modules in a new cryptocurrency project, such as interactive documents and website.
-        - Create a visualization prototype tapped to the system API showing
-        which machines is doing what.
-
-    - Technologies used
-        - Rust, webassembly
-        - Java, pairing libraries
 
 * **Senior Software Engineer at Copyleft Solutions (Jun 2017 - Dec 2018)**
 
     - Involvement
         - Fix and maintain existing android applications
-        - Port excel spreadsheet apps into web applications
+        - Port excel spreadsheet apps into web application
         - Prototype small experimental projects involving webcam and image processing
-        - Screened and interview talented people into the company
+        - Screened and interview talented developers into the company
 
     - Technologies used
         - Android/Java, typescript
@@ -75,9 +64,9 @@ Opensource programmer with passion for innovative technologies
     - Involvement
         - Prototype and build critical products in the organization, such as the portal which links all the apps in the organization.
         - Design database schema for high throughput application, such as the backend for ads system.
-        - Did initial research and development on processing 1TB of logs per month into an analytical report, using appropriate BigData Analytics tools such as Hadoop/Hive.
+        - Research and development on processing 1TB of logs per month into an analytical report, using appropriate BigData Analytics tools such as Hadoop/Hive.
         - Implemented a sophisticated requirement to do selective synchronization of data into multiple database instances from different regions, in accordance to US and EU data regulations.
-        - Brought the database to terabyte scale, making it to the top 5 AWS apps in terms of impression.
+        - Brought the database to terabyte scale, making it to the top 5 AWS apps in terms of page impression.
         - Data recovery and correction through scraping out logs from the production servers, in the event of unexpected data loss.
         - Completed an backend service for doing static and dynamic analysis of ios apps.
         - Implemented a project involving document search using amazon ElasticSearch.
@@ -139,5 +128,3 @@ voxel-based raytracing, baremetal OS.
 * [Sauron](https://github.com/ivanceras/sauron) - A very fast library for building web apps, using the latest web technology: webassembly.
 * [Restq](https://github.com/ivanceras/restq) - An alternative to graphql which parses http url to express an api query.
 
-## References
- ..Available upon request..
