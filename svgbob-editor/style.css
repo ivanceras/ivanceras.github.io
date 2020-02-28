@@ -102,6 +102,8 @@ p {
 						30px;
 
 	min-height: 100vh;
+    color: var(--fg);
+    background-color: var(--bg);
 }
 
 
@@ -220,18 +222,34 @@ body{
 }
 
 /* override the svg backdrop with the theme bg */
-svg.bob rect.backdrop,
-svg.bob .bg_fill{
+/*
+.svgbob > svg rect.backdrop,
+.svgbob > svg .nofill,
+.svgbob > svg .bg_fill{
     fill: var(--bg) !important;
 }
 
-svg.bob .fg_fill{
+.svgbob > svg .fg_fill,
+{
     fill: var(--fg) !important;
 }
 
-svg.bob .fg_stroke{
+.svgbob > svg .fg_stroke{
     stroke: var(--fg) !important;
 }
+
+.svgbob > svg line,
+.svgbob > svg path,
+.svgbob > svg circle,
+.svgbob > svg rect,
+.svgbob > svg polygon {
+    stroke: var(--fg) !important;
+}
+
+.svgbob > svg text {
+    fill: var(--fg) !important;
+}
+*/
 
 
 .line {
@@ -399,5 +417,12 @@ p.debug {
 
 .tool button.active{
     background-color: #eee;
+}
+
+textarea.textinput{
+    width: 100%;
+    height: 100%;
+    color: var(--fg);
+    background-color: var(--bg);
 }
 
