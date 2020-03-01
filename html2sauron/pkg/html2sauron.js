@@ -176,12 +176,12 @@ function getInt32Memory0() {
     }
     return cachegetInt32Memory0;
 }
-function __wbg_adapter_18(arg0, arg1, arg2) {
-    wasm._dyn_core__ops__function__FnMut__A____Output___R_as_wasm_bindgen__closure__WasmClosure___describe__invoke__h36e3314c2d8a6af0(arg0, arg1, addHeapObject(arg2));
+function __wbg_adapter_18(arg0, arg1) {
+    wasm._dyn_core__ops__function__FnMut_____Output___R_as_wasm_bindgen__closure__WasmClosure___describe__invoke__h1350cfb418adfb24(arg0, arg1);
 }
 
-function __wbg_adapter_21(arg0, arg1) {
-    wasm._dyn_core__ops__function__FnMut_____Output___R_as_wasm_bindgen__closure__WasmClosure___describe__invoke__h1350cfb418adfb24(arg0, arg1);
+function __wbg_adapter_21(arg0, arg1, arg2) {
+    wasm._dyn_core__ops__function__FnMut__A____Output___R_as_wasm_bindgen__closure__WasmClosure___describe__invoke__h36e3314c2d8a6af0(arg0, arg1, addHeapObject(arg2));
 }
 
 /**
@@ -556,15 +556,15 @@ function init(module) {
     imports.wbg.__wbindgen_throw = function(arg0, arg1) {
         throw new Error(getStringFromWasm0(arg0, arg1));
     };
-    imports.wbg.__wbindgen_closure_wrapper120 = function(arg0, arg1, arg2) {
+    imports.wbg.__wbindgen_closure_wrapper119 = function(arg0, arg1, arg2) {
 
         const state = { a: arg0, b: arg1, cnt: 1 };
-        const real = (arg0) => {
+        const real = () => {
             state.cnt++;
             const a = state.a;
             state.a = 0;
             try {
-                return __wbg_adapter_18(a, state.b, arg0);
+                return __wbg_adapter_18(a, state.b, );
             } finally {
                 if (--state.cnt === 0) wasm.__wbindgen_export_2.get(32)(a, state.b);
                 else state.a = a;
@@ -575,15 +575,15 @@ function init(module) {
         var ret = real;
         return addHeapObject(ret);
     };
-    imports.wbg.__wbindgen_closure_wrapper119 = function(arg0, arg1, arg2) {
+    imports.wbg.__wbindgen_closure_wrapper120 = function(arg0, arg1, arg2) {
 
         const state = { a: arg0, b: arg1, cnt: 1 };
-        const real = () => {
+        const real = (arg0) => {
             state.cnt++;
             const a = state.a;
             state.a = 0;
             try {
-                return __wbg_adapter_21(a, state.b, );
+                return __wbg_adapter_21(a, state.b, arg0);
             } finally {
                 if (--state.cnt === 0) wasm.__wbindgen_export_2.get(32)(a, state.b);
                 else state.a = a;
