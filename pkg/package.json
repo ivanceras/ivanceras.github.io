@@ -1,0 +1,14 @@
+{
+  "name": "tinki",
+  "collaborators": [
+    "lee"
+  ],
+  "version": "0.1.0",
+  "files": [
+    "tinki_bg.wasm",
+    "tinki.js",
+    "tinki.d.ts"
+  ],
+  "browser": "tinki.js",
+  "types": "tinki.d.ts"
+}
