@@ -15,7 +15,6 @@ Opensource programmer with passion for innovative technologies
 * Code quality and code correctness
 * Research and development
 
-
 ## Preferred Technology Stack
 * Linux, Rust, PostgreSQL, Webassembly
 
@@ -30,7 +29,16 @@ Opensource programmer with passion for innovative technologies
 
 ## Professional Work Experience
 
-* **Freelancing and opensource (May 2019 - Present)**
+* **Centrifuge Inc (March 2020 - Present)**
+    - Centrifuge-chain protocol engineer
+    - Responsibilities:
+        - Build and integrate substrate pallet/modules into centrifuge-chain
+        - Build and integrate monitoring tools for blockchain validators and nodes
+    - Technologies used:
+        - rust, blockchain, cryptography, paritytech/substrate, polkadot network, prometheus + grafana, bash scripting
+
+
+* **Freelancing and opensource (May 2019 - Dec 2019)**
     - Self study rust and freelance contracts.
     - Projects:
         - **dns gateway module** - an independent contract project which manages and automate acquisition of ssl certificates from lets-encrypt.
