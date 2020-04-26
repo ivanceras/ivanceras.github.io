@@ -1,9 +1,15 @@
 {
   "name": "tinki",
   "collaborators": [
-    "lee"
+    "Jovansonlee Cesar <ivanceras@gmail.com>"
   ],
+  "description": "Markdown based personal wiki",
   "version": "0.1.0",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ivanceras/tinki"
+  },
   "files": [
     "tinki_bg.wasm",
     "tinki.js",
