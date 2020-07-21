@@ -1,0 +1,15 @@
+{
+  "name": "todo-mvc-bench",
+  "collaborators": [
+    "Schell Scivally <efsubenovex@gmail.com>"
+  ],
+  "version": "0.0.0",
+  "files": [
+    "todo_mvc_bench_bg.wasm",
+    "todo_mvc_bench.js",
+    "todo_mvc_bench.d.ts"
+  ],
+  "module": "todo_mvc_bench.js",
+  "types": "todo_mvc_bench.d.ts",
+  "sideEffects": false
+}
