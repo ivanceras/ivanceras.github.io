@@ -1,0 +1,14 @@
+{
+  "name": "todomvc",
+  "collaborators": [
+    "Schell Scivally <efsubenovex@gmail.com>"
+  ],
+  "version": "0.1.0",
+  "files": [
+    "todomvc_bg.wasm",
+    "todomvc.js",
+    "todomvc.d.ts"
+  ],
+  "browser": "todomvc.js",
+  "types": "todomvc.d.ts"
+}
