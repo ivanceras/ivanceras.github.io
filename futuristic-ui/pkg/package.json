@@ -1,0 +1,14 @@
+{
+  "name": "futuristic-ui",
+  "collaborators": [
+    "Jovansonlee Cesar <ivanceras@gmail.com>"
+  ],
+  "version": "0.1.0",
+  "files": [
+    "futuristic_ui_bg.wasm",
+    "futuristic_ui.js",
+    "futuristic_ui.d.ts"
+  ],
+  "browser": "futuristic_ui.js",
+  "types": "futuristic_ui.d.ts"
+}
