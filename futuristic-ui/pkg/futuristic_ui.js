@@ -233,16 +233,16 @@ function logError(f) {
 function _assertNum(n) {
     if (typeof(n) !== 'number') throw new Error('expected a number argument');
 }
-function __wbg_adapter_16(arg0, arg1) {
-    _assertNum(arg0);
-    _assertNum(arg1);
-    wasm._dyn_core__ops__function__FnMut_____Output___R_as_wasm_bindgen__closure__WasmClosure___describe__invoke__h4325d6f7cbbb9150(arg0, arg1);
-}
-
-function __wbg_adapter_19(arg0, arg1, arg2) {
+function __wbg_adapter_16(arg0, arg1, arg2) {
     _assertNum(arg0);
     _assertNum(arg1);
     wasm._dyn_core__ops__function__FnMut__A____Output___R_as_wasm_bindgen__closure__WasmClosure___describe__invoke__h3bdd387a2fdf3302(arg0, arg1, addHeapObject(arg2));
+}
+
+function __wbg_adapter_19(arg0, arg1) {
+    _assertNum(arg0);
+    _assertNum(arg1);
+    wasm._dyn_core__ops__function__FnMut_____Output___R_as_wasm_bindgen__closure__WasmClosure___describe__invoke__h4325d6f7cbbb9150(arg0, arg1);
 }
 
 function makeClosure(arg0, arg1, dtor, f) {
@@ -598,16 +598,16 @@ async function init(input) {
     imports.wbg.__wbindgen_throw = function(arg0, arg1) {
         throw new Error(getStringFromWasm0(arg0, arg1));
     };
-    imports.wbg.__wbindgen_closure_wrapper2664 = logError(function(arg0, arg1, arg2) {
-        var ret = makeMutClosure(arg0, arg1, 31, __wbg_adapter_19);
+    imports.wbg.__wbindgen_closure_wrapper2691 = logError(function(arg0, arg1, arg2) {
+        var ret = makeMutClosure(arg0, arg1, 32, __wbg_adapter_19);
         return addHeapObject(ret);
     });
-    imports.wbg.__wbindgen_closure_wrapper2666 = logError(function(arg0, arg1, arg2) {
-        var ret = makeClosure(arg0, arg1, 24, __wbg_adapter_22);
+    imports.wbg.__wbindgen_closure_wrapper2687 = logError(function(arg0, arg1, arg2) {
+        var ret = makeMutClosure(arg0, arg1, 34, __wbg_adapter_16);
         return addHeapObject(ret);
     });
-    imports.wbg.__wbindgen_closure_wrapper2668 = logError(function(arg0, arg1, arg2) {
-        var ret = makeMutClosure(arg0, arg1, 29, __wbg_adapter_16);
+    imports.wbg.__wbindgen_closure_wrapper2689 = logError(function(arg0, arg1, arg2) {
+        var ret = makeClosure(arg0, arg1, 27, __wbg_adapter_22);
         return addHeapObject(ret);
     });
 
