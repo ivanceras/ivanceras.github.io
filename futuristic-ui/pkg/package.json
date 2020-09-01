@@ -9,6 +9,7 @@
     "futuristic_ui.js",
     "futuristic_ui.d.ts"
   ],
-  "browser": "futuristic_ui.js",
-  "types": "futuristic_ui.d.ts"
+  "module": "futuristic_ui.js",
+  "types": "futuristic_ui.d.ts",
+  "sideEffects": false
 }
