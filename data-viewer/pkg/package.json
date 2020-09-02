@@ -9,6 +9,7 @@
     "data_viewer.js",
     "data_viewer.d.ts"
   ],
-  "browser": "data_viewer.js",
-  "types": "data_viewer.d.ts"
+  "module": "data_viewer.js",
+  "types": "data_viewer.d.ts",
+  "sideEffects": false
 }

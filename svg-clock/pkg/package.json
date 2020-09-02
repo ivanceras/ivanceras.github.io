@@ -10,6 +10,7 @@
     "svg_clock.js",
     "svg_clock.d.ts"
   ],
-  "browser": "svg_clock.js",
-  "types": "svg_clock.d.ts"
+  "module": "svg_clock.js",
+  "types": "svg_clock.d.ts",
+  "sideEffects": false
 }

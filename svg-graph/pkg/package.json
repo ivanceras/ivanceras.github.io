@@ -10,6 +10,7 @@
     "svg_graph.js",
     "svg_graph.d.ts"
   ],
-  "browser": "svg_graph.js",
-  "types": "svg_graph.d.ts"
+  "module": "svg_graph.js",
+  "types": "svg_graph.d.ts",
+  "sideEffects": false
 }
