@@ -9,6 +9,7 @@
     "svgbob_editor.js",
     "svgbob_editor.d.ts"
   ],
-  "browser": "svgbob_editor.js",
-  "types": "svgbob_editor.d.ts"
+  "module": "svgbob_editor.js",
+  "types": "svgbob_editor.d.ts",
+  "sideEffects": false
 }
