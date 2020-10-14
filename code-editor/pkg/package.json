@@ -1,0 +1,15 @@
+{
+  "name": "ultron-web",
+  "collaborators": [
+    "Jovansonlee Cesar <ivanceras@gmail.com>"
+  ],
+  "version": "0.1.0",
+  "files": [
+    "ultron_web_bg.wasm",
+    "ultron_web.js",
+    "ultron_web.d.ts"
+  ],
+  "module": "ultron_web.js",
+  "types": "ultron_web.d.ts",
+  "sideEffects": false
+}
