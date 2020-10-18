@@ -15,6 +15,7 @@
     "tinki.js",
     "tinki.d.ts"
   ],
-  "browser": "tinki.js",
-  "types": "tinki.d.ts"
+  "module": "tinki.js",
+  "types": "tinki.d.ts",
+  "sideEffects": false
 }
