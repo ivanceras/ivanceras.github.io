@@ -1,0 +1,15 @@
+{
+  "name": "arc-reactor",
+  "collaborators": [
+    "Jovansonlee Cesar <ivanceras@gmail.com>"
+  ],
+  "version": "0.1.0",
+  "files": [
+    "arc_reactor_bg.wasm",
+    "arc_reactor.js",
+    "arc_reactor.d.ts"
+  ],
+  "module": "arc_reactor.js",
+  "types": "arc_reactor.d.ts",
+  "sideEffects": false
+}
