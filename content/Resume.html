@@ -1,0 +1,496 @@
+<html>
+    <head>
+        <meta content="text/html;charset=utf-8" http-equiv="Content-Type"/>
+        <link rel="stylesheet" href="/minimal.css"/>
+        <style>.hl {
+    user-select: none;
+    -webkit-user-select: none;
+    position: relative;
+    font-size: 12px;
+    cursor: text;
+}
+.hl__code {
+    position: relative;
+    overflow: auto;
+    font: 0.8rem Inconsolata, monospace;
+}
+.hl__line_block {
+    display: block;
+}
+.hl__number__line {
+    display: flex;
+}
+.hl__number {
+    flex: none;
+    text-align: right;
+    background-color: cyan;
+    padding-right: 1ex;
+    user-select: none;
+    -webkit-user-select: none;
+}
+.hl__number_wide1 .hl__number {
+    width: 1ex;
+}
+.hl__number_wide2 .hl__number {
+    width: 2ex;
+}
+.hl__number_wide3 .hl__number {
+    width: 3ex;
+}
+.hl__number_wide4 .hl__number {
+    width: 4ex;
+}
+.hl__line {
+    display: flex;
+    flex: none;
+}
+.hl__filler {
+    width: 100%;
+}
+.hl__line_focused {
+    background-color: pink;
+}
+.hl__range {
+    display: flex;
+    flex: none;
+}
+.hl__line .hl__ch {
+    width: 1ex;
+    height: 2ex;
+    font-family: monospace;
+    font-stretch: ultra-condensed;
+    font-variant-numeric: slashed-zero;
+    font-kerning: none;
+    font-size-adjust: none;
+    font-optical-sizing: none;
+    position: relative;
+    overflow: visible;
+    align-items: center;
+}
+.hl__ch.hl__selected {
+    background-color: yellow;
+}
+.hl__ch .hl__cursor {
+    position: absolute;
+    left: 0;
+    height: 2ex;
+    width: 1ex;
+    background-color: red;
+    display: inline;
+    animation: cursor_blink-anim 500ms step-end infinite;
+}
+.hl__ch.hl__wide2 .hl__cursor {
+    width: 2ex;
+}
+.hl__thin_cursor .hl__cursor {
+    width: 2px;
+}
+.hl__thin_cursor .hl__wide2 .hl__cursor {
+    width: 2px;
+}
+.hl__block_cursor .hl__cursor {
+    width: 1ex;
+}
+.hl__line .hl__ch.hl__wide2 {
+    width: 2ex;
+}
+.hl__status {
+    background-color: blue;
+    position: sticky;
+    bottom: 0;
+    display: flex;
+    flex-direction: flex-end;
+}
+@keyframes cursor_blink-anim {
+    50% {
+        background-color: transparent;
+        border-color: transparent;
+    }
+}
+.fake_buttons {
+  height: 10px;
+  width: 10px;
+  border-radius: 50%;
+  border: 1px solid #000;
+  position: relative;
+  top: 6px;
+  left: 6px;
+  background-color: #ff3b47;
+  border-color: #9d252b;
+  display: inline-block;
+}
+
+.fake_minimize {
+  left: 11px;
+  background-color: #ffc100;
+  border-color: #9d802c;
+}
+
+.fake_zoom {
+  left: 16px;
+  background-color: #00d742;
+  border-color: #049931;
+}
+
+.fake_menu {
+  width: 50ch;
+  box-sizing: border-box;
+  height: 25px;
+  background-color: #bbb;
+  margin: 0 auto;
+  border-top-right-radius: 5px;
+  border-top-left-radius: 5px;
+}
+
+.fake_screen {
+  background-color: #151515;
+  box-sizing: border-box;
+  width: 50ch;
+  margin: 0 auto;
+  padding: 20px;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+}
+
+.fake_terminal p {
+  position: relative;
+  text-align: left;
+  font-size: 0.7em;
+  font-family: monospace;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.fake_terminal span {
+  color: #fff;
+  font-weight: bold;
+}
+
+.fake_terminal .line {
+  color: #9CD9F0;
+}
+
+    </style>
+    </head>
+    <body>
+        <script type="module">
+         import { search, default as init } from '/tinysearch_engine.js';
+         window.search = search;
+         
+         async function run() {
+           await init('/tinysearch_engine_bg.wasm');
+         }
+         
+         run();
+      </script>
+        <script>
+         function doSearch() {
+           let value = document.getElementById('demo').value;
+           const arr = search(value, 10);
+           let ul = document.getElementById('results');
+           ul.innerHTML = '';
+         
+           for (i = 0; i < arr.length; i++) {
+             var li = document.createElement('li');
+         
+             let elem = arr[i];
+             let elemlink = document.createElement('a');
+             elemlink.innerHTML = elem[0];
+             elemlink.setAttribute('href', elem[1]);
+             li.appendChild(elemlink);
+         
+             ul.appendChild(li);
+           }
+         }
+      </script>
+        <input id="demo" class="search" placeholder="Search.." onkeyup="doSearch()" type="text"/>
+        <ul id="results"></ul>
+        <div>
+            <nav>
+                <a href="/">Home</a>
+            </nav>
+            <article>
+                <div>
+                    <h1>Jovansonlee B. Cesar</h1>
+                    <h2>Senior Software Engineer</h2>
+                    <p>Opensource programmer with passion for innovative technologies</p>
+                    <ul>
+                        <li>mobile: +639156659318</li>
+                        <li>email: ivanceras@gmail.com</li>
+                        <li>skype: ivanceras</li>
+                    </ul>
+                    <h2>Expertise</h2>
+                    <ul>
+                        <li>Data analytics and visualization</li>
+                        <li>Heuristic programming on complex problems</li>
+                        <li>High availability and scaling solutions</li>
+                        <li>Code quality and code correctness</li>
+                        <li>Research and development</li>
+                    </ul>
+                    <h2>Preferred Technology Stack</h2>
+                    <ul>
+                        <li>Linux, Rust, PostgreSQL, Webassembly</li>
+                    </ul>
+                    <h2>All Technology Stack</h2>
+                    <ul>
+                        <li>
+                            Linux, 
+                            <span class="font-weight-bold">Rust</span>
+                            , PostgreSQL, Java, Php, Bash/Shell, Docker
+                        </li>
+                        <li>
+                            Javascript, HTML/CSS, 
+                            <span class="font-weight-bold">Elm</span>
+                            , 
+                            <span class="font-weight-bold">Webassembly</span>
+                            , React, React-native
+                        </li>
+                        <li>
+                            <span class="font-weight-bold">PostgreSQL</span>
+                            ,Mysql,Oracle,SQLite, Hadoop/Hive/MapReduce
+                        </li>
+                        <li>git, vim, Eclipse, IntelliJ</li>
+                        <li>xls+ods+csv data processing</li>
+                    </ul>
+                    <h2>Professional Work Experience</h2>
+                    <ul>
+                        <li>
+                            <p>
+                                <span class="font-weight-bold">Centrifuge Inc (March 2020 - Present)</span>
+                            </p>
+                            <ul>
+                                <li>Centrifuge-chain protocol engineer</li>
+                                <li>
+                                    Responsibilities:
+                                    <ul>
+                                        <li>Build and integrate substrate pallet/modules into centrifuge-chain</li>
+                                        <li>Build and integrate monitoring tools for blockchain validators and nodes</li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    Technologies used:
+                                    <ul>
+                                        <li>
+                                            <span class="font-weight-bold">rust</span>
+                                            , blockchain, cryptography, 
+                                            <span class="font-weight-bold">paritytech/substrate</span>
+                                            , polkadot network, prometheus + grafana, bash scripting
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <p>
+                                <span class="font-weight-bold">Freelancing and opensource (May 2019 - Dec 2019)</span>
+                            </p>
+                            <ul>
+                                <li>
+                                    <p>Self study rust and freelance contracts.</p>
+                                </li>
+                                <li>
+                                    <p>Projects:</p>
+                                    <ul>
+                                        <li>
+                                            <span class="font-weight-bold">dns gateway module</span>
+                                             - an independent contract project which manages and automate acquisition of ssl certificates from lets-encrypt.
+                                            <ul>
+                                                <li>dynamically serve multiple domains in one server using the appropriate certificate for the requested domain.</li>
+                                                <li>involves low level parsing of tcp-packets, extracting the SNI/domain name in the handshake process.</li>
+                                            </ul>
+                                        </li>
+                                        <li>
+                                            <span class="font-weight-bold">open-api parser</span>
+                                             - generates rust source code from open-api spec.
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <p>Technolgoies used:</p>
+                                    <ul>
+                                        <li>
+                                            <span class="font-weight-bold">rust</span>
+                                            , tokio, actix-web, rustls
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <p>
+                                <span class="font-weight-bold">Senior Software Engineer at Copyleft Solutions (Jun 2017 - Dec 2018)</span>
+                            </p>
+                            <ul>
+                                <li>
+                                    <p>Involvement</p>
+                                    <ul>
+                                        <li>Fix and maintain existing android applications</li>
+                                        <li>Port excel spreadsheet apps into web application</li>
+                                        <li>Prototype small experimental projects involving webcam and image processing</li>
+                                        <li>Screened and interview talented developers into the company</li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <p>Technologies used</p>
+                                    <ul>
+                                        <li>Android/Java, typescript</li>
+                                        <li>Rust, gtk</li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <p>
+                                <span class="font-weight-bold">Senior Software Engineer at TRUSTe/TrustArc (Jan 2012-Jun 2017)</span>
+                            </p>
+                            <ul>
+                                <li>
+                                    <p>Projects</p>
+                                    <ul>
+                                        <li>
+                                            Multi-region database selective syncing setup.
+                                            <ul>
+                                                <li>
+                                                    Setup custom configuration to selectively sync certain data from EU-US region, while complying the EU regulations
+                                                    
+
+                                                    of which data is not allowed to move out of EU servers.
+                                                </li>
+                                            </ul>
+                                        </li>
+                                        <li>Created a custom lightweight ORM which doesn't allow loss of data in the event of database downtime up to several hours.</li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <p>Involvement</p>
+                                    <ul>
+                                        <li>Prototype and build critical products in the organization, such as the portal which links all the apps in the organization.</li>
+                                        <li>Design database schema for high throughput application, such as the backend for ads system.</li>
+                                        <li>Research and development on processing 1TB of logs per month into an analytical report, using appropriate BigData Analytics tools such as Hadoop/Hive.</li>
+                                        <li>Implemented a sophisticated requirement to do selective synchronization of data into multiple database instances from different regions, in accordance to US and EU data regulations.</li>
+                                        <li>Brought the database to terabyte scale, making it to the top 5 AWS apps in terms of page impression.</li>
+                                        <li>Data recovery and correction through scraping out logs from the production servers, in the event of unexpected data loss.</li>
+                                        <li>Completed an backend service for doing static and dynamic analysis of ios apps.</li>
+                                        <li>Implemented a project involving document search using amazon ElasticSearch.</li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <p>Skills used</p>
+                                    <ul>
+                                        <li>
+                                            <span class="font-weight-bold">Java</span>
+                                            , GWT, Amazon EMR, Amazon SDK(lambda, s3, elasticsearch)
+                                        </li>
+                                        <li>Javascript, Angularjs, jquery, bootstrap</li>
+                                        <li>PostgreSQL, SymmetricDS, SQLite</li>
+                                        <li>Rust, python, C, bash</li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <p>
+                                <span class="font-weight-bold">Senior Software Engineer at Cebu Machine Laboratories Inc. (Oct. 2010 - Jan. 2012)</span>
+                            </p>
+                            <ul>
+                                <li>
+                                    <p>Involvement</p>
+                                    <ul>
+                                        <li>Research and prototype an Interactive Comic Game for the Ipad when it first came out.</li>
+                                        <li>Using C, Objective-C and opengl, animate 2D assets created by the artist.</li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <p>Accomplishments</p>
+                                    <ul>
+                                        <li>Used stencil and svg overlay on the 2D images, presented as a very simple solution to animate 2D images for an interactive comic game.</li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <p>
+                                <span class="font-weight-bold">Junior Software Engineer at Cebu Mitsumi Inc. (Apr 2007 - Aug 2009)</span>
+                            </p>
+                            <ul>
+                                <li>
+                                    <p>Involvement</p>
+                                    <ul>
+                                        <li>Maintain and improve an existing Shop Floor Control/Manufacturing Management Software.</li>
+                                        <li>Improved the existing UI and UX to reduce the number of actions to accomplish tasks.</li>
+                                        <li>Improved the flexibility of the report generator to provide a more detailed view of the data into an interactive excel spreadsheet.</li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <p>Skill used</p>
+                                    <ul>
+                                        <li>Oracle</li>
+                                        <li>Powerbuilder, Powerscripts</li>
+                                        <li>MS Excel Spreadsheet, VBA scripts and macros.</li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <h2>Education</h2>
+                    <ul>
+                        <li>
+                            <span class="font-weight-bold">Bohol Island State University ( 2002-2007 ), C.P.G North Avenue, Tagbilaran City, Bohol</span>
+                            <ul>
+                                <li>Bachelor of Science in Computer Engineering</li>
+                                <li>
+                                    Learning highlights
+                                    <ul>
+                                        <li>Linux</li>
+                                        <li>C, Lowlevel-C Programming, PIC</li>
+                                        <li>Hardware interfacing</li>
+                                        <li>Self-taught: php, javascript, html/css.</li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <h2>Desirable qualities</h2>
+                    <ul>
+                        <li>
+                            I do research, experiments, exploration on my free-time on just about anything
+                            
+
+                            ranging from database tools, neat algorithmns, learning programming languages,
+                            
+
+                            voxel-based raytracing, baremetal OS.
+                        </li>
+                        <li>Incorporate these learnings into company products.</li>
+                    </ul>
+                    <h2>Opensource project involvement</h2>
+                    <ul>
+                        <li>
+                            <a href="https://github.com/ivanceras/svgbob" title="">Svgbob</a>
+                             - converts inline ascii scribbles and diagrams into a nicely rendered svg,
+                            
+
+                            <a href="https://ivanceras.github.io/svgbob-editor/" title="">demo</a>
+                        </li>
+                        <li>
+                            <a href="https://github.com/ivanceras/diwata" title="">Diwata</a>
+                             - A user-friendly web-based database administration tool for PostgreSQL and Sqlite
+                        </li>
+                        <li>
+                            <a href="https://github.com/ivanceras/rustorm" title="">Rustorm</a>
+                             - an orm for rust, primarily used by the diwata project.
+                        </li>
+                        <li>
+                            <a href="https://github.com/ivanceras/sauron" title="">Sauron</a>
+                             - A very fast library for building web apps, using the latest web technology: webassembly.
+                        </li>
+                        <li>
+                            <a href="https://github.com/ivanceras/restq" title="">Restq</a>
+                             - An alternative to graphql which parses http url to express an api query.
+                        </li>
+                    </ul>
+                </div>
+            </article>
+        </div>
+    </body>
+</html>

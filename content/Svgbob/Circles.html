@@ -1,0 +1,2459 @@
+<html>
+    <head>
+        <meta content="text/html;charset=utf-8" http-equiv="Content-Type"/>
+        <link rel="stylesheet" href="/minimal.css"/>
+        <style>.hl {
+    user-select: none;
+    -webkit-user-select: none;
+    position: relative;
+    font-size: 12px;
+    cursor: text;
+}
+.hl__code {
+    position: relative;
+    overflow: auto;
+    font: 0.8rem Inconsolata, monospace;
+}
+.hl__line_block {
+    display: block;
+}
+.hl__number__line {
+    display: flex;
+}
+.hl__number {
+    flex: none;
+    text-align: right;
+    background-color: cyan;
+    padding-right: 1ex;
+    user-select: none;
+    -webkit-user-select: none;
+}
+.hl__number_wide1 .hl__number {
+    width: 1ex;
+}
+.hl__number_wide2 .hl__number {
+    width: 2ex;
+}
+.hl__number_wide3 .hl__number {
+    width: 3ex;
+}
+.hl__number_wide4 .hl__number {
+    width: 4ex;
+}
+.hl__line {
+    display: flex;
+    flex: none;
+}
+.hl__filler {
+    width: 100%;
+}
+.hl__line_focused {
+    background-color: pink;
+}
+.hl__range {
+    display: flex;
+    flex: none;
+}
+.hl__line .hl__ch {
+    width: 1ex;
+    height: 2ex;
+    font-family: monospace;
+    font-stretch: ultra-condensed;
+    font-variant-numeric: slashed-zero;
+    font-kerning: none;
+    font-size-adjust: none;
+    font-optical-sizing: none;
+    position: relative;
+    overflow: visible;
+    align-items: center;
+}
+.hl__ch.hl__selected {
+    background-color: yellow;
+}
+.hl__ch .hl__cursor {
+    position: absolute;
+    left: 0;
+    height: 2ex;
+    width: 1ex;
+    background-color: red;
+    display: inline;
+    animation: cursor_blink-anim 500ms step-end infinite;
+}
+.hl__ch.hl__wide2 .hl__cursor {
+    width: 2ex;
+}
+.hl__thin_cursor .hl__cursor {
+    width: 2px;
+}
+.hl__thin_cursor .hl__wide2 .hl__cursor {
+    width: 2px;
+}
+.hl__block_cursor .hl__cursor {
+    width: 1ex;
+}
+.hl__line .hl__ch.hl__wide2 {
+    width: 2ex;
+}
+.hl__status {
+    background-color: blue;
+    position: sticky;
+    bottom: 0;
+    display: flex;
+    flex-direction: flex-end;
+}
+@keyframes cursor_blink-anim {
+    50% {
+        background-color: transparent;
+        border-color: transparent;
+    }
+}
+.fake_buttons {
+  height: 10px;
+  width: 10px;
+  border-radius: 50%;
+  border: 1px solid #000;
+  position: relative;
+  top: 6px;
+  left: 6px;
+  background-color: #ff3b47;
+  border-color: #9d252b;
+  display: inline-block;
+}
+
+.fake_minimize {
+  left: 11px;
+  background-color: #ffc100;
+  border-color: #9d802c;
+}
+
+.fake_zoom {
+  left: 16px;
+  background-color: #00d742;
+  border-color: #049931;
+}
+
+.fake_menu {
+  width: 50ch;
+  box-sizing: border-box;
+  height: 25px;
+  background-color: #bbb;
+  margin: 0 auto;
+  border-top-right-radius: 5px;
+  border-top-left-radius: 5px;
+}
+
+.fake_screen {
+  background-color: #151515;
+  box-sizing: border-box;
+  width: 50ch;
+  margin: 0 auto;
+  padding: 20px;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+}
+
+.fake_terminal p {
+  position: relative;
+  text-align: left;
+  font-size: 0.7em;
+  font-family: monospace;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.fake_terminal span {
+  color: #fff;
+  font-weight: bold;
+}
+
+.fake_terminal .line {
+  color: #9CD9F0;
+}
+
+    </style>
+    </head>
+    <body>
+        <script type="module">
+         import { search, default as init } from '/tinysearch_engine.js';
+         window.search = search;
+         
+         async function run() {
+           await init('/tinysearch_engine_bg.wasm');
+         }
+         
+         run();
+      </script>
+        <script>
+         function doSearch() {
+           let value = document.getElementById('demo').value;
+           const arr = search(value, 10);
+           let ul = document.getElementById('results');
+           ul.innerHTML = '';
+         
+           for (i = 0; i < arr.length; i++) {
+             var li = document.createElement('li');
+         
+             let elem = arr[i];
+             let elemlink = document.createElement('a');
+             elemlink.innerHTML = elem[0];
+             elemlink.setAttribute('href', elem[1]);
+             li.appendChild(elemlink);
+         
+             ul.appendChild(li);
+           }
+         }
+      </script>
+        <input id="demo" class="search" placeholder="Search.." onkeyup="doSearch()" type="text"/>
+        <ul id="results"></ul>
+        <div>
+            <nav>
+                <a href="/">Home</a>
+            </nav>
+            <article>
+                <div>
+                    <h1>Circles</h1>
+                    <h3>Radius 0.5</h3>
+                    <div>
+                        <div class="side-to-side">
+                            <div class="raw">
+                                <pre>
+                                    <code>()
+
+</code>
+                                </pre>
+                            </div>
+                            <div class="bob">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="32">
+                                    <style>line, path, circle,rect,polygon {
+                          stroke: black;
+                          stroke-width: 2;
+                          stroke-opacity: 1;
+                          fill-opacity: 1;
+                          stroke-linecap: round;
+                          stroke-linejoin: miter;
+                        }
+
+                    text {
+                        fill: black;
+                        }
+                        rect.backdrop{
+                            stroke: none;
+                            fill: white;
+                        }
+                        .broken{
+                            stroke-dasharray: 8;
+                        }
+                        .filled{
+                            fill: black;
+                        }
+                        .bg_filled{
+                            fill: white;
+                        }
+                        .nofill{
+                            fill: white;
+                        }
+
+                        text {
+                         font-family: monospace;
+                         font-size: 14px;
+                        }
+
+                        .end_marked_arrow{
+                            marker-end: url(#arrow);
+                         }
+                        .start_marked_arrow{
+                            marker-start: url(#arrow);
+                         }
+
+                        .end_marked_diamond{
+                            marker-end: url(#diamond);
+                         }
+                        .start_marked_diamond{
+                            marker-start: url(#diamond);
+                         }
+
+                        .end_marked_circle{
+                            marker-end: url(#circle);
+                         }
+                        .start_marked_circle{
+                            marker-start: url(#circle);
+                         }
+
+                        .end_marked_open_circle{
+                            marker-end: url(#open_circle);
+                         }
+                        .start_marked_open_circle{
+                            marker-start: url(#open_circle);
+                         }
+
+                        .end_marked_big_open_circle{
+                            marker-end: url(#big_open_circle);
+                         }
+                        .start_marked_big_open_circle{
+                            marker-start: url(#big_open_circle);
+                         }
+
+                         
+                        </style>
+                                    <defs>
+                                        <marker id="arrow" viewBox="-2 -2 8 8" refX="4" refY="2" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+                                            <polygon points="0,0 0,4 4,2 0,0"></polygon>
+                                        </marker>
+                                        <marker id="diamond" viewBox="-2 -2 8 8" refX="4" refY="2" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+                                            <polygon points="0,2 2,0 4,2 2,4 0,2"></polygon>
+                                        </marker>
+                                        <marker id="circle" viewBox="0 0 8 8" refX="4" refY="4" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+                                            <circle cx="4" cy="4" r="2" class="filled"></circle>
+                                        </marker>
+                                        <marker id="open_circle" viewBox="0 0 8 8" refX="4" refY="4" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+                                            <circle cx="4" cy="4" r="2" class="bg_filled"></circle>
+                                        </marker>
+                                        <marker id="big_open_circle" viewBox="0 0 8 8" refX="4" refY="4" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+                                            <circle cx="4" cy="4" r="3" class="bg_filled"></circle>
+                                        </marker>
+                                    </defs>
+                                    <rect class="backdrop" x="0" y="0" width="24" height="32"></rect>
+                                    <circle cx="8" cy="8" r="4" class="nofill"></circle>
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                    <h4>Radius 1.0</h4>
+                    <div>
+                        <div class="side-to-side">
+                            <div class="raw">
+                                <pre>
+                                    <code>
+(_)
+
+</code>
+                                </pre>
+                            </div>
+                            <div class="bob">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="48">
+                                    <style>line, path, circle,rect,polygon {
+                          stroke: black;
+                          stroke-width: 2;
+                          stroke-opacity: 1;
+                          fill-opacity: 1;
+                          stroke-linecap: round;
+                          stroke-linejoin: miter;
+                        }
+
+                    text {
+                        fill: black;
+                        }
+                        rect.backdrop{
+                            stroke: none;
+                            fill: white;
+                        }
+                        .broken{
+                            stroke-dasharray: 8;
+                        }
+                        .filled{
+                            fill: black;
+                        }
+                        .bg_filled{
+                            fill: white;
+                        }
+                        .nofill{
+                            fill: white;
+                        }
+
+                        text {
+                         font-family: monospace;
+                         font-size: 14px;
+                        }
+
+                        .end_marked_arrow{
+                            marker-end: url(#arrow);
+                         }
+                        .start_marked_arrow{
+                            marker-start: url(#arrow);
+                         }
+
+                        .end_marked_diamond{
+                            marker-end: url(#diamond);
+                         }
+                        .start_marked_diamond{
+                            marker-start: url(#diamond);
+                         }
+
+                        .end_marked_circle{
+                            marker-end: url(#circle);
+                         }
+                        .start_marked_circle{
+                            marker-start: url(#circle);
+                         }
+
+                        .end_marked_open_circle{
+                            marker-end: url(#open_circle);
+                         }
+                        .start_marked_open_circle{
+                            marker-start: url(#open_circle);
+                         }
+
+                        .end_marked_big_open_circle{
+                            marker-end: url(#big_open_circle);
+                         }
+                        .start_marked_big_open_circle{
+                            marker-start: url(#big_open_circle);
+                         }
+
+                         
+                        </style>
+                                    <defs>
+                                        <marker id="arrow" viewBox="-2 -2 8 8" refX="4" refY="2" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+                                            <polygon points="0,0 0,4 4,2 0,0"></polygon>
+                                        </marker>
+                                        <marker id="diamond" viewBox="-2 -2 8 8" refX="4" refY="2" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+                                            <polygon points="0,2 2,0 4,2 2,4 0,2"></polygon>
+                                        </marker>
+                                        <marker id="circle" viewBox="0 0 8 8" refX="4" refY="4" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+                                            <circle cx="4" cy="4" r="2" class="filled"></circle>
+                                        </marker>
+                                        <marker id="open_circle" viewBox="0 0 8 8" refX="4" refY="4" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+                                            <circle cx="4" cy="4" r="2" class="bg_filled"></circle>
+                                        </marker>
+                                        <marker id="big_open_circle" viewBox="0 0 8 8" refX="4" refY="4" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+                                            <circle cx="4" cy="4" r="3" class="bg_filled"></circle>
+                                        </marker>
+                                    </defs>
+                                    <rect class="backdrop" x="0" y="0" width="32" height="48"></rect>
+                                    <circle cx="12" cy="24" r="8" class="nofill"></circle>
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                    <h3>Radius 1.5</h3>
+                    <div>
+                        <div class="side-to-side">
+                            <div class="raw">
+                                <pre>
+                                    <code> __
+(__)
+</code>
+                                </pre>
+                            </div>
+                            <div class="bob">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="40" height="48">
+                                    <style>line, path, circle,rect,polygon {
+                          stroke: black;
+                          stroke-width: 2;
+                          stroke-opacity: 1;
+                          fill-opacity: 1;
+                          stroke-linecap: round;
+                          stroke-linejoin: miter;
+                        }
+
+                    text {
+                        fill: black;
+                        }
+                        rect.backdrop{
+                            stroke: none;
+                            fill: white;
+                        }
+                        .broken{
+                            stroke-dasharray: 8;
+                        }
+                        .filled{
+                            fill: black;
+                        }
+                        .bg_filled{
+                            fill: white;
+                        }
+                        .nofill{
+                            fill: white;
+                        }
+
+                        text {
+                         font-family: monospace;
+                         font-size: 14px;
+                        }
+
+                        .end_marked_arrow{
+                            marker-end: url(#arrow);
+                         }
+                        .start_marked_arrow{
+                            marker-start: url(#arrow);
+                         }
+
+                        .end_marked_diamond{
+                            marker-end: url(#diamond);
+                         }
+                        .start_marked_diamond{
+                            marker-start: url(#diamond);
+                         }
+
+                        .end_marked_circle{
+                            marker-end: url(#circle);
+                         }
+                        .start_marked_circle{
+                            marker-start: url(#circle);
+                         }
+
+                        .end_marked_open_circle{
+                            marker-end: url(#open_circle);
+                         }
+                        .start_marked_open_circle{
+                            marker-start: url(#open_circle);
+                         }
+
+                        .end_marked_big_open_circle{
+                            marker-end: url(#big_open_circle);
+                         }
+                        .start_marked_big_open_circle{
+                            marker-start: url(#big_open_circle);
+                         }
+
+                         
+                        </style>
+                                    <defs>
+                                        <marker id="arrow" viewBox="-2 -2 8 8" refX="4" refY="2" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+                                            <polygon points="0,0 0,4 4,2 0,0"></polygon>
+                                        </marker>
+                                        <marker id="diamond" viewBox="-2 -2 8 8" refX="4" refY="2" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+                                            <polygon points="0,2 2,0 4,2 2,4 0,2"></polygon>
+                                        </marker>
+                                        <marker id="circle" viewBox="0 0 8 8" refX="4" refY="4" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+                                            <circle cx="4" cy="4" r="2" class="filled"></circle>
+                                        </marker>
+                                        <marker id="open_circle" viewBox="0 0 8 8" refX="4" refY="4" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+                                            <circle cx="4" cy="4" r="2" class="bg_filled"></circle>
+                                        </marker>
+                                        <marker id="big_open_circle" viewBox="0 0 8 8" refX="4" refY="4" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+                                            <circle cx="4" cy="4" r="3" class="bg_filled"></circle>
+                                        </marker>
+                                    </defs>
+                                    <rect class="backdrop" x="0" y="0" width="40" height="48"></rect>
+                                    <circle cx="16" cy="24" r="12" class="nofill"></circle>
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                    <h4>Radius 2.0</h4>
+                    <div>
+                        <div class="side-to-side">
+                            <div class="raw">
+                                <pre>
+                                    <code> .-.
+(   )
+ `-'
+</code>
+                                </pre>
+                            </div>
+                            <div class="bob">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="48" height="64">
+                                    <style>line, path, circle,rect,polygon {
+                          stroke: black;
+                          stroke-width: 2;
+                          stroke-opacity: 1;
+                          fill-opacity: 1;
+                          stroke-linecap: round;
+                          stroke-linejoin: miter;
+                        }
+
+                    text {
+                        fill: black;
+                        }
+                        rect.backdrop{
+                            stroke: none;
+                            fill: white;
+                        }
+                        .broken{
+                            stroke-dasharray: 8;
+                        }
+                        .filled{
+                            fill: black;
+                        }
+                        .bg_filled{
+                            fill: white;
+                        }
+                        .nofill{
+                            fill: white;
+                        }
+
+                        text {
+                         font-family: monospace;
+                         font-size: 14px;
+                        }
+
+                        .end_marked_arrow{
+                            marker-end: url(#arrow);
+                         }
+                        .start_marked_arrow{
+                            marker-start: url(#arrow);
+                         }
+
+                        .end_marked_diamond{
+                            marker-end: url(#diamond);
+                         }
+                        .start_marked_diamond{
+                            marker-start: url(#diamond);
+                         }
+
+                        .end_marked_circle{
+                            marker-end: url(#circle);
+                         }
+                        .start_marked_circle{
+                            marker-start: url(#circle);
+                         }
+
+                        .end_marked_open_circle{
+                            marker-end: url(#open_circle);
+                         }
+                        .start_marked_open_circle{
+                            marker-start: url(#open_circle);
+                         }
+
+                        .end_marked_big_open_circle{
+                            marker-end: url(#big_open_circle);
+                         }
+                        .start_marked_big_open_circle{
+                            marker-start: url(#big_open_circle);
+                         }
+
+                         
+                        </style>
+                                    <defs>
+                                        <marker id="arrow" viewBox="-2 -2 8 8" refX="4" refY="2" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+                                            <polygon points="0,0 0,4 4,2 0,0"></polygon>
+                                        </marker>
+                                        <marker id="diamond" viewBox="-2 -2 8 8" refX="4" refY="2" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+                                            <polygon points="0,2 2,0 4,2 2,4 0,2"></polygon>
+                                        </marker>
+                                        <marker id="circle" viewBox="0 0 8 8" refX="4" refY="4" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+                                            <circle cx="4" cy="4" r="2" class="filled"></circle>
+                                        </marker>
+                                        <marker id="open_circle" viewBox="0 0 8 8" refX="4" refY="4" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+                                            <circle cx="4" cy="4" r="2" class="bg_filled"></circle>
+                                        </marker>
+                                        <marker id="big_open_circle" viewBox="0 0 8 8" refX="4" refY="4" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+                                            <circle cx="4" cy="4" r="3" class="bg_filled"></circle>
+                                        </marker>
+                                    </defs>
+                                    <rect class="backdrop" x="0" y="0" width="48" height="64"></rect>
+                                    <circle cx="20" cy="24" r="16" class="nofill"></circle>
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                    <h4>Radius 2.5</h4>
+                    <div>
+                        <div class="side-to-side">
+                            <div class="raw">
+                                <pre>
+                                    <code> .--.
+(    )
+ `--'
+</code>
+                                </pre>
+                            </div>
+                            <div class="bob">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="56" height="64">
+                                    <style>line, path, circle,rect,polygon {
+                          stroke: black;
+                          stroke-width: 2;
+                          stroke-opacity: 1;
+                          fill-opacity: 1;
+                          stroke-linecap: round;
+                          stroke-linejoin: miter;
+                        }
+
+                    text {
+                        fill: black;
+                        }
+                        rect.backdrop{
+                            stroke: none;
+                            fill: white;
+                        }
+                        .broken{
+                            stroke-dasharray: 8;
+                        }
+                        .filled{
+                            fill: black;
+                        }
+                        .bg_filled{
+                            fill: white;
+                        }
+                        .nofill{
+                            fill: white;
+                        }
+
+                        text {
+                         font-family: monospace;
+                         font-size: 14px;
+                        }
+
+                        .end_marked_arrow{
+                            marker-end: url(#arrow);
+                         }
+                        .start_marked_arrow{
+                            marker-start: url(#arrow);
+                         }
+
+                        .end_marked_diamond{
+                            marker-end: url(#diamond);
+                         }
+                        .start_marked_diamond{
+                            marker-start: url(#diamond);
+                         }
+
+                        .end_marked_circle{
+                            marker-end: url(#circle);
+                         }
+                        .start_marked_circle{
+                            marker-start: url(#circle);
+                         }
+
+                        .end_marked_open_circle{
+                            marker-end: url(#open_circle);
+                         }
+                        .start_marked_open_circle{
+                            marker-start: url(#open_circle);
+                         }
+
+                        .end_marked_big_open_circle{
+                            marker-end: url(#big_open_circle);
+                         }
+                        .start_marked_big_open_circle{
+                            marker-start: url(#big_open_circle);
+                         }
+
+                         
+                        </style>
+                                    <defs>
+                                        <marker id="arrow" viewBox="-2 -2 8 8" refX="4" refY="2" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+                                            <polygon points="0,0 0,4 4,2 0,0"></polygon>
+                                        </marker>
+                                        <marker id="diamond" viewBox="-2 -2 8 8" refX="4" refY="2" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+                                            <polygon points="0,2 2,0 4,2 2,4 0,2"></polygon>
+                                        </marker>
+                                        <marker id="circle" viewBox="0 0 8 8" refX="4" refY="4" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+                                            <circle cx="4" cy="4" r="2" class="filled"></circle>
+                                        </marker>
+                                        <marker id="open_circle" viewBox="0 0 8 8" refX="4" refY="4" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+                                            <circle cx="4" cy="4" r="2" class="bg_filled"></circle>
+                                        </marker>
+                                        <marker id="big_open_circle" viewBox="0 0 8 8" refX="4" refY="4" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+                                            <circle cx="4" cy="4" r="3" class="bg_filled"></circle>
+                                        </marker>
+                                    </defs>
+                                    <rect class="backdrop" x="0" y="0" width="56" height="64"></rect>
+                                    <circle cx="24" cy="24" r="20" class="nofill"></circle>
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                    <h4>Radius 3.0</h4>
+                    <div>
+                        <div class="side-to-side">
+                            <div class="raw">
+                                <pre>
+                                    <code>   _
+ .' '.
+(     )
+ `._.'
+</code>
+                                </pre>
+                            </div>
+                            <div class="bob">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="64" height="80">
+                                    <style>line, path, circle,rect,polygon {
+                          stroke: black;
+                          stroke-width: 2;
+                          stroke-opacity: 1;
+                          fill-opacity: 1;
+                          stroke-linecap: round;
+                          stroke-linejoin: miter;
+                        }
+
+                    text {
+                        fill: black;
+                        }
+                        rect.backdrop{
+                            stroke: none;
+                            fill: white;
+                        }
+                        .broken{
+                            stroke-dasharray: 8;
+                        }
+                        .filled{
+                            fill: black;
+                        }
+                        .bg_filled{
+                            fill: white;
+                        }
+                        .nofill{
+                            fill: white;
+                        }
+
+                        text {
+                         font-family: monospace;
+                         font-size: 14px;
+                        }
+
+                        .end_marked_arrow{
+                            marker-end: url(#arrow);
+                         }
+                        .start_marked_arrow{
+                            marker-start: url(#arrow);
+                         }
+
+                        .end_marked_diamond{
+                            marker-end: url(#diamond);
+                         }
+                        .start_marked_diamond{
+                            marker-start: url(#diamond);
+                         }
+
+                        .end_marked_circle{
+                            marker-end: url(#circle);
+                         }
+                        .start_marked_circle{
+                            marker-start: url(#circle);
+                         }
+
+                        .end_marked_open_circle{
+                            marker-end: url(#open_circle);
+                         }
+                        .start_marked_open_circle{
+                            marker-start: url(#open_circle);
+                         }
+
+                        .end_marked_big_open_circle{
+                            marker-end: url(#big_open_circle);
+                         }
+                        .start_marked_big_open_circle{
+                            marker-start: url(#big_open_circle);
+                         }
+
+                         
+                        </style>
+                                    <defs>
+                                        <marker id="arrow" viewBox="-2 -2 8 8" refX="4" refY="2" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+                                            <polygon points="0,0 0,4 4,2 0,0"></polygon>
+                                        </marker>
+                                        <marker id="diamond" viewBox="-2 -2 8 8" refX="4" refY="2" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+                                            <polygon points="0,2 2,0 4,2 2,4 0,2"></polygon>
+                                        </marker>
+                                        <marker id="circle" viewBox="0 0 8 8" refX="4" refY="4" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+                                            <circle cx="4" cy="4" r="2" class="filled"></circle>
+                                        </marker>
+                                        <marker id="open_circle" viewBox="0 0 8 8" refX="4" refY="4" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+                                            <circle cx="4" cy="4" r="2" class="bg_filled"></circle>
+                                        </marker>
+                                        <marker id="big_open_circle" viewBox="0 0 8 8" refX="4" refY="4" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+                                            <circle cx="4" cy="4" r="3" class="bg_filled"></circle>
+                                        </marker>
+                                    </defs>
+                                    <rect class="backdrop" x="0" y="0" width="64" height="80"></rect>
+                                    <circle cx="28" cy="40" r="24" class="nofill"></circle>
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                    <h4>Radius 3.5</h4>
+                    <div>
+                        <div class="side-to-side">
+                            <div class="raw">
+                                <pre>
+                                    <code>    __
+  ,'  '.
+ (      )
+  `.__.'
+</code>
+                                </pre>
+                            </div>
+                            <div class="bob">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="80" height="80">
+                                    <style>line, path, circle,rect,polygon {
+                          stroke: black;
+                          stroke-width: 2;
+                          stroke-opacity: 1;
+                          fill-opacity: 1;
+                          stroke-linecap: round;
+                          stroke-linejoin: miter;
+                        }
+
+                    text {
+                        fill: black;
+                        }
+                        rect.backdrop{
+                            stroke: none;
+                            fill: white;
+                        }
+                        .broken{
+                            stroke-dasharray: 8;
+                        }
+                        .filled{
+                            fill: black;
+                        }
+                        .bg_filled{
+                            fill: white;
+                        }
+                        .nofill{
+                            fill: white;
+                        }
+
+                        text {
+                         font-family: monospace;
+                         font-size: 14px;
+                        }
+
+                        .end_marked_arrow{
+                            marker-end: url(#arrow);
+                         }
+                        .start_marked_arrow{
+                            marker-start: url(#arrow);
+                         }
+
+                        .end_marked_diamond{
+                            marker-end: url(#diamond);
+                         }
+                        .start_marked_diamond{
+                            marker-start: url(#diamond);
+                         }
+
+                        .end_marked_circle{
+                            marker-end: url(#circle);
+                         }
+                        .start_marked_circle{
+                            marker-start: url(#circle);
+                         }
+
+                        .end_marked_open_circle{
+                            marker-end: url(#open_circle);
+                         }
+                        .start_marked_open_circle{
+                            marker-start: url(#open_circle);
+                         }
+
+                        .end_marked_big_open_circle{
+                            marker-end: url(#big_open_circle);
+                         }
+                        .start_marked_big_open_circle{
+                            marker-start: url(#big_open_circle);
+                         }
+
+                         
+                        </style>
+                                    <defs>
+                                        <marker id="arrow" viewBox="-2 -2 8 8" refX="4" refY="2" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+                                            <polygon points="0,0 0,4 4,2 0,0"></polygon>
+                                        </marker>
+                                        <marker id="diamond" viewBox="-2 -2 8 8" refX="4" refY="2" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+                                            <polygon points="0,2 2,0 4,2 2,4 0,2"></polygon>
+                                        </marker>
+                                        <marker id="circle" viewBox="0 0 8 8" refX="4" refY="4" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+                                            <circle cx="4" cy="4" r="2" class="filled"></circle>
+                                        </marker>
+                                        <marker id="open_circle" viewBox="0 0 8 8" refX="4" refY="4" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+                                            <circle cx="4" cy="4" r="2" class="bg_filled"></circle>
+                                        </marker>
+                                        <marker id="big_open_circle" viewBox="0 0 8 8" refX="4" refY="4" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+                                            <circle cx="4" cy="4" r="3" class="bg_filled"></circle>
+                                        </marker>
+                                    </defs>
+                                    <rect class="backdrop" x="0" y="0" width="80" height="80"></rect>
+                                    <circle cx="40" cy="40" r="28" class="nofill"></circle>
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                    <h4>Radius 4.0</h4>
+                    <div>
+                        <div class="side-to-side">
+                            <div class="raw">
+                                <pre>
+                                    <code>    ___
+  ,'   '.
+ (       )
+  `.   .'
+    `-'
+</code>
+                                </pre>
+                            </div>
+                            <div class="bob">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="88" height="96">
+                                    <style>line, path, circle,rect,polygon {
+                          stroke: black;
+                          stroke-width: 2;
+                          stroke-opacity: 1;
+                          fill-opacity: 1;
+                          stroke-linecap: round;
+                          stroke-linejoin: miter;
+                        }
+
+                    text {
+                        fill: black;
+                        }
+                        rect.backdrop{
+                            stroke: none;
+                            fill: white;
+                        }
+                        .broken{
+                            stroke-dasharray: 8;
+                        }
+                        .filled{
+                            fill: black;
+                        }
+                        .bg_filled{
+                            fill: white;
+                        }
+                        .nofill{
+                            fill: white;
+                        }
+
+                        text {
+                         font-family: monospace;
+                         font-size: 14px;
+                        }
+
+                        .end_marked_arrow{
+                            marker-end: url(#arrow);
+                         }
+                        .start_marked_arrow{
+                            marker-start: url(#arrow);
+                         }
+
+                        .end_marked_diamond{
+                            marker-end: url(#diamond);
+                         }
+                        .start_marked_diamond{
+                            marker-start: url(#diamond);
+                         }
+
+                        .end_marked_circle{
+                            marker-end: url(#circle);
+                         }
+                        .start_marked_circle{
+                            marker-start: url(#circle);
+                         }
+
+                        .end_marked_open_circle{
+                            marker-end: url(#open_circle);
+                         }
+                        .start_marked_open_circle{
+                            marker-start: url(#open_circle);
+                         }
+
+                        .end_marked_big_open_circle{
+                            marker-end: url(#big_open_circle);
+                         }
+                        .start_marked_big_open_circle{
+                            marker-start: url(#big_open_circle);
+                         }
+
+                         
+                        </style>
+                                    <defs>
+                                        <marker id="arrow" viewBox="-2 -2 8 8" refX="4" refY="2" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+                                            <polygon points="0,0 0,4 4,2 0,0"></polygon>
+                                        </marker>
+                                        <marker id="diamond" viewBox="-2 -2 8 8" refX="4" refY="2" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+                                            <polygon points="0,2 2,0 4,2 2,4 0,2"></polygon>
+                                        </marker>
+                                        <marker id="circle" viewBox="0 0 8 8" refX="4" refY="4" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+                                            <circle cx="4" cy="4" r="2" class="filled"></circle>
+                                        </marker>
+                                        <marker id="open_circle" viewBox="0 0 8 8" refX="4" refY="4" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+                                            <circle cx="4" cy="4" r="2" class="bg_filled"></circle>
+                                        </marker>
+                                        <marker id="big_open_circle" viewBox="0 0 8 8" refX="4" refY="4" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+                                            <circle cx="4" cy="4" r="3" class="bg_filled"></circle>
+                                        </marker>
+                                    </defs>
+                                    <rect class="backdrop" x="0" y="0" width="88" height="96"></rect>
+                                    <circle cx="44" cy="40" r="32" class="nofill"></circle>
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                    <h4>Radius 4.5</h4>
+                    <div>
+                        <div class="side-to-side">
+                            <div class="raw">
+                                <pre>
+                                    <code>
+      ___
+    ,'   `.
+   /       \
+   \       /
+    `.___.'
+
+</code>
+                                </pre>
+                            </div>
+                            <div class="bob">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="104" height="112">
+                                    <style>line, path, circle,rect,polygon {
+                          stroke: black;
+                          stroke-width: 2;
+                          stroke-opacity: 1;
+                          fill-opacity: 1;
+                          stroke-linecap: round;
+                          stroke-linejoin: miter;
+                        }
+
+                    text {
+                        fill: black;
+                        }
+                        rect.backdrop{
+                            stroke: none;
+                            fill: white;
+                        }
+                        .broken{
+                            stroke-dasharray: 8;
+                        }
+                        .filled{
+                            fill: black;
+                        }
+                        .bg_filled{
+                            fill: white;
+                        }
+                        .nofill{
+                            fill: white;
+                        }
+
+                        text {
+                         font-family: monospace;
+                         font-size: 14px;
+                        }
+
+                        .end_marked_arrow{
+                            marker-end: url(#arrow);
+                         }
+                        .start_marked_arrow{
+                            marker-start: url(#arrow);
+                         }
+
+                        .end_marked_diamond{
+                            marker-end: url(#diamond);
+                         }
+                        .start_marked_diamond{
+                            marker-start: url(#diamond);
+                         }
+
+                        .end_marked_circle{
+                            marker-end: url(#circle);
+                         }
+                        .start_marked_circle{
+                            marker-start: url(#circle);
+                         }
+
+                        .end_marked_open_circle{
+                            marker-end: url(#open_circle);
+                         }
+                        .start_marked_open_circle{
+                            marker-start: url(#open_circle);
+                         }
+
+                        .end_marked_big_open_circle{
+                            marker-end: url(#big_open_circle);
+                         }
+                        .start_marked_big_open_circle{
+                            marker-start: url(#big_open_circle);
+                         }
+
+                         
+                        </style>
+                                    <defs>
+                                        <marker id="arrow" viewBox="-2 -2 8 8" refX="4" refY="2" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+                                            <polygon points="0,0 0,4 4,2 0,0"></polygon>
+                                        </marker>
+                                        <marker id="diamond" viewBox="-2 -2 8 8" refX="4" refY="2" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+                                            <polygon points="0,2 2,0 4,2 2,4 0,2"></polygon>
+                                        </marker>
+                                        <marker id="circle" viewBox="0 0 8 8" refX="4" refY="4" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+                                            <circle cx="4" cy="4" r="2" class="filled"></circle>
+                                        </marker>
+                                        <marker id="open_circle" viewBox="0 0 8 8" refX="4" refY="4" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+                                            <circle cx="4" cy="4" r="2" class="bg_filled"></circle>
+                                        </marker>
+                                        <marker id="big_open_circle" viewBox="0 0 8 8" refX="4" refY="4" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+                                            <circle cx="4" cy="4" r="3" class="bg_filled"></circle>
+                                        </marker>
+                                    </defs>
+                                    <rect class="backdrop" x="0" y="0" width="104" height="112"></rect>
+                                    <circle cx="60" cy="64" r="36" class="nofill"></circle>
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                    <h4>Radius 5.0</h4>
+                    <div>
+                        <div class="side-to-side">
+                            <div class="raw">
+                                <pre>
+                                    <code>
+       ____
+     ,'    `.
+    /        \
+    \        /
+     `.____.'
+
+
+
+
+</code>
+                                </pre>
+                            </div>
+                            <div class="bob">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="120" height="112">
+                                    <style>line, path, circle,rect,polygon {
+                          stroke: black;
+                          stroke-width: 2;
+                          stroke-opacity: 1;
+                          fill-opacity: 1;
+                          stroke-linecap: round;
+                          stroke-linejoin: miter;
+                        }
+
+                    text {
+                        fill: black;
+                        }
+                        rect.backdrop{
+                            stroke: none;
+                            fill: white;
+                        }
+                        .broken{
+                            stroke-dasharray: 8;
+                        }
+                        .filled{
+                            fill: black;
+                        }
+                        .bg_filled{
+                            fill: white;
+                        }
+                        .nofill{
+                            fill: white;
+                        }
+
+                        text {
+                         font-family: monospace;
+                         font-size: 14px;
+                        }
+
+                        .end_marked_arrow{
+                            marker-end: url(#arrow);
+                         }
+                        .start_marked_arrow{
+                            marker-start: url(#arrow);
+                         }
+
+                        .end_marked_diamond{
+                            marker-end: url(#diamond);
+                         }
+                        .start_marked_diamond{
+                            marker-start: url(#diamond);
+                         }
+
+                        .end_marked_circle{
+                            marker-end: url(#circle);
+                         }
+                        .start_marked_circle{
+                            marker-start: url(#circle);
+                         }
+
+                        .end_marked_open_circle{
+                            marker-end: url(#open_circle);
+                         }
+                        .start_marked_open_circle{
+                            marker-start: url(#open_circle);
+                         }
+
+                        .end_marked_big_open_circle{
+                            marker-end: url(#big_open_circle);
+                         }
+                        .start_marked_big_open_circle{
+                            marker-start: url(#big_open_circle);
+                         }
+
+                         
+                        </style>
+                                    <defs>
+                                        <marker id="arrow" viewBox="-2 -2 8 8" refX="4" refY="2" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+                                            <polygon points="0,0 0,4 4,2 0,0"></polygon>
+                                        </marker>
+                                        <marker id="diamond" viewBox="-2 -2 8 8" refX="4" refY="2" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+                                            <polygon points="0,2 2,0 4,2 2,4 0,2"></polygon>
+                                        </marker>
+                                        <marker id="circle" viewBox="0 0 8 8" refX="4" refY="4" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+                                            <circle cx="4" cy="4" r="2" class="filled"></circle>
+                                        </marker>
+                                        <marker id="open_circle" viewBox="0 0 8 8" refX="4" refY="4" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+                                            <circle cx="4" cy="4" r="2" class="bg_filled"></circle>
+                                        </marker>
+                                        <marker id="big_open_circle" viewBox="0 0 8 8" refX="4" refY="4" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+                                            <circle cx="4" cy="4" r="3" class="bg_filled"></circle>
+                                        </marker>
+                                    </defs>
+                                    <rect class="backdrop" x="0" y="0" width="120" height="112"></rect>
+                                    <circle cx="72" cy="64" r="40" class="nofill"></circle>
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                    <h4>Radius 5.5</h4>
+                    <div>
+                        <div class="side-to-side">
+                            <div class="raw">
+                                <pre>
+                                    <code>
+    ____
+  .'    `.
+ /        \
+(          )
+ \        /
+  `.____.'
+
+
+</code>
+                                </pre>
+                            </div>
+                            <div class="bob">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="104" height="128">
+                                    <style>line, path, circle,rect,polygon {
+                          stroke: black;
+                          stroke-width: 2;
+                          stroke-opacity: 1;
+                          fill-opacity: 1;
+                          stroke-linecap: round;
+                          stroke-linejoin: miter;
+                        }
+
+                    text {
+                        fill: black;
+                        }
+                        rect.backdrop{
+                            stroke: none;
+                            fill: white;
+                        }
+                        .broken{
+                            stroke-dasharray: 8;
+                        }
+                        .filled{
+                            fill: black;
+                        }
+                        .bg_filled{
+                            fill: white;
+                        }
+                        .nofill{
+                            fill: white;
+                        }
+
+                        text {
+                         font-family: monospace;
+                         font-size: 14px;
+                        }
+
+                        .end_marked_arrow{
+                            marker-end: url(#arrow);
+                         }
+                        .start_marked_arrow{
+                            marker-start: url(#arrow);
+                         }
+
+                        .end_marked_diamond{
+                            marker-end: url(#diamond);
+                         }
+                        .start_marked_diamond{
+                            marker-start: url(#diamond);
+                         }
+
+                        .end_marked_circle{
+                            marker-end: url(#circle);
+                         }
+                        .start_marked_circle{
+                            marker-start: url(#circle);
+                         }
+
+                        .end_marked_open_circle{
+                            marker-end: url(#open_circle);
+                         }
+                        .start_marked_open_circle{
+                            marker-start: url(#open_circle);
+                         }
+
+                        .end_marked_big_open_circle{
+                            marker-end: url(#big_open_circle);
+                         }
+                        .start_marked_big_open_circle{
+                            marker-start: url(#big_open_circle);
+                         }
+
+                         
+                        </style>
+                                    <defs>
+                                        <marker id="arrow" viewBox="-2 -2 8 8" refX="4" refY="2" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+                                            <polygon points="0,0 0,4 4,2 0,0"></polygon>
+                                        </marker>
+                                        <marker id="diamond" viewBox="-2 -2 8 8" refX="4" refY="2" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+                                            <polygon points="0,2 2,0 4,2 2,4 0,2"></polygon>
+                                        </marker>
+                                        <marker id="circle" viewBox="0 0 8 8" refX="4" refY="4" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+                                            <circle cx="4" cy="4" r="2" class="filled"></circle>
+                                        </marker>
+                                        <marker id="open_circle" viewBox="0 0 8 8" refX="4" refY="4" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+                                            <circle cx="4" cy="4" r="2" class="bg_filled"></circle>
+                                        </marker>
+                                        <marker id="big_open_circle" viewBox="0 0 8 8" refX="4" refY="4" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+                                            <circle cx="4" cy="4" r="3" class="bg_filled"></circle>
+                                        </marker>
+                                    </defs>
+                                    <rect class="backdrop" x="0" y="0" width="104" height="128"></rect>
+                                    <circle cx="48" cy="72" r="44" class="nofill"></circle>
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                    <h4>Radius 6.0</h4>
+                    <div>
+                        <div class="side-to-side">
+                            <div class="raw">
+                                <pre>
+                                    <code>
+    _____
+  ,'     `.
+ /         \
+(           )
+ \         /
+  `._____.'
+
+
+</code>
+                                </pre>
+                            </div>
+                            <div class="bob">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="112" height="128">
+                                    <style>line, path, circle,rect,polygon {
+                          stroke: black;
+                          stroke-width: 2;
+                          stroke-opacity: 1;
+                          fill-opacity: 1;
+                          stroke-linecap: round;
+                          stroke-linejoin: miter;
+                        }
+
+                    text {
+                        fill: black;
+                        }
+                        rect.backdrop{
+                            stroke: none;
+                            fill: white;
+                        }
+                        .broken{
+                            stroke-dasharray: 8;
+                        }
+                        .filled{
+                            fill: black;
+                        }
+                        .bg_filled{
+                            fill: white;
+                        }
+                        .nofill{
+                            fill: white;
+                        }
+
+                        text {
+                         font-family: monospace;
+                         font-size: 14px;
+                        }
+
+                        .end_marked_arrow{
+                            marker-end: url(#arrow);
+                         }
+                        .start_marked_arrow{
+                            marker-start: url(#arrow);
+                         }
+
+                        .end_marked_diamond{
+                            marker-end: url(#diamond);
+                         }
+                        .start_marked_diamond{
+                            marker-start: url(#diamond);
+                         }
+
+                        .end_marked_circle{
+                            marker-end: url(#circle);
+                         }
+                        .start_marked_circle{
+                            marker-start: url(#circle);
+                         }
+
+                        .end_marked_open_circle{
+                            marker-end: url(#open_circle);
+                         }
+                        .start_marked_open_circle{
+                            marker-start: url(#open_circle);
+                         }
+
+                        .end_marked_big_open_circle{
+                            marker-end: url(#big_open_circle);
+                         }
+                        .start_marked_big_open_circle{
+                            marker-start: url(#big_open_circle);
+                         }
+
+                         
+                        </style>
+                                    <defs>
+                                        <marker id="arrow" viewBox="-2 -2 8 8" refX="4" refY="2" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+                                            <polygon points="0,0 0,4 4,2 0,0"></polygon>
+                                        </marker>
+                                        <marker id="diamond" viewBox="-2 -2 8 8" refX="4" refY="2" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+                                            <polygon points="0,2 2,0 4,2 2,4 0,2"></polygon>
+                                        </marker>
+                                        <marker id="circle" viewBox="0 0 8 8" refX="4" refY="4" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+                                            <circle cx="4" cy="4" r="2" class="filled"></circle>
+                                        </marker>
+                                        <marker id="open_circle" viewBox="0 0 8 8" refX="4" refY="4" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+                                            <circle cx="4" cy="4" r="2" class="bg_filled"></circle>
+                                        </marker>
+                                        <marker id="big_open_circle" viewBox="0 0 8 8" refX="4" refY="4" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+                                            <circle cx="4" cy="4" r="3" class="bg_filled"></circle>
+                                        </marker>
+                                    </defs>
+                                    <rect class="backdrop" x="0" y="0" width="112" height="128"></rect>
+                                    <circle cx="52" cy="72" r="48" class="nofill"></circle>
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                    <h4>Radius 6.5</h4>
+                    <div>
+                        <div class="side-to-side">
+                            <div class="raw">
+                                <pre>
+                                    <code>
+
+         ______
+       ,'      `.
+      /          \
+     |            |
+     |            |
+      \          /
+       `.______.'
+
+
+
+</code>
+                                </pre>
+                            </div>
+                            <div class="bob">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="160" height="160">
+                                    <style>line, path, circle,rect,polygon {
+                          stroke: black;
+                          stroke-width: 2;
+                          stroke-opacity: 1;
+                          fill-opacity: 1;
+                          stroke-linecap: round;
+                          stroke-linejoin: miter;
+                        }
+
+                    text {
+                        fill: black;
+                        }
+                        rect.backdrop{
+                            stroke: none;
+                            fill: white;
+                        }
+                        .broken{
+                            stroke-dasharray: 8;
+                        }
+                        .filled{
+                            fill: black;
+                        }
+                        .bg_filled{
+                            fill: white;
+                        }
+                        .nofill{
+                            fill: white;
+                        }
+
+                        text {
+                         font-family: monospace;
+                         font-size: 14px;
+                        }
+
+                        .end_marked_arrow{
+                            marker-end: url(#arrow);
+                         }
+                        .start_marked_arrow{
+                            marker-start: url(#arrow);
+                         }
+
+                        .end_marked_diamond{
+                            marker-end: url(#diamond);
+                         }
+                        .start_marked_diamond{
+                            marker-start: url(#diamond);
+                         }
+
+                        .end_marked_circle{
+                            marker-end: url(#circle);
+                         }
+                        .start_marked_circle{
+                            marker-start: url(#circle);
+                         }
+
+                        .end_marked_open_circle{
+                            marker-end: url(#open_circle);
+                         }
+                        .start_marked_open_circle{
+                            marker-start: url(#open_circle);
+                         }
+
+                        .end_marked_big_open_circle{
+                            marker-end: url(#big_open_circle);
+                         }
+                        .start_marked_big_open_circle{
+                            marker-start: url(#big_open_circle);
+                         }
+
+                         
+                        </style>
+                                    <defs>
+                                        <marker id="arrow" viewBox="-2 -2 8 8" refX="4" refY="2" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+                                            <polygon points="0,0 0,4 4,2 0,0"></polygon>
+                                        </marker>
+                                        <marker id="diamond" viewBox="-2 -2 8 8" refX="4" refY="2" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+                                            <polygon points="0,2 2,0 4,2 2,4 0,2"></polygon>
+                                        </marker>
+                                        <marker id="circle" viewBox="0 0 8 8" refX="4" refY="4" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+                                            <circle cx="4" cy="4" r="2" class="filled"></circle>
+                                        </marker>
+                                        <marker id="open_circle" viewBox="0 0 8 8" refX="4" refY="4" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+                                            <circle cx="4" cy="4" r="2" class="bg_filled"></circle>
+                                        </marker>
+                                        <marker id="big_open_circle" viewBox="0 0 8 8" refX="4" refY="4" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+                                            <circle cx="4" cy="4" r="3" class="bg_filled"></circle>
+                                        </marker>
+                                    </defs>
+                                    <rect class="backdrop" x="0" y="0" width="160" height="160"></rect>
+                                    <circle cx="96" cy="96" r="52" class="nofill"></circle>
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                    <h4>Radius 7.0</h4>
+                    <div>
+                        <div class="side-to-side">
+                            <div class="raw">
+                                <pre>
+                                    <code>
+          _______
+        ,'       `.
+       /           \
+      |             |
+      |             |
+       \           /
+        `._______.'
+
+</code>
+                                </pre>
+                            </div>
+                            <div class="bob">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="176" height="144">
+                                    <style>line, path, circle,rect,polygon {
+                          stroke: black;
+                          stroke-width: 2;
+                          stroke-opacity: 1;
+                          fill-opacity: 1;
+                          stroke-linecap: round;
+                          stroke-linejoin: miter;
+                        }
+
+                    text {
+                        fill: black;
+                        }
+                        rect.backdrop{
+                            stroke: none;
+                            fill: white;
+                        }
+                        .broken{
+                            stroke-dasharray: 8;
+                        }
+                        .filled{
+                            fill: black;
+                        }
+                        .bg_filled{
+                            fill: white;
+                        }
+                        .nofill{
+                            fill: white;
+                        }
+
+                        text {
+                         font-family: monospace;
+                         font-size: 14px;
+                        }
+
+                        .end_marked_arrow{
+                            marker-end: url(#arrow);
+                         }
+                        .start_marked_arrow{
+                            marker-start: url(#arrow);
+                         }
+
+                        .end_marked_diamond{
+                            marker-end: url(#diamond);
+                         }
+                        .start_marked_diamond{
+                            marker-start: url(#diamond);
+                         }
+
+                        .end_marked_circle{
+                            marker-end: url(#circle);
+                         }
+                        .start_marked_circle{
+                            marker-start: url(#circle);
+                         }
+
+                        .end_marked_open_circle{
+                            marker-end: url(#open_circle);
+                         }
+                        .start_marked_open_circle{
+                            marker-start: url(#open_circle);
+                         }
+
+                        .end_marked_big_open_circle{
+                            marker-end: url(#big_open_circle);
+                         }
+                        .start_marked_big_open_circle{
+                            marker-start: url(#big_open_circle);
+                         }
+
+                         
+                        </style>
+                                    <defs>
+                                        <marker id="arrow" viewBox="-2 -2 8 8" refX="4" refY="2" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+                                            <polygon points="0,0 0,4 4,2 0,0"></polygon>
+                                        </marker>
+                                        <marker id="diamond" viewBox="-2 -2 8 8" refX="4" refY="2" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+                                            <polygon points="0,2 2,0 4,2 2,4 0,2"></polygon>
+                                        </marker>
+                                        <marker id="circle" viewBox="0 0 8 8" refX="4" refY="4" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+                                            <circle cx="4" cy="4" r="2" class="filled"></circle>
+                                        </marker>
+                                        <marker id="open_circle" viewBox="0 0 8 8" refX="4" refY="4" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+                                            <circle cx="4" cy="4" r="2" class="bg_filled"></circle>
+                                        </marker>
+                                        <marker id="big_open_circle" viewBox="0 0 8 8" refX="4" refY="4" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+                                            <circle cx="4" cy="4" r="3" class="bg_filled"></circle>
+                                        </marker>
+                                    </defs>
+                                    <rect class="backdrop" x="0" y="0" width="176" height="144"></rect>
+                                    <circle cx="108" cy="80" r="56" class="nofill"></circle>
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                    <h4>Radius 7.5</h4>
+                    <div>
+                        <div class="side-to-side">
+                            <div class="raw">
+                                <pre>
+                                    <code>
+       ________
+     ,'        `.
+    /            \
+   |              |
+   |              |
+   |              |
+    \            /
+     `.________.'
+
+
+</code>
+                                </pre>
+                            </div>
+                            <div class="bob">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="160" height="160">
+                                    <style>line, path, circle,rect,polygon {
+                          stroke: black;
+                          stroke-width: 2;
+                          stroke-opacity: 1;
+                          fill-opacity: 1;
+                          stroke-linecap: round;
+                          stroke-linejoin: miter;
+                        }
+
+                    text {
+                        fill: black;
+                        }
+                        rect.backdrop{
+                            stroke: none;
+                            fill: white;
+                        }
+                        .broken{
+                            stroke-dasharray: 8;
+                        }
+                        .filled{
+                            fill: black;
+                        }
+                        .bg_filled{
+                            fill: white;
+                        }
+                        .nofill{
+                            fill: white;
+                        }
+
+                        text {
+                         font-family: monospace;
+                         font-size: 14px;
+                        }
+
+                        .end_marked_arrow{
+                            marker-end: url(#arrow);
+                         }
+                        .start_marked_arrow{
+                            marker-start: url(#arrow);
+                         }
+
+                        .end_marked_diamond{
+                            marker-end: url(#diamond);
+                         }
+                        .start_marked_diamond{
+                            marker-start: url(#diamond);
+                         }
+
+                        .end_marked_circle{
+                            marker-end: url(#circle);
+                         }
+                        .start_marked_circle{
+                            marker-start: url(#circle);
+                         }
+
+                        .end_marked_open_circle{
+                            marker-end: url(#open_circle);
+                         }
+                        .start_marked_open_circle{
+                            marker-start: url(#open_circle);
+                         }
+
+                        .end_marked_big_open_circle{
+                            marker-end: url(#big_open_circle);
+                         }
+                        .start_marked_big_open_circle{
+                            marker-start: url(#big_open_circle);
+                         }
+
+                         
+                        </style>
+                                    <defs>
+                                        <marker id="arrow" viewBox="-2 -2 8 8" refX="4" refY="2" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+                                            <polygon points="0,0 0,4 4,2 0,0"></polygon>
+                                        </marker>
+                                        <marker id="diamond" viewBox="-2 -2 8 8" refX="4" refY="2" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+                                            <polygon points="0,2 2,0 4,2 2,4 0,2"></polygon>
+                                        </marker>
+                                        <marker id="circle" viewBox="0 0 8 8" refX="4" refY="4" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+                                            <circle cx="4" cy="4" r="2" class="filled"></circle>
+                                        </marker>
+                                        <marker id="open_circle" viewBox="0 0 8 8" refX="4" refY="4" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+                                            <circle cx="4" cy="4" r="2" class="bg_filled"></circle>
+                                        </marker>
+                                        <marker id="big_open_circle" viewBox="0 0 8 8" refX="4" refY="4" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+                                            <circle cx="4" cy="4" r="3" class="bg_filled"></circle>
+                                        </marker>
+                                    </defs>
+                                    <rect class="backdrop" x="0" y="0" width="160" height="160"></rect>
+                                    <circle cx="88" cy="88" r="60" class="nofill"></circle>
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                    <h4>Radius 8.0</h4>
+                    <div>
+                        <div class="side-to-side">
+                            <div class="raw">
+                                <pre>
+                                    <code>
+
+         __-----__
+       ,'         `.
+      /             \
+     |               |
+     |               |
+     |               |
+      \             /
+       `.         .'
+         `-------'
+
+</code>
+                                </pre>
+                            </div>
+                            <div class="bob">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="184" height="192">
+                                    <style>line, path, circle,rect,polygon {
+                          stroke: black;
+                          stroke-width: 2;
+                          stroke-opacity: 1;
+                          fill-opacity: 1;
+                          stroke-linecap: round;
+                          stroke-linejoin: miter;
+                        }
+
+                    text {
+                        fill: black;
+                        }
+                        rect.backdrop{
+                            stroke: none;
+                            fill: white;
+                        }
+                        .broken{
+                            stroke-dasharray: 8;
+                        }
+                        .filled{
+                            fill: black;
+                        }
+                        .bg_filled{
+                            fill: white;
+                        }
+                        .nofill{
+                            fill: white;
+                        }
+
+                        text {
+                         font-family: monospace;
+                         font-size: 14px;
+                        }
+
+                        .end_marked_arrow{
+                            marker-end: url(#arrow);
+                         }
+                        .start_marked_arrow{
+                            marker-start: url(#arrow);
+                         }
+
+                        .end_marked_diamond{
+                            marker-end: url(#diamond);
+                         }
+                        .start_marked_diamond{
+                            marker-start: url(#diamond);
+                         }
+
+                        .end_marked_circle{
+                            marker-end: url(#circle);
+                         }
+                        .start_marked_circle{
+                            marker-start: url(#circle);
+                         }
+
+                        .end_marked_open_circle{
+                            marker-end: url(#open_circle);
+                         }
+                        .start_marked_open_circle{
+                            marker-start: url(#open_circle);
+                         }
+
+                        .end_marked_big_open_circle{
+                            marker-end: url(#big_open_circle);
+                         }
+                        .start_marked_big_open_circle{
+                            marker-start: url(#big_open_circle);
+                         }
+
+                         
+                        </style>
+                                    <defs>
+                                        <marker id="arrow" viewBox="-2 -2 8 8" refX="4" refY="2" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+                                            <polygon points="0,0 0,4 4,2 0,0"></polygon>
+                                        </marker>
+                                        <marker id="diamond" viewBox="-2 -2 8 8" refX="4" refY="2" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+                                            <polygon points="0,2 2,0 4,2 2,4 0,2"></polygon>
+                                        </marker>
+                                        <marker id="circle" viewBox="0 0 8 8" refX="4" refY="4" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+                                            <circle cx="4" cy="4" r="2" class="filled"></circle>
+                                        </marker>
+                                        <marker id="open_circle" viewBox="0 0 8 8" refX="4" refY="4" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+                                            <circle cx="4" cy="4" r="2" class="bg_filled"></circle>
+                                        </marker>
+                                        <marker id="big_open_circle" viewBox="0 0 8 8" refX="4" refY="4" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+                                            <circle cx="4" cy="4" r="3" class="bg_filled"></circle>
+                                        </marker>
+                                    </defs>
+                                    <rect class="backdrop" x="0" y="0" width="184" height="192"></rect>
+                                    <circle cx="108" cy="104" r="64" class="nofill"></circle>
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                    <h4>Radius 8.5</h4>
+                    <div>
+                        <div class="side-to-side">
+                            <div class="raw">
+                                <pre>
+                                    <code>
+
+        .--------.
+      ,'          `.
+     /              \
+    |                |
+    |                |
+    |                |
+     \              /
+      `.          .'
+        `--------'
+
+
+</code>
+                                </pre>
+                            </div>
+                            <div class="bob">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="184" height="192">
+                                    <style>line, path, circle,rect,polygon {
+                          stroke: black;
+                          stroke-width: 2;
+                          stroke-opacity: 1;
+                          fill-opacity: 1;
+                          stroke-linecap: round;
+                          stroke-linejoin: miter;
+                        }
+
+                    text {
+                        fill: black;
+                        }
+                        rect.backdrop{
+                            stroke: none;
+                            fill: white;
+                        }
+                        .broken{
+                            stroke-dasharray: 8;
+                        }
+                        .filled{
+                            fill: black;
+                        }
+                        .bg_filled{
+                            fill: white;
+                        }
+                        .nofill{
+                            fill: white;
+                        }
+
+                        text {
+                         font-family: monospace;
+                         font-size: 14px;
+                        }
+
+                        .end_marked_arrow{
+                            marker-end: url(#arrow);
+                         }
+                        .start_marked_arrow{
+                            marker-start: url(#arrow);
+                         }
+
+                        .end_marked_diamond{
+                            marker-end: url(#diamond);
+                         }
+                        .start_marked_diamond{
+                            marker-start: url(#diamond);
+                         }
+
+                        .end_marked_circle{
+                            marker-end: url(#circle);
+                         }
+                        .start_marked_circle{
+                            marker-start: url(#circle);
+                         }
+
+                        .end_marked_open_circle{
+                            marker-end: url(#open_circle);
+                         }
+                        .start_marked_open_circle{
+                            marker-start: url(#open_circle);
+                         }
+
+                        .end_marked_big_open_circle{
+                            marker-end: url(#big_open_circle);
+                         }
+                        .start_marked_big_open_circle{
+                            marker-start: url(#big_open_circle);
+                         }
+
+                         
+                        </style>
+                                    <defs>
+                                        <marker id="arrow" viewBox="-2 -2 8 8" refX="4" refY="2" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+                                            <polygon points="0,0 0,4 4,2 0,0"></polygon>
+                                        </marker>
+                                        <marker id="diamond" viewBox="-2 -2 8 8" refX="4" refY="2" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+                                            <polygon points="0,2 2,0 4,2 2,4 0,2"></polygon>
+                                        </marker>
+                                        <marker id="circle" viewBox="0 0 8 8" refX="4" refY="4" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+                                            <circle cx="4" cy="4" r="2" class="filled"></circle>
+                                        </marker>
+                                        <marker id="open_circle" viewBox="0 0 8 8" refX="4" refY="4" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+                                            <circle cx="4" cy="4" r="2" class="bg_filled"></circle>
+                                        </marker>
+                                        <marker id="big_open_circle" viewBox="0 0 8 8" refX="4" refY="4" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+                                            <circle cx="4" cy="4" r="3" class="bg_filled"></circle>
+                                        </marker>
+                                    </defs>
+                                    <rect class="backdrop" x="0" y="0" width="184" height="192"></rect>
+                                    <circle cx="104" cy="104" r="68" class="nofill"></circle>
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                    <h4>Radius 9.0</h4>
+                    <div>
+                        <div class="side-to-side">
+                            <div class="raw">
+                                <pre>
+                                    <code>
+        _.-'''''-._
+      ,'           `.
+     /               \
+    .                 .
+    |                 |
+    |                 |
+    |                 |
+     \               /
+      `._         _.'
+         '-.....-'
+
+
+</code>
+                                </pre>
+                            </div>
+                            <div class="bob">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="192" height="192">
+                                    <style>line, path, circle,rect,polygon {
+                          stroke: black;
+                          stroke-width: 2;
+                          stroke-opacity: 1;
+                          fill-opacity: 1;
+                          stroke-linecap: round;
+                          stroke-linejoin: miter;
+                        }
+
+                    text {
+                        fill: black;
+                        }
+                        rect.backdrop{
+                            stroke: none;
+                            fill: white;
+                        }
+                        .broken{
+                            stroke-dasharray: 8;
+                        }
+                        .filled{
+                            fill: black;
+                        }
+                        .bg_filled{
+                            fill: white;
+                        }
+                        .nofill{
+                            fill: white;
+                        }
+
+                        text {
+                         font-family: monospace;
+                         font-size: 14px;
+                        }
+
+                        .end_marked_arrow{
+                            marker-end: url(#arrow);
+                         }
+                        .start_marked_arrow{
+                            marker-start: url(#arrow);
+                         }
+
+                        .end_marked_diamond{
+                            marker-end: url(#diamond);
+                         }
+                        .start_marked_diamond{
+                            marker-start: url(#diamond);
+                         }
+
+                        .end_marked_circle{
+                            marker-end: url(#circle);
+                         }
+                        .start_marked_circle{
+                            marker-start: url(#circle);
+                         }
+
+                        .end_marked_open_circle{
+                            marker-end: url(#open_circle);
+                         }
+                        .start_marked_open_circle{
+                            marker-start: url(#open_circle);
+                         }
+
+                        .end_marked_big_open_circle{
+                            marker-end: url(#big_open_circle);
+                         }
+                        .start_marked_big_open_circle{
+                            marker-start: url(#big_open_circle);
+                         }
+
+                         
+                        </style>
+                                    <defs>
+                                        <marker id="arrow" viewBox="-2 -2 8 8" refX="4" refY="2" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+                                            <polygon points="0,0 0,4 4,2 0,0"></polygon>
+                                        </marker>
+                                        <marker id="diamond" viewBox="-2 -2 8 8" refX="4" refY="2" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+                                            <polygon points="0,2 2,0 4,2 2,4 0,2"></polygon>
+                                        </marker>
+                                        <marker id="circle" viewBox="0 0 8 8" refX="4" refY="4" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+                                            <circle cx="4" cy="4" r="2" class="filled"></circle>
+                                        </marker>
+                                        <marker id="open_circle" viewBox="0 0 8 8" refX="4" refY="4" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+                                            <circle cx="4" cy="4" r="2" class="bg_filled"></circle>
+                                        </marker>
+                                        <marker id="big_open_circle" viewBox="0 0 8 8" refX="4" refY="4" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+                                            <circle cx="4" cy="4" r="3" class="bg_filled"></circle>
+                                        </marker>
+                                    </defs>
+                                    <rect class="backdrop" x="0" y="0" width="192" height="192"></rect>
+                                    <circle cx="108" cy="104" r="72" class="nofill"></circle>
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                    <h4>Radius 9.5</h4>
+                    <div>
+                        <div class="side-to-side">
+                            <div class="raw">
+                                <pre>
+                                    <code>
+        _.-''''''-._
+      ,'            `.
+     /                \
+    .                  .
+    |                  |
+    |                  |
+    |                  |
+     \                /
+      `._          _.'
+         '-......-'
+
+
+</code>
+                                </pre>
+                            </div>
+                            <div class="bob">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="200" height="192">
+                                    <style>line, path, circle,rect,polygon {
+                          stroke: black;
+                          stroke-width: 2;
+                          stroke-opacity: 1;
+                          fill-opacity: 1;
+                          stroke-linecap: round;
+                          stroke-linejoin: miter;
+                        }
+
+                    text {
+                        fill: black;
+                        }
+                        rect.backdrop{
+                            stroke: none;
+                            fill: white;
+                        }
+                        .broken{
+                            stroke-dasharray: 8;
+                        }
+                        .filled{
+                            fill: black;
+                        }
+                        .bg_filled{
+                            fill: white;
+                        }
+                        .nofill{
+                            fill: white;
+                        }
+
+                        text {
+                         font-family: monospace;
+                         font-size: 14px;
+                        }
+
+                        .end_marked_arrow{
+                            marker-end: url(#arrow);
+                         }
+                        .start_marked_arrow{
+                            marker-start: url(#arrow);
+                         }
+
+                        .end_marked_diamond{
+                            marker-end: url(#diamond);
+                         }
+                        .start_marked_diamond{
+                            marker-start: url(#diamond);
+                         }
+
+                        .end_marked_circle{
+                            marker-end: url(#circle);
+                         }
+                        .start_marked_circle{
+                            marker-start: url(#circle);
+                         }
+
+                        .end_marked_open_circle{
+                            marker-end: url(#open_circle);
+                         }
+                        .start_marked_open_circle{
+                            marker-start: url(#open_circle);
+                         }
+
+                        .end_marked_big_open_circle{
+                            marker-end: url(#big_open_circle);
+                         }
+                        .start_marked_big_open_circle{
+                            marker-start: url(#big_open_circle);
+                         }
+
+                         
+                        </style>
+                                    <defs>
+                                        <marker id="arrow" viewBox="-2 -2 8 8" refX="4" refY="2" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+                                            <polygon points="0,0 0,4 4,2 0,0"></polygon>
+                                        </marker>
+                                        <marker id="diamond" viewBox="-2 -2 8 8" refX="4" refY="2" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+                                            <polygon points="0,2 2,0 4,2 2,4 0,2"></polygon>
+                                        </marker>
+                                        <marker id="circle" viewBox="0 0 8 8" refX="4" refY="4" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+                                            <circle cx="4" cy="4" r="2" class="filled"></circle>
+                                        </marker>
+                                        <marker id="open_circle" viewBox="0 0 8 8" refX="4" refY="4" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+                                            <circle cx="4" cy="4" r="2" class="bg_filled"></circle>
+                                        </marker>
+                                        <marker id="big_open_circle" viewBox="0 0 8 8" refX="4" refY="4" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+                                            <circle cx="4" cy="4" r="3" class="bg_filled"></circle>
+                                        </marker>
+                                    </defs>
+                                    <rect class="backdrop" x="0" y="0" width="200" height="192"></rect>
+                                    <circle cx="112" cy="104" r="76" class="nofill"></circle>
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                    <h4>Radius 10.0</h4>
+                    <div>
+                        <div class="side-to-side">
+                            <div class="raw">
+                                <pre>
+                                    <code>
+      _.-'''''''-._
+    ,'             `.
+   /                 \
+  .                   .
+  |                   |
+  |                   |
+  |                   |
+   \                 /
+    `._           _.'
+       '-.......-'
+
+
+</code>
+                                </pre>
+                            </div>
+                            <div class="bob">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="192" height="192">
+                                    <style>line, path, circle,rect,polygon {
+                          stroke: black;
+                          stroke-width: 2;
+                          stroke-opacity: 1;
+                          fill-opacity: 1;
+                          stroke-linecap: round;
+                          stroke-linejoin: miter;
+                        }
+
+                    text {
+                        fill: black;
+                        }
+                        rect.backdrop{
+                            stroke: none;
+                            fill: white;
+                        }
+                        .broken{
+                            stroke-dasharray: 8;
+                        }
+                        .filled{
+                            fill: black;
+                        }
+                        .bg_filled{
+                            fill: white;
+                        }
+                        .nofill{
+                            fill: white;
+                        }
+
+                        text {
+                         font-family: monospace;
+                         font-size: 14px;
+                        }
+
+                        .end_marked_arrow{
+                            marker-end: url(#arrow);
+                         }
+                        .start_marked_arrow{
+                            marker-start: url(#arrow);
+                         }
+
+                        .end_marked_diamond{
+                            marker-end: url(#diamond);
+                         }
+                        .start_marked_diamond{
+                            marker-start: url(#diamond);
+                         }
+
+                        .end_marked_circle{
+                            marker-end: url(#circle);
+                         }
+                        .start_marked_circle{
+                            marker-start: url(#circle);
+                         }
+
+                        .end_marked_open_circle{
+                            marker-end: url(#open_circle);
+                         }
+                        .start_marked_open_circle{
+                            marker-start: url(#open_circle);
+                         }
+
+                        .end_marked_big_open_circle{
+                            marker-end: url(#big_open_circle);
+                         }
+                        .start_marked_big_open_circle{
+                            marker-start: url(#big_open_circle);
+                         }
+
+                         
+                        </style>
+                                    <defs>
+                                        <marker id="arrow" viewBox="-2 -2 8 8" refX="4" refY="2" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+                                            <polygon points="0,0 0,4 4,2 0,0"></polygon>
+                                        </marker>
+                                        <marker id="diamond" viewBox="-2 -2 8 8" refX="4" refY="2" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+                                            <polygon points="0,2 2,0 4,2 2,4 0,2"></polygon>
+                                        </marker>
+                                        <marker id="circle" viewBox="0 0 8 8" refX="4" refY="4" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+                                            <circle cx="4" cy="4" r="2" class="filled"></circle>
+                                        </marker>
+                                        <marker id="open_circle" viewBox="0 0 8 8" refX="4" refY="4" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+                                            <circle cx="4" cy="4" r="2" class="bg_filled"></circle>
+                                        </marker>
+                                        <marker id="big_open_circle" viewBox="0 0 8 8" refX="4" refY="4" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+                                            <circle cx="4" cy="4" r="3" class="bg_filled"></circle>
+                                        </marker>
+                                    </defs>
+                                    <rect class="backdrop" x="0" y="0" width="192" height="192"></rect>
+                                    <circle cx="100" cy="104" r="80" class="nofill"></circle>
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                    <p>
+                        <a href="/content/Svgbob.html" title="">Back to Svgbob</a>
+                    </p>
+                </div>
+            </article>
+        </div>
+    </body>
+</html>
