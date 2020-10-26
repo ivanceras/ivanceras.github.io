@@ -1,8 +1,4 @@
-<html>
-    <head>
-        <meta content="text/html;charset=utf-8" http-equiv="Content-Type"/>
-        <link rel="stylesheet" href="/minimal.css"/>
-        <style>.hl {
+<html><head><meta content="text/html;charset=utf-8" http-equiv="Content-Type"/><link rel="stylesheet" href="/minimal.css"/><style>.hl {
     user-select: none;
     -webkit-user-select: none;
     position: relative;
@@ -113,7 +109,6 @@
   border-radius: 50%;
   border: 1px solid #000;
   position: relative;
-  top: 6px;
   left: 6px;
   background-color: #ff3b47;
   border-color: #9d252b;
@@ -137,7 +132,6 @@
   box-sizing: border-box;
   height: 25px;
   background-color: #bbb;
-  margin: 0 auto;
   border-top-right-radius: 5px;
   border-top-left-radius: 5px;
 }
@@ -146,7 +140,6 @@
   background-color: #151515;
   box-sizing: border-box;
   width: 50ch;
-  margin: 0 auto;
   padding: 20px;
   border-bottom-left-radius: 5px;
   border-bottom-right-radius: 5px;
@@ -170,10 +163,7 @@
   color: #9CD9F0;
 }
 
-    </style>
-    </head>
-    <body>
-        <script type="module">
+    </style></head><body><script type="module">
          import { search, default as init } from '/tinysearch_engine.js';
          window.search = search;
          
@@ -182,8 +172,7 @@
          }
          
          run();
-      </script>
-        <script>
+      </script><script>
          function doSearch() {
            let value = document.getElementById('demo').value;
            const arr = search(value, 10);
@@ -202,34 +191,4 @@
              ul.appendChild(li);
            }
          }
-      </script>
-        <input id="demo" class="search" placeholder="Search.." onkeyup="doSearch()" type="text"/>
-        <ul id="results"></ul>
-        <div>
-            <nav>
-                <a href="/">Home</a>
-            </nav>
-            <article>
-                <div>
-                    <h1>Diwata</h1>
-                    <p>Diwata is a user-friendly and content-aware database interface.</p>
-                    <h4>Features</h4>
-                    <ul>
-                        <li>Automatic display of direct and indirect linked record</li>
-                        <li>Freeze column and freeze rows</li>
-                        <li>Infinite scrolling / loading of page on scrolling</li>
-                        <li>User friendly granular search and filter</li>
-                        <li>Diplay descriptive referred records. (ie: Instead of displaying the foreign_key value integer or uuid, display the referred records in such a way it is distinguisable by the user)</li>
-                        <li>Well integrated with the browsers, clickable tables, records and tabs can be openned in a new window and displays the data as though clicking on it.</li>
-                    </ul>
-                    <p>
-                        <a href="/content/Diwata/Architecture.html" title="">Diwata architecture</a>
-                    </p>
-                    <p>
-                        <a href="https://github.com/ivanceras/diwata" title="">Code Repository</a>
-                    </p>
-                </div>
-            </article>
-        </div>
-    </body>
-</html>
+      </script><input id="demo" class="search" placeholder="Search.." onkeyup="doSearch()" type="text"/><ul id="results"></ul><div><nav><a href="/">Home</a></nav><article><div><h1>Diwata</h1><p>Diwata is a user-friendly and content-aware database interface.</p><h4>Features</h4><ul><li>Automatic display of direct and indirect linked record</li><li>Freeze column and freeze rows</li><li>Infinite scrolling / loading of page on scrolling</li><li>User friendly granular search and filter</li><li>Diplay descriptive referred records. (ie: Instead of displaying the foreign_key value integer or uuid, display the referred records in such a way it is distinguisable by the user)</li><li>Well integrated with the browsers, clickable tables, records and tabs can be openned in a new window and displays the data as though clicking on it.</li></ul><p><a href="/content/Diwata/Architecture.html" title="">Diwata architecture</a></p><p><a href="https://github.com/ivanceras/diwata" title="">Code Repository</a></p></div></article></div></body></html>
