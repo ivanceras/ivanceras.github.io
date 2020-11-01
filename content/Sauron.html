@@ -104,34 +104,40 @@
     }
 }
 .fake_buttons {
+  position: relative;
+  display: flex;
+  left: 10px;
+  top: 5px;
+}
+
+.fake_btn{
   height: 10px;
   width: 10px;
   border-radius: 50%;
   border: 1px solid #000;
-  position: relative;
-  left: 6px;
+  margin: 0 2px;
+}
+
+.fake_close{
   background-color: #ff3b47;
   border-color: #9d252b;
-  display: inline-block;
 }
 
 .fake_minimize {
-  left: 11px;
   background-color: #ffc100;
   border-color: #9d802c;
 }
 
 .fake_zoom {
-  left: 16px;
   background-color: #00d742;
   border-color: #049931;
 }
 
 .fake_menu {
-  width: 50ch;
+  width: 100%;
   box-sizing: border-box;
   height: 25px;
-  background-color: #bbb;
+  background-color: #151515;
   border-top-right-radius: 5px;
   border-top-left-radius: 5px;
 }
@@ -139,7 +145,7 @@
 .fake_screen {
   background-color: #151515;
   box-sizing: border-box;
-  width: 50ch;
+  width: 100%;
   padding: 20px;
   border-bottom-left-radius: 5px;
   border-bottom-right-radius: 5px;
@@ -191,4 +197,4 @@
              ul.appendChild(li);
            }
          }
-      </script><input id="demo" class="search" placeholder="Search.." onkeyup="doSearch()" type="text"/><ul id="results"></ul><div><nav><a href="/">Home</a></nav><article><div><p>Sauron is a client side web framework with focus on ease of use.</p><p>Prerequisite:</p><div><div class="fake_terminal"><div class="fake_menu"><div class="fake_buttons fake_close"></div><div class="fake_buttons fake_minimize"></div><div class="fake_buttons fake_zoom"></div></div><div class="fake_screen"><p class="line">cargo install wasm-pack</p><p class="line">cargo install basic-http-server</p></div></div></div></div></article></div></body></html>
+      </script><input id="demo" class="search" placeholder="Search.." onkeyup="doSearch()" type="text"/><ul id="results"></ul><div><nav><a href="/">Home</a></nav><article><div><p>Sauron is a client side web framework with focus on ease of use.</p><p>Prerequisite:</p><div><div class="fake_terminal"><div class="fake_menu" style="background-color:rgba(15,20,25,1);"><div class="fake_buttons"><div class="fake_btn fake_close"></div><div class="fake_btn fake_minimize"></div><div class="fake_btn fake_zoom"></div></div></div><div class="fake_screen" style="background-color:rgba(15,20,25,1);"><p class="line" style="color:rgba(191,186,176,1);">cargo install wasm-pack</p><p class="line" style="color:rgba(191,186,176,1);">cargo install basic-http-server</p></div></div></div></div></article></div></body></html>
