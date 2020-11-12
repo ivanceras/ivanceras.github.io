@@ -170,34 +170,34 @@
 }
 
     </style><title>Design Implementation</title></head><body><script type="module">
-         import { search, default as init } from '/tinysearch_engine.js';
-         window.search = search;
-         
-         async function run() {
-           await init('/tinysearch_engine_bg.wasm');
-         }
-         
-         run();
-      </script><script>
-         function doSearch() {
-           let value = document.getElementById('demo').value;
-           const arr = search(value, 10);
-           let ul = document.getElementById('results');
-           ul.innerHTML = '';
-         
-           for (i = 0; i < arr.length; i++) {
-             var li = document.createElement('li');
-         
-             let elem = arr[i];
-             let elemlink = document.createElement('a');
-             elemlink.innerHTML = elem[0];
-             elemlink.setAttribute('href', elem[1]);
-             li.appendChild(elemlink);
-         
-             ul.appendChild(li);
-           }
-         }
-      </script><input id="demo" class="search" placeholder="Search.." onkeyup="doSearch()" type="text"/><ul id="results"></ul><div><nav><a href="/">Home</a></nav><article><div><h1>Design Implementation</h1><p>Svgbob converts characters into a graphical element, however listing every possible combination of characters for each of the 8 neighbors
+                             import { search, default as init } from '/tinysearch_engine.js';
+                             window.search = search;
+                             
+                             async function run() {
+                               await init('/tinysearch_engine_bg.wasm');
+                             }
+                             
+                             run();
+                            </script><script>
+                             function doSearch() {
+                               let value = document.getElementById('search').value;
+                               const arr = search(value, 10);
+                               let ul = document.getElementById('results');
+                               ul.innerHTML = '';
+                             
+                               for (i = 0; i < arr.length; i++) {
+                                 var li = document.createElement('li');
+                             
+                                 let elem = arr[i];
+                                 let elemlink = document.createElement('a');
+                                 elemlink.innerHTML = elem[0];
+                                 elemlink.setAttribute('href', elem[1]);
+                                 li.appendChild(elemlink);
+                             
+                                 ul.appendChild(li);
+                               }
+                             }
+                          </script><input id="search" class="search" placeholder="Search.." onkeyup="doSearch()" type="search"/><ul id="results"></ul><div><nav><a href="/">Home</a></nav><article><div><h1>Design Implementation</h1><p>Svgbob converts characters into a graphical element, however listing every possible combination of characters for each of the 8 neighbors
 would be exhausting and impractical.</p><p>For each character, we will subdivide it into 25 blocks at 5x5 cells.</p><div><svg xmlns="http://www.w3.org/2000/svg" width="160" height="208"><style>line, path, circle,rect,polygon {
                           stroke: black;
                           stroke-width: 2;

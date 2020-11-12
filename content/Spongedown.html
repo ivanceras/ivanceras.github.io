@@ -170,34 +170,34 @@
 }
 
     </style><title>Spongedown</title></head><body><script type="module">
-         import { search, default as init } from '/tinysearch_engine.js';
-         window.search = search;
-         
-         async function run() {
-           await init('/tinysearch_engine_bg.wasm');
-         }
-         
-         run();
-      </script><script>
-         function doSearch() {
-           let value = document.getElementById('demo').value;
-           const arr = search(value, 10);
-           let ul = document.getElementById('results');
-           ul.innerHTML = '';
-         
-           for (i = 0; i < arr.length; i++) {
-             var li = document.createElement('li');
-         
-             let elem = arr[i];
-             let elemlink = document.createElement('a');
-             elemlink.innerHTML = elem[0];
-             elemlink.setAttribute('href', elem[1]);
-             li.appendChild(elemlink);
-         
-             ul.appendChild(li);
-           }
-         }
-      </script><input id="demo" class="search" placeholder="Search.." onkeyup="doSearch()" type="text"/><ul id="results"></ul><div><nav><a href="/">Home</a></nav><article><div><h1>Spongedown</h1><p>Spongedown extends markdown with support for additional useful features.</p><ul><li>svgbob diagrams</li><li>inline csv</li><li>embedding content</li></ul><h4>Svgbob diagram</h4><p><a href="/content/Svgbob.html" title="">Svgbob</a> makes use of textual representation of diagram and creates and svg image out of it.</p><p>This is an example of svgbob diagram</p><div><svg xmlns="http://www.w3.org/2000/svg" width="728" height="704"><style>line, path, circle,rect,polygon {
+                             import { search, default as init } from '/tinysearch_engine.js';
+                             window.search = search;
+                             
+                             async function run() {
+                               await init('/tinysearch_engine_bg.wasm');
+                             }
+                             
+                             run();
+                            </script><script>
+                             function doSearch() {
+                               let value = document.getElementById('search').value;
+                               const arr = search(value, 10);
+                               let ul = document.getElementById('results');
+                               ul.innerHTML = '';
+                             
+                               for (i = 0; i < arr.length; i++) {
+                                 var li = document.createElement('li');
+                             
+                                 let elem = arr[i];
+                                 let elemlink = document.createElement('a');
+                                 elemlink.innerHTML = elem[0];
+                                 elemlink.setAttribute('href', elem[1]);
+                                 li.appendChild(elemlink);
+                             
+                                 ul.appendChild(li);
+                               }
+                             }
+                          </script><input id="search" class="search" placeholder="Search.." onkeyup="doSearch()" type="search"/><ul id="results"></ul><div><nav><a href="/">Home</a></nav><article><div><h1>Spongedown</h1><p>Spongedown extends markdown with support for additional useful features.</p><ul><li>svgbob diagrams</li><li>inline csv</li><li>embedding content</li></ul><h4>Svgbob diagram</h4><p><a href="/content/Svgbob.html" title="">Svgbob</a> makes use of textual representation of diagram and creates and svg image out of it.</p><p>This is an example of svgbob diagram</p><div><svg xmlns="http://www.w3.org/2000/svg" width="728" height="704"><style>line, path, circle,rect,polygon {
                           stroke: black;
                           stroke-width: 2;
                           stroke-opacity: 1;

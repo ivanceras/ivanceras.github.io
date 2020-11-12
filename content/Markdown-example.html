@@ -170,34 +170,34 @@
 }
 
     </style><title>An h1 header</title></head><body><script type="module">
-         import { search, default as init } from '/tinysearch_engine.js';
-         window.search = search;
-         
-         async function run() {
-           await init('/tinysearch_engine_bg.wasm');
-         }
-         
-         run();
-      </script><script>
-         function doSearch() {
-           let value = document.getElementById('demo').value;
-           const arr = search(value, 10);
-           let ul = document.getElementById('results');
-           ul.innerHTML = '';
-         
-           for (i = 0; i < arr.length; i++) {
-             var li = document.createElement('li');
-         
-             let elem = arr[i];
-             let elemlink = document.createElement('a');
-             elemlink.innerHTML = elem[0];
-             elemlink.setAttribute('href', elem[1]);
-             li.appendChild(elemlink);
-         
-             ul.appendChild(li);
-           }
-         }
-      </script><input id="demo" class="search" placeholder="Search.." onkeyup="doSearch()" type="text"/><ul id="results"></ul><div><nav><a href="/">Home</a></nav><article><div><h1>An h1 header</h1><p>Paragraphs are separated by a blank line.</p><p>2nd paragraph. <em class="font-italic">Italic</em>, <strong class="font-weight-bold">bold</strong>, and <code>monospace</code>. Itemized lists
+                             import { search, default as init } from '/tinysearch_engine.js';
+                             window.search = search;
+                             
+                             async function run() {
+                               await init('/tinysearch_engine_bg.wasm');
+                             }
+                             
+                             run();
+                            </script><script>
+                             function doSearch() {
+                               let value = document.getElementById('search').value;
+                               const arr = search(value, 10);
+                               let ul = document.getElementById('results');
+                               ul.innerHTML = '';
+                             
+                               for (i = 0; i < arr.length; i++) {
+                                 var li = document.createElement('li');
+                             
+                                 let elem = arr[i];
+                                 let elemlink = document.createElement('a');
+                                 elemlink.innerHTML = elem[0];
+                                 elemlink.setAttribute('href', elem[1]);
+                                 li.appendChild(elemlink);
+                             
+                                 ul.appendChild(li);
+                               }
+                             }
+                          </script><input id="search" class="search" placeholder="Search.." onkeyup="doSearch()" type="search"/><ul id="results"></ul><div><nav><a href="/">Home</a></nav><article><div><h1>An h1 header</h1><p>Paragraphs are separated by a blank line.</p><p>2nd paragraph. <em class="font-italic">Italic</em>, <strong class="font-weight-bold">bold</strong>, and <code>monospace</code>. Itemized lists
 look like:</p><ul><li>this one</li><li>that one</li><li>the other one</li></ul><p>Note that --- not considering the asterisk --- the actual text
 content starts at 4-columns in.</p><blockquote><p>Block quotes are
 written like so.</p><p>They can span multiple paragraphs,

@@ -170,34 +170,34 @@
 }
 
     </style><title>Svgbob Specification</title></head><body><script type="module">
-         import { search, default as init } from '/tinysearch_engine.js';
-         window.search = search;
-         
-         async function run() {
-           await init('/tinysearch_engine_bg.wasm');
-         }
-         
-         run();
-      </script><script>
-         function doSearch() {
-           let value = document.getElementById('demo').value;
-           const arr = search(value, 10);
-           let ul = document.getElementById('results');
-           ul.innerHTML = '';
-         
-           for (i = 0; i < arr.length; i++) {
-             var li = document.createElement('li');
-         
-             let elem = arr[i];
-             let elemlink = document.createElement('a');
-             elemlink.innerHTML = elem[0];
-             elemlink.setAttribute('href', elem[1]);
-             li.appendChild(elemlink);
-         
-             ul.appendChild(li);
-           }
-         }
-      </script><input id="demo" class="search" placeholder="Search.." onkeyup="doSearch()" type="text"/><ul id="results"></ul><div><nav><a href="/">Home</a></nav><article><div><h1>Svgbob Specification</h1><h4>Characters</h4><p>Svgbob relies on set of characters that are easily accessible on your keypad.
+                             import { search, default as init } from '/tinysearch_engine.js';
+                             window.search = search;
+                             
+                             async function run() {
+                               await init('/tinysearch_engine_bg.wasm');
+                             }
+                             
+                             run();
+                            </script><script>
+                             function doSearch() {
+                               let value = document.getElementById('search').value;
+                               const arr = search(value, 10);
+                               let ul = document.getElementById('results');
+                               ul.innerHTML = '';
+                             
+                               for (i = 0; i < arr.length; i++) {
+                                 var li = document.createElement('li');
+                             
+                                 let elem = arr[i];
+                                 let elemlink = document.createElement('a');
+                                 elemlink.innerHTML = elem[0];
+                                 elemlink.setAttribute('href', elem[1]);
+                                 li.appendChild(elemlink);
+                             
+                                 ul.appendChild(li);
+                               }
+                             }
+                          </script><input id="search" class="search" placeholder="Search.." onkeyup="doSearch()" type="search"/><ul id="results"></ul><div><nav><a href="/">Home</a></nav><article><div><h1>Svgbob Specification</h1><h4>Characters</h4><p>Svgbob relies on set of characters that are easily accessible on your keypad.
 Each of these character has certain set of behaviors depending on the neighbor character.</p><p>These are the most common characters that are used.</p><table><tr><th>Character</th><th>Common Name</th></tr><tr><td>.</td><td>period or dot</td></tr><tr><td>,</td><td>comma</td></tr><tr><td>`</td><td>backtick or backquote</td></tr><tr><td>'</td><td>quote or singlequote</td></tr><tr><td>+</td><td>plus sign or cross</td></tr><tr><td>*</td><td>asterisk</td></tr><tr><td>o</td><td>letter o</td></tr><tr><td>O</td><td>capital letter O</td></tr><tr><td>-</td><td>dash or hypen</td></tr><tr><td></td><td></td></tr><tr><td>~</td><td>tilde</td></tr><tr><td>_</td><td>underscore</td></tr><tr><td>:</td><td>colon</td></tr><tr><td>!</td><td>exclamation mark</td></tr><tr><td>&lt;</td><td>less than sign</td></tr><tr><td>&gt;</td><td>greater than sign</td></tr><tr><td>v</td><td>letter v</td></tr><tr><td>V</td><td>capital letter V</td></tr><tr><td>^</td><td>caret</td></tr><tr><td>/</td><td>Forward slash</td></tr><tr><td>\</td><td>Backward slash</td></tr><tr><td>"</td><td>Double quote</td></tr></table><h2>Character general behaviors</h2><h4>Period <code>.</code></h4><ul><li>Period makes a rounded corner on the top-left if a line connects to it from the bottom
 and from the right.</li></ul><div><div class="side-to-side"><div class="raw"><pre><code>  .--
   |

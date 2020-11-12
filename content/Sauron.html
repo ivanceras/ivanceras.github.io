@@ -170,31 +170,31 @@
 }
 
     </style></head><body><script type="module">
-         import { search, default as init } from '/tinysearch_engine.js';
-         window.search = search;
-         
-         async function run() {
-           await init('/tinysearch_engine_bg.wasm');
-         }
-         
-         run();
-      </script><script>
-         function doSearch() {
-           let value = document.getElementById('demo').value;
-           const arr = search(value, 10);
-           let ul = document.getElementById('results');
-           ul.innerHTML = '';
-         
-           for (i = 0; i < arr.length; i++) {
-             var li = document.createElement('li');
-         
-             let elem = arr[i];
-             let elemlink = document.createElement('a');
-             elemlink.innerHTML = elem[0];
-             elemlink.setAttribute('href', elem[1]);
-             li.appendChild(elemlink);
-         
-             ul.appendChild(li);
-           }
-         }
-      </script><input id="demo" class="search" placeholder="Search.." onkeyup="doSearch()" type="text"/><ul id="results"></ul><div><nav><a href="/">Home</a></nav><article><div><p>Sauron is a client side web framework with focus on ease of use.</p><p>Prerequisite:</p><div><div class="fake_terminal"><div class="fake_menu" style="background-color:rgba(15,20,25,1);"><div class="fake_buttons"><div class="fake_btn fake_close"></div><div class="fake_btn fake_minimize"></div><div class="fake_btn fake_zoom"></div></div></div><div class="fake_screen" style="background-color:rgba(15,20,25,1);"><p class="line" style="color:rgba(191,186,176,1);">cargo install wasm-pack</p><p class="line" style="color:rgba(191,186,176,1);">cargo install basic-http-server</p></div></div></div></div></article></div></body></html>
+                             import { search, default as init } from '/tinysearch_engine.js';
+                             window.search = search;
+                             
+                             async function run() {
+                               await init('/tinysearch_engine_bg.wasm');
+                             }
+                             
+                             run();
+                            </script><script>
+                             function doSearch() {
+                               let value = document.getElementById('search').value;
+                               const arr = search(value, 10);
+                               let ul = document.getElementById('results');
+                               ul.innerHTML = '';
+                             
+                               for (i = 0; i < arr.length; i++) {
+                                 var li = document.createElement('li');
+                             
+                                 let elem = arr[i];
+                                 let elemlink = document.createElement('a');
+                                 elemlink.innerHTML = elem[0];
+                                 elemlink.setAttribute('href', elem[1]);
+                                 li.appendChild(elemlink);
+                             
+                                 ul.appendChild(li);
+                               }
+                             }
+                          </script><input id="search" class="search" placeholder="Search.." onkeyup="doSearch()" type="search"/><ul id="results"></ul><div><nav><a href="/">Home</a></nav><article><div><p>Sauron is a client side web framework with focus on ease of use.</p><p>Prerequisite:</p><div><div class="fake_terminal"><div class="fake_menu" style="background-color:rgba(15,20,25,1);"><div class="fake_buttons"><div class="fake_btn fake_close"></div><div class="fake_btn fake_minimize"></div><div class="fake_btn fake_zoom"></div></div></div><div class="fake_screen" style="background-color:rgba(15,20,25,1);"><p class="line" style="color:rgba(191,186,176,1);">cargo install wasm-pack</p><p class="line" style="color:rgba(191,186,176,1);">cargo install basic-http-server</p></div></div></div></div></article></div></body></html>

@@ -170,34 +170,34 @@
 }
 
     </style><title>Svgbob Architecture and Design phases</title></head><body><script type="module">
-         import { search, default as init } from '/tinysearch_engine.js';
-         window.search = search;
-         
-         async function run() {
-           await init('/tinysearch_engine_bg.wasm');
-         }
-         
-         run();
-      </script><script>
-         function doSearch() {
-           let value = document.getElementById('demo').value;
-           const arr = search(value, 10);
-           let ul = document.getElementById('results');
-           ul.innerHTML = '';
-         
-           for (i = 0; i < arr.length; i++) {
-             var li = document.createElement('li');
-         
-             let elem = arr[i];
-             let elemlink = document.createElement('a');
-             elemlink.innerHTML = elem[0];
-             elemlink.setAttribute('href', elem[1]);
-             li.appendChild(elemlink);
-         
-             ul.appendChild(li);
-           }
-         }
-      </script><input id="demo" class="search" placeholder="Search.." onkeyup="doSearch()" type="text"/><ul id="results"></ul><div><nav><a href="/">Home</a></nav><article><div><h1>Svgbob Architecture and Design phases</h1><p>Svgbob creates an svg drawing based on the input ascii art diagrams.
+                             import { search, default as init } from '/tinysearch_engine.js';
+                             window.search = search;
+                             
+                             async function run() {
+                               await init('/tinysearch_engine_bg.wasm');
+                             }
+                             
+                             run();
+                            </script><script>
+                             function doSearch() {
+                               let value = document.getElementById('search').value;
+                               const arr = search(value, 10);
+                               let ul = document.getElementById('results');
+                               ul.innerHTML = '';
+                             
+                               for (i = 0; i < arr.length; i++) {
+                                 var li = document.createElement('li');
+                             
+                                 let elem = arr[i];
+                                 let elemlink = document.createElement('a');
+                                 elemlink.innerHTML = elem[0];
+                                 elemlink.setAttribute('href', elem[1]);
+                                 li.appendChild(elemlink);
+                             
+                                 ul.appendChild(li);
+                               }
+                             }
+                          </script><input id="search" class="search" placeholder="Search.." onkeyup="doSearch()" type="search"/><ul id="results"></ul><div><nav><a href="/">Home</a></nav><article><div><h1>Svgbob Architecture and Design phases</h1><p>Svgbob creates an svg drawing based on the input ascii art diagrams.
 It achieves this by creating a corresponding fragment for each character, and then this little fragments
 are then merged to form lines and arcs. The lines and arcs are then endorsed into high level shapes such as rect, circles.</p><h3>Name inspiration:</h3><ul><li>svg for svg document and drawing.</li><li>bob for Alice and Bob as common characters in most diagrams
 Bob Ross - a painter who like to draws happy little trees.</li></ul><h3>Library used</h3><ul><li><a href="https://www.nalgebra.org/" title="">nalgebra</a> and <a href="https://ncollide.org/" title="">ncollide2d</a> for geometric function calculations such as calculating whether lines are intersecting, collinear. Computing the clipping of lines and boxes.</li><li><a href="https://github.com/J-F-Liu/pom" title="">pom</a> for parsing the styling directives(Legend) at the bottom of the document</li><li><a href="https://github.com/ivanceras/sauron" title="">sauron</a> for building the svg document object tree.</li></ul><h3><strong class="font-weight-bold">Iterations, re-architecture rewrites</strong></h3><h4>Phase 1</h4><p>Exploding if statements. This was in elm
