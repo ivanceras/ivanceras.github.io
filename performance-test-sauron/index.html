@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Performance Comparison for Sauron, Vue and React</title>
+    <link href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.1/css/bootstrap.css" rel="stylesheet" />
+    <style type="text/css">
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            padding: 30px 0;
+        }
+
+        h2 {
+            margin: 0;
+            margin-bottom: 25px;
+        }
+
+        h3 {
+            margin: 0;
+            padding: 0;
+            margin-bottom: 12px;
+        }
+
+        .test-data {
+            margin-bottom: 3px;
+        }
+
+        .test-data span {
+            padding: 3px 10px;
+            background: #EEE;
+            width: 100%;
+            float: left;
+            cursor: pointer;
+        }
+
+        .test-data span:hover {
+            background: #DDD;
+        }
+
+        .test-data span.selected {
+            background: #3F7AD9;
+            color: white;
+        }
+
+        .time {
+            font-weight: bold;
+            height: 26px;
+            line-height: 26px;
+            vertical-align: middle;
+            display: inline-block;
+            cursor: pointer;
+            text-decoration: underline;
+        }
+
+    </style>
+
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/react/0.12.1/react.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+    <script type="text/javascript">
+
+        document.addEventListener("DOMContentLoaded", function () {
+            _react();
+            _vue();
+            _raw();
+        });
+
+        function _buildData(count) {
+            count = count || 1000;
+
+            var adjectives = [
+                "pretty",
+                "large",
+                "big",
+                "small",
+                "tall",
+                "short",
+                "long",
+                "handsome",
+                "plain",
+                "quaint",
+                "clean",
+                "elegant",
+                "easy",
+                "angry",
+                "crazy",
+                "helpful",
+                "mushy",
+                "odd",
+                "unsightly",
+                "adorable",
+                "important",
+                "inexpensive",
+                "cheap",
+                "expensive",
+                "fancy",
+            ];
+            var colours = ["red", "yellow", "blue", "green", "pink", "brown", "purple", "brown", "white", "black", "orange"];
+            var nouns = ["table", "chair", "house", "bbq", "desk", "car", "pony", "cookie", "sandwich", "burger", "pizza", "mouse", "keyboard"];
+            var data = [];
+            for (var i = 0; i < count; i++) data.push({ id: i + 1, label: adjectives[_random(adjectives.length)] + " " + colours[_random(colours.length)] + " " + nouns[_random(nouns.length)] });
+            return data;
+        }
+
+        function _random(max) {
+            return Math.round(Math.random() * 1000) % max;
+        }
+
+
+        function _vue() {
+            new Vue({
+                el: '#vue',
+                data: {
+                    data: [],
+                    time_started: null,
+                    selected: null,
+                    do_measure: false,
+                },
+                methods: {
+                    run: function(event){
+                        this.do_measure = true;
+                        this.data = _buildData();
+                        this.time_started = performance.now() ;
+                    },
+                    select: function(data_id){
+                        this.do_measure = false;
+                        this.selected = data_id;
+                    }
+                },
+                updated: function(){
+                     this.$nextTick(function () {
+                        if (this.do_measure){
+                            let update_took = Math.round(performance.now() - this.time_started );
+                            var runVue = document.getElementById("run-vue");
+                            runVue.innerHTML = update_took + " ms";
+                        }
+                    })
+                }
+            });
+        }
+
+        function _react() {
+            var Class = React.createClass({
+                select: function (data) {
+                    this.props.selected = data.id;
+                    this.forceUpdate();
+                },
+
+                render: function () {
+                    var items = [];
+                    for (var i = 0; i < this.props.data.length; i++) {
+                        items.push(
+                            React.createElement(
+                                "div",
+                                { className: "row" },
+                                React.createElement(
+                                    "div",
+                                    { className: "col-md-12 test-data" },
+                                    React.createElement("span", 
+                                        { className: this.props.selected === this.props.data[i].id ? "selected" : "", 
+                                            onClick: this.select.bind(null, this.props.data[i]) }, this.props.data[i].label)
+                                )
+                            )
+                        );
+                    }
+
+                    return React.createElement("div", null, items);
+                },
+            });
+
+            var runReact = document.getElementById("run-react");
+            runReact.addEventListener("click", function () {
+                var data = _buildData(),
+                    time_started = performance.now();
+
+                React.render(new Class({ data: data, selected: null }), document.getElementById("react"));
+                runReact.innerHTML = Math.round(performance.now() - time_started) + " ms";
+            });
+        }
+
+        function _raw() {
+            var container = document.getElementById("raw"),
+                docFragment = document.createDocumentFragment(),
+                runRawNode = document.getElementById("run-raw"),
+                handler = function () {
+                    var selected = container.querySelector(".selected");
+                    if (selected) {
+                        selected.className = "";
+                    }
+                    this.className = "selected";
+                };
+            runRawNode.addEventListener("click", function () {
+                var data = _buildData(),
+                    time_started = performance.now();
+
+                if (!container.hasChildNodes()) {
+                    var containerWrap = document.createElement("div");
+                    container.appendChild(containerWrap);
+                    for (var i = 0; i < data.length; i++) {
+                        var div1 = document.createElement("div"),
+                            div2 = document.createElement("div"),
+                            span = document.createElement("span");
+                        div1.className = "row";
+                        div2.className = "col-md-12 test-data";
+                        span.addEventListener("click", handler);
+                        span.textContent = data[i].label;
+                        div2.appendChild(span);
+                        div1.appendChild(div2);
+                        docFragment.appendChild(div1);
+                    }
+                    containerWrap.appendChild(docFragment);
+                    container.appendChild(containerWrap);
+                } else {
+                    for (var i = 0; i < data.length; i++) {
+                        container.firstChild.childNodes[i].firstChild.firstChild.className = "";
+                        container.firstChild.childNodes[i].firstChild.firstChild.textContent = data[i].label;
+                    }
+                }
+                runRawNode.textContent = Math.round(performance.now() - time_started) + " ms";
+            });
+        }
+    </script>
+    <script type="module">
+         import init from '/pkg/client.js';
+            init().catch(console.error);
+    </script>
+</head>
+
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h2>Performance Comparison for React, Vue and Sauron</h2>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="row">
+                <div class="col-md-7">
+                    <h3>React</h3>
+                </div>
+                <div class="col-md-5 text-right time" id="run-react">Run</div>
+            </div>
+            <div id="react"></div>
+        </div>
+
+        <div id="vue" class="col-md-3">
+            <div class="row">
+                <div class="col-md-7">
+                    <h3>Vue.js</h3>
+                </div>
+                <div class="col-md-5 text-right time" id="run-vue" v-on:click="run">Run</div>
+            </div>
+            <div>
+                <div class="row">
+                    <div class="col-md-12 test-data" v-for="item in data">
+                        <span v-on:click="select(item.id)" v-bind:class="{ 'selected' : item.id == selected }">{{ item.label }}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="row">
+                <div class="col-md-7">
+                    <h3>Raw</h3>
+                </div>
+                <div class="col-md-5 text-right time" id="run-raw">Run</div>
+            </div>
+            <div id="raw"></div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="row">
+                <div class="col-md-7">
+                    <h3>Sauron</h3>
+                </div>
+                <div class="col-md-5 text-right time" id="run-sauron">Run</div>
+            </div>
+            <div id="sauron"></div>
+        </div>
+    </div>
+
+    <script type="text/html" id="raw-template">
+        <div class="row">
+            <div class="col-md-12 test-data">
+                <span class="{{className}}">{{label}}</span>
+            </div>
+        </div>
+    </script>
+</body>
+
+</html>
