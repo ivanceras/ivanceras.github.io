@@ -1,108 +1,4 @@
-<html><head><meta content="text/html;charset=utf-8" http-equiv="Content-Type"/><link rel="stylesheet" href="/minimal.css"/><style>.hl {
-    user-select: none;
-    -webkit-user-select: none;
-    position: relative;
-    font-size: 12px;
-    cursor: text;
-}
-.hl__code {
-    position: relative;
-    overflow: auto;
-    font: 0.8rem Inconsolata, monospace;
-}
-.hl__line_block {
-    display: block;
-}
-.hl__number__line {
-    display: flex;
-}
-.hl__number {
-    flex: none;
-    text-align: right;
-    background-color: cyan;
-    padding-right: 1ex;
-    user-select: none;
-    -webkit-user-select: none;
-}
-.hl__number_wide1 .hl__number {
-    width: 1ex;
-}
-.hl__number_wide2 .hl__number {
-    width: 2ex;
-}
-.hl__number_wide3 .hl__number {
-    width: 3ex;
-}
-.hl__number_wide4 .hl__number {
-    width: 4ex;
-}
-.hl__line {
-    display: flex;
-    flex: none;
-}
-.hl__filler {
-    width: 100%;
-}
-.hl__line_focused {
-    background-color: pink;
-}
-.hl__range {
-    display: flex;
-    flex: none;
-}
-.hl__line .hl__ch {
-    width: 1ex;
-    height: 2ex;
-    font-family: monospace;
-    font-stretch: ultra-condensed;
-    font-variant-numeric: slashed-zero;
-    font-kerning: none;
-    font-size-adjust: none;
-    font-optical-sizing: none;
-    position: relative;
-    overflow: visible;
-    align-items: center;
-}
-.hl__ch.hl__selected {
-    background-color: yellow;
-}
-.hl__ch .hl__cursor {
-    position: absolute;
-    left: 0;
-    height: 2ex;
-    width: 1ex;
-    background-color: red;
-    display: inline;
-    animation: cursor_blink-anim 500ms step-end infinite;
-}
-.hl__ch.hl__wide2 .hl__cursor {
-    width: 2ex;
-}
-.hl__thin_cursor .hl__cursor {
-    width: 2px;
-}
-.hl__thin_cursor .hl__wide2 .hl__cursor {
-    width: 2px;
-}
-.hl__block_cursor .hl__cursor {
-    width: 1ex;
-}
-.hl__line .hl__ch.hl__wide2 {
-    width: 2ex;
-}
-.hl__status {
-    background-color: blue;
-    position: sticky;
-    bottom: 0;
-    display: flex;
-    flex-direction: flex-end;
-}
-@keyframes cursor_blink-anim {
-    50% {
-        background-color: transparent;
-        border-color: transparent;
-    }
-}
+<html><head><meta content="text/html;charset=utf-8" http-equiv="Content-Type"/><link rel="stylesheet" href="/style.css"/><style>.hl{position:relative;cursor:text;}.hl__code{position:relative;overflow:auto;font-family:Inconsolata, monospace;font-size:14px;}.hl__line_block{display:block;}.hl__number__line{display:flex;}.hl__number{flex:none;text-align:right;background-color:cyan;padding-right:8px;user-select:none;-webkit-user-select:none;}.hl__number_wide1 .hl__number{width:8px;}.hl__number_wide2 .hl__number{width:16px;}.hl__number_wide3 .hl__number{width:24px;}.hl__number_wide4 .hl__number{width:32px;}.hl__line{display:flex;flex:none;}.hl__filler{width:100%;}.hl__line_focused{background-color:pink;}.hl__range{display:flex;flex:none;}.hl__line .hl__ch{width:8px;height:16px;font-stretch:ultra-condensed;font-variant-numeric:slashed-zero;font-kerning:none;font-size-adjust:none;font-optical-sizing:none;position:relative;overflow:visible;}.hl__line .hl__ch::selection{background-color:rgba(233,242,248,65025);}.hl__ch.hl__selected{background-color:yellow;}.hl__ch .hl__cursor{position:absolute;left:0;height:8px;width:16px;background-color:red;display:inline;animation:cursor_blink-anim 500ms step-end infinite;}.hl__ch.hl__wide2 .hl__cursor{width:16px;}.hl__thin_cursor .hl__cursor{width:2px;}.hl__thin_cursor .hl__wide2 .hl__cursor{width:2px;}.hl__block_cursor .hl__cursor{width:8px;}.hl__line .hl__ch.hl__wide2{width:8px;}.hl__status{background-color:blue;position:sticky;bottom:0;display:flex;flex-direction:flex-end;}@keyframes cursor_blink-anim{50%{background-color:transparent;border-color:transparent;}}
 .fake_buttons {
   position: relative;
   display: flex;
@@ -172,11 +68,11 @@
     </style><title>Jovansonlee Cesar</title></head><body><script type="module">
                              import { search, default as init } from '/tinysearch_engine.js';
                              window.search = search;
-                             
+
                              async function run() {
                                await init('/tinysearch_engine_bg.wasm');
                              }
-                             
+
                              run();
                             </script><script>
                              function doSearch() {
@@ -184,18 +80,18 @@
                                const arr = search(value, 10);
                                let ul = document.getElementById('results');
                                ul.innerHTML = '';
-                             
+
                                for (i = 0; i < arr.length; i++) {
                                  var li = document.createElement('li');
-                             
+
                                  let elem = arr[i];
                                  let elemlink = document.createElement('a');
                                  elemlink.innerHTML = elem[0];
                                  elemlink.setAttribute('href', elem[1]);
                                  li.appendChild(elemlink);
-                             
+
                                  ul.appendChild(li);
                                }
                              }
-                          </script><input id="search" class="search" placeholder="Search.." onkeyup="doSearch()" type="search"/><ul id="results"></ul><div><nav><a href="/">Home</a></nav><article><div><h1>Jovansonlee Cesar</h1><ul><li><a href="https://github.com/ivanceras" title="">Github profile</a></li><li><a href="/content/Resume.html" title="">Resume</a></li></ul><h4>Active Opensource projects</h4><ul><li><a href="/content/Spongedown.html" title="">Spongedown</a></li><li><a href="/content/Svgbob.html" title="">Svgbob</a><ul><li><a href="/content/Svgbob/Specification.html" title="">Svgbob specification</a></li><li><a href="/content/Svgbob/Architecture.html" title="">Design architecture</a></li><li><a href="/content/Svgbob/Design-Implementation.html" title="">Design implementation</a></li></ul></li><li><a href="/content/Sauron.html" title="">Sauron</a></li><li><a href="/content/Sauron-native.html" title="">Sauron-native</a></li><li><a href="/content/Rustorm.html" title="">Rustorm</a></li></ul><h4>Projects Contributed to</h4><ul><li><a href="https://github.com/andygrove/sqlparser-rs" title="">sqlparser-rs</a> - parse sql from supported dialects</li><li><a href="https://github.com/kivikakk/comrak" title="">comrak</a> - parse markdown files and render to html</li><li><a href="https://github.com/RyanBluth/term-table-rs" title="">term-table-rs</a> - display tables in terminal</li></ul><h4>Little projects</h4><ul><li><a href="https://github.com/ivanceras/url_path" title="">url_path</a> - Manipulates url canonicalization without requiring contraint to the file system</li><li><a href="https://github.com/ivanceras/r2d2-sqlite" title="">r2d2-sqlite</a> - An r2d2 connection pooling for sqlite</li><li><a href="https://github.com/ivanceras/blob-uuid" title="">blob-uuid</a> - convert uuid into a url friendly 22 character string blob, useful for making url slugs</li></ul><h4>Inactive projects</h4><ul><li><a href="https://github.com/ivanceras/balisong" title="">Balisong</a> - An attempt to create voxel base raytracing in rust.</li></ul><h4>Code</h4><p>All content on this site (including the svg images) are made with markdown.
-Here is the <a href="https://github.com/ivanceras/ivanceras.github.io/tree/master/md" title="">link to the files</a></p></div></article></div></body></html>
+                          </script><input id="search" class="search" placeholder="Search.." onkeyup="doSearch()" type="search"/><ul id="results"></ul><div><nav><a href="/">Home</a></nav><article><p><h1>Jovansonlee Cesar</h1><ul><li><a href="https://github.com/ivanceras" title="">Github profile</a></li><li><a href="/content/Resume.html" title="">Resume</a></li></ul><h4>Active Opensource projects</h4><ul><li><a href="/content/Spongedown.html" title="">Spongedown</a></li><li><a href="/content/Svgbob.html" title="">Svgbob</a><ul><li><a href="/content/Svgbob/Specification.html" title="">Svgbob specification</a></li><li><a href="/content/Svgbob/Architecture.html" title="">Design architecture</a></li><li><a href="/content/Svgbob/Design-Implementation.html" title="">Design implementation</a></li></ul></li><li><a href="/content/Sauron.html" title="">Sauron</a></li><li><a href="/content/Sauron-native.html" title="">Sauron-native</a></li><li><a href="/content/Rustorm.html" title="">Rustorm</a></li></ul><h4>Projects Contributed to</h4><ul><li><a href="https://github.com/andygrove/sqlparser-rs" title="">sqlparser-rs</a> - parse sql from supported dialects</li><li><a href="https://github.com/kivikakk/comrak" title="">comrak</a> - parse markdown files and render to html</li><li><a href="https://github.com/RyanBluth/term-table-rs" title="">term-table-rs</a> - display tables in terminal</li></ul><h4>Little projects</h4><ul><li><a href="https://github.com/ivanceras/url_path" title="">url_path</a> - Manipulates url canonicalization without requiring contraint to the file system</li><li><a href="https://github.com/ivanceras/r2d2-sqlite" title="">r2d2-sqlite</a> - An r2d2 connection pooling for sqlite</li><li><a href="https://github.com/ivanceras/blob-uuid" title="">blob-uuid</a> - convert uuid into a url friendly 22 character string blob, useful for making url slugs</li></ul><h4>Inactive projects</h4><ul><li><a href="https://github.com/ivanceras/balisong" title="">Balisong</a> - An attempt to create voxel base raytracing in rust.</li></ul><h4>Code</h4><p>All content on this site (including the svg images) are made with markdown.
+Here is the <a href="https://github.com/ivanceras/ivanceras.github.io/tree/master/md" title="">link to the files</a></p></p></article></div></body></html>

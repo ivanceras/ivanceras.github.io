@@ -1,108 +1,4 @@
-<html><head><meta content="text/html;charset=utf-8" http-equiv="Content-Type"/><link rel="stylesheet" href="/minimal.css"/><style>.hl {
-    user-select: none;
-    -webkit-user-select: none;
-    position: relative;
-    font-size: 12px;
-    cursor: text;
-}
-.hl__code {
-    position: relative;
-    overflow: auto;
-    font: 0.8rem Inconsolata, monospace;
-}
-.hl__line_block {
-    display: block;
-}
-.hl__number__line {
-    display: flex;
-}
-.hl__number {
-    flex: none;
-    text-align: right;
-    background-color: cyan;
-    padding-right: 1ex;
-    user-select: none;
-    -webkit-user-select: none;
-}
-.hl__number_wide1 .hl__number {
-    width: 1ex;
-}
-.hl__number_wide2 .hl__number {
-    width: 2ex;
-}
-.hl__number_wide3 .hl__number {
-    width: 3ex;
-}
-.hl__number_wide4 .hl__number {
-    width: 4ex;
-}
-.hl__line {
-    display: flex;
-    flex: none;
-}
-.hl__filler {
-    width: 100%;
-}
-.hl__line_focused {
-    background-color: pink;
-}
-.hl__range {
-    display: flex;
-    flex: none;
-}
-.hl__line .hl__ch {
-    width: 1ex;
-    height: 2ex;
-    font-family: monospace;
-    font-stretch: ultra-condensed;
-    font-variant-numeric: slashed-zero;
-    font-kerning: none;
-    font-size-adjust: none;
-    font-optical-sizing: none;
-    position: relative;
-    overflow: visible;
-    align-items: center;
-}
-.hl__ch.hl__selected {
-    background-color: yellow;
-}
-.hl__ch .hl__cursor {
-    position: absolute;
-    left: 0;
-    height: 2ex;
-    width: 1ex;
-    background-color: red;
-    display: inline;
-    animation: cursor_blink-anim 500ms step-end infinite;
-}
-.hl__ch.hl__wide2 .hl__cursor {
-    width: 2ex;
-}
-.hl__thin_cursor .hl__cursor {
-    width: 2px;
-}
-.hl__thin_cursor .hl__wide2 .hl__cursor {
-    width: 2px;
-}
-.hl__block_cursor .hl__cursor {
-    width: 1ex;
-}
-.hl__line .hl__ch.hl__wide2 {
-    width: 2ex;
-}
-.hl__status {
-    background-color: blue;
-    position: sticky;
-    bottom: 0;
-    display: flex;
-    flex-direction: flex-end;
-}
-@keyframes cursor_blink-anim {
-    50% {
-        background-color: transparent;
-        border-color: transparent;
-    }
-}
+<html><head><meta content="text/html;charset=utf-8" http-equiv="Content-Type"/><link rel="stylesheet" href="/style.css"/><style>.hl{position:relative;cursor:text;}.hl__code{position:relative;overflow:auto;font-family:Inconsolata, monospace;font-size:14px;}.hl__line_block{display:block;}.hl__number__line{display:flex;}.hl__number{flex:none;text-align:right;background-color:cyan;padding-right:8px;user-select:none;-webkit-user-select:none;}.hl__number_wide1 .hl__number{width:8px;}.hl__number_wide2 .hl__number{width:16px;}.hl__number_wide3 .hl__number{width:24px;}.hl__number_wide4 .hl__number{width:32px;}.hl__line{display:flex;flex:none;}.hl__filler{width:100%;}.hl__line_focused{background-color:pink;}.hl__range{display:flex;flex:none;}.hl__line .hl__ch{width:8px;height:16px;font-stretch:ultra-condensed;font-variant-numeric:slashed-zero;font-kerning:none;font-size-adjust:none;font-optical-sizing:none;position:relative;overflow:visible;}.hl__line .hl__ch::selection{background-color:rgba(233,242,248,65025);}.hl__ch.hl__selected{background-color:yellow;}.hl__ch .hl__cursor{position:absolute;left:0;height:8px;width:16px;background-color:red;display:inline;animation:cursor_blink-anim 500ms step-end infinite;}.hl__ch.hl__wide2 .hl__cursor{width:16px;}.hl__thin_cursor .hl__cursor{width:2px;}.hl__thin_cursor .hl__wide2 .hl__cursor{width:2px;}.hl__block_cursor .hl__cursor{width:8px;}.hl__line .hl__ch.hl__wide2{width:8px;}.hl__status{background-color:blue;position:sticky;bottom:0;display:flex;flex-direction:flex-end;}@keyframes cursor_blink-anim{50%{background-color:transparent;border-color:transparent;}}
 .fake_buttons {
   position: relative;
   display: flex;
@@ -172,11 +68,11 @@
     </style></head><body><script type="module">
                              import { search, default as init } from '/tinysearch_engine.js';
                              window.search = search;
-                             
+
                              async function run() {
                                await init('/tinysearch_engine_bg.wasm');
                              }
-                             
+
                              run();
                             </script><script>
                              function doSearch() {
@@ -184,17 +80,17 @@
                                const arr = search(value, 10);
                                let ul = document.getElementById('results');
                                ul.innerHTML = '';
-                             
+
                                for (i = 0; i < arr.length; i++) {
                                  var li = document.createElement('li');
-                             
+
                                  let elem = arr[i];
                                  let elemlink = document.createElement('a');
                                  elemlink.innerHTML = elem[0];
                                  elemlink.setAttribute('href', elem[1]);
                                  li.appendChild(elemlink);
-                             
+
                                  ul.appendChild(li);
                                }
                              }
-                          </script><input id="search" class="search" placeholder="Search.." onkeyup="doSearch()" type="search"/><ul id="results"></ul><div><nav><a href="/">Home</a></nav><article><div><p>Sauron is a client side web framework with focus on ease of use.</p><p>Prerequisite:</p><div><div class="fake_terminal"><div class="fake_menu" style="background-color:rgba(15,20,25,1);"><div class="fake_buttons"><div class="fake_btn fake_close"></div><div class="fake_btn fake_minimize"></div><div class="fake_btn fake_zoom"></div></div></div><div class="fake_screen" style="background-color:rgba(15,20,25,1);"><p class="line" style="color:rgba(191,186,176,1);">cargo install wasm-pack</p><p class="line" style="color:rgba(191,186,176,1);">cargo install basic-http-server</p></div></div></div></div></article></div></body></html>
+                          </script><input id="search" class="search" placeholder="Search.." onkeyup="doSearch()" type="search"/><ul id="results"></ul><div><nav><a href="/">Home</a></nav><article><p><p>Sauron is a client side web framework with focus on ease of use.</p><p>Prerequisite:</p><pre><code class="sh"><div class="fake_terminal"><div class="fake_menu" style="background-color:rgba(250,250,250,1);"><div class="fake_buttons"><div class="fake_btn fake_close"></div><div class="fake_btn fake_minimize"></div><div class="fake_btn fake_zoom"></div></div></div><div class="fake_screen" style="background-color:rgba(250,250,250,1);"><p class="line" style="color:rgba(97,103,108,1);">cargo install wasm-pack</p><p class="line" style="color:rgba(97,103,108,1);">cargo install basic-http-server</p></div></div></code></pre></p></article></div></body></html>
