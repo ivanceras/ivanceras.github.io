@@ -12,8 +12,11 @@
   </head>
   <body>
     <script type=module>
-      import init from './pkg/ultron.js';
-      await init().catch(console.error);
+      import wasm_bindgen from './pkg/ultron.js';
+      async function start(){
+        await wasm_bindgen().catch(console.error);
+      }
+      start();
     </script>
   </body>
 </html>
