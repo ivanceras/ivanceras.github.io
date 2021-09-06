@@ -171,6 +171,7 @@ html {
   max-width: 100%;
 }
 
+
 body {
   color: #000;
   font-family: "Fira Sans", Menlo, Monaco, Lucida Console, Liberation Mono, DejaVu Sans Mono, Bitstream Vera Sans Mono, Courier New, monospace, serif;
@@ -179,6 +180,23 @@ body {
   max-width: 48rem;
   line-height: 1.45;
   padding: .25rem;
+}
+
+@media (prefers-color-scheme: dark) {
+	body {
+		color: #fff;
+		background: #000
+	}
+	a:link {
+		color: #9cf
+	}
+	a:hover,
+	a:visited:hover {
+		color: #cef
+	}
+	a:visited {
+		color: #c9f
+	}
 }
 
 h1,

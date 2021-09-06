@@ -5,16 +5,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Code editor</title>
     <style type="text/css">
+        @font-face {
+          font-family: JuliaMono;
+          src: url(./assets/JuliaMono-Light.woff2);
+        }
         body {
-            font-family: "Fira Sans", "Courier New", Courier,"Lucida Sans Typewriter","Lucida Typewriter",monospace;
+            font-family: "JuliaMono", "Fira Sans", "Courier New", Courier,"Lucida Sans Typewriter","Lucida Typewriter",monospace;
             margin: 0;
-            background-color: rgba(0,43,54,65025);
+            background-color: rgba(0,43,54,1.0);
         }
     </style>
+    <link rel="modulepreload" href="./pkg/ultron_web.js">
+    <link rel="modulepreload" href="./pkg/ultron_web_bg.wasm">
   </head>
   <body>
     <script type=module>
-      import wasm_bindgen from './pkg/ultron.js';
+      import wasm_bindgen from './pkg/ultron_web.js';
       async function start(){
         await wasm_bindgen().catch(console.error);
       }

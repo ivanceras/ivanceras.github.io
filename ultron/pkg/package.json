@@ -1,16 +1,12 @@
 {
-  "name": "ultron",
-  "collaborators": [
-    "Jovansonlee Cesar <ivanceras@gmail.com>"
-  ],
-  "description": "Ultron is a code editor written in rust",
+  "name": "ultron-web",
   "version": "0.1.0",
   "files": [
-    "ultron_bg.wasm",
-    "ultron.js",
-    "ultron.d.ts"
+    "ultron_web_bg.wasm",
+    "ultron_web.js",
+    "ultron_web.d.ts"
   ],
-  "module": "ultron.js",
-  "types": "ultron.d.ts",
+  "module": "ultron_web.js",
+  "types": "ultron_web.d.ts",
   "sideEffects": false
 }
