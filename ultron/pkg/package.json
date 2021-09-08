@@ -1,6 +1,12 @@
 {
   "name": "ultron-web",
-  "version": "0.1.0",
+  "description": "Ultron editor variant exposed as a web application",
+  "version": "0.1.2",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ivanceras/ultron"
+  },
   "files": [
     "ultron_web_bg.wasm",
     "ultron_web.js",
@@ -8,5 +14,10 @@
   ],
   "module": "ultron_web.js",
   "types": "ultron_web.d.ts",
-  "sideEffects": false
+  "sideEffects": false,
+  "keywords": [
+    "web",
+    "editor",
+    "monospace"
+  ]
 }
