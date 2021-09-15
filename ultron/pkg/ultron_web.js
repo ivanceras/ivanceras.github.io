@@ -327,10 +327,6 @@ async function init(input) {
         var ret = getObject(arg0).requestAnimationFrame(getObject(arg1));
         return ret;
     }, arguments) };
-    imports.wbg.__wbg_body_358bdbcdd48b1995 = function(arg0) {
-        var ret = getObject(arg0).body;
-        return isLikeNone(ret) ? 0 : addHeapObject(ret);
-    };
     imports.wbg.__wbg_head_5466616e5cd10559 = function(arg0) {
         var ret = getObject(arg0).head;
         return isLikeNone(ret) ? 0 : addHeapObject(ret);
@@ -350,6 +346,10 @@ async function init(input) {
     imports.wbg.__wbg_createTextNode_eaf6df3dd186d5bf = function(arg0, arg1, arg2) {
         var ret = getObject(arg0).createTextNode(getStringFromWasm0(arg1, arg2));
         return addHeapObject(ret);
+    };
+    imports.wbg.__wbg_getElementById_97cfcb57d9ef46b3 = function(arg0, arg1, arg2) {
+        var ret = getObject(arg0).getElementById(getStringFromWasm0(arg1, arg2));
+        return isLikeNone(ret) ? 0 : addHeapObject(ret);
     };
     imports.wbg.__wbg_nodeType_18cb88021eaf1571 = function(arg0) {
         var ret = getObject(arg0).nodeType;
