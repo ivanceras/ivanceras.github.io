@@ -199,11 +199,11 @@ function makeMutClosure(arg0, arg1, dtor, f) {
     return real;
 }
 function __wbg_adapter_16(arg0, arg1) {
-    wasm._dyn_core__ops__function__FnMut_____Output___R_as_wasm_bindgen__closure__WasmClosure___describe__invoke__hde84ce050efbba43(arg0, arg1);
+    wasm._dyn_core__ops__function__FnMut_____Output___R_as_wasm_bindgen__closure__WasmClosure___describe__invoke__hfb050e1f6d501fc2(arg0, arg1);
 }
 
 function __wbg_adapter_19(arg0, arg1, arg2) {
-    wasm._dyn_core__ops__function__FnMut__A____Output___R_as_wasm_bindgen__closure__WasmClosure___describe__invoke__h24a5cb7ee6757448(arg0, arg1, addHeapObject(arg2));
+    wasm._dyn_core__ops__function__FnMut__A____Output___R_as_wasm_bindgen__closure__WasmClosure___describe__invoke__hfc5cfa4286cce4eb(arg0, arg1, addHeapObject(arg2));
 }
 
 /**
@@ -549,6 +549,10 @@ async function init(input) {
         var ret = getObject(arg0).ctrlKey;
         return ret;
     };
+    imports.wbg.__wbg_shiftKey_66fbffa2937afdb2 = function(arg0) {
+        var ret = getObject(arg0).shiftKey;
+        return ret;
+    };
     imports.wbg.__wbg_key_4561659253ce92e8 = function(arg0, arg1) {
         var ret = getObject(arg1).key;
         var ptr0 = passStringToWasm0(ret, wasm.__wbindgen_malloc, wasm.__wbindgen_realloc);
@@ -613,12 +617,12 @@ async function init(input) {
     imports.wbg.__wbindgen_throw = function(arg0, arg1) {
         throw new Error(getStringFromWasm0(arg0, arg1));
     };
-    imports.wbg.__wbindgen_closure_wrapper121 = function(arg0, arg1, arg2) {
-        var ret = makeMutClosure(arg0, arg1, 5, __wbg_adapter_16);
+    imports.wbg.__wbindgen_closure_wrapper139 = function(arg0, arg1, arg2) {
+        var ret = makeMutClosure(arg0, arg1, 8, __wbg_adapter_16);
         return addHeapObject(ret);
     };
-    imports.wbg.__wbindgen_closure_wrapper122 = function(arg0, arg1, arg2) {
-        var ret = makeMutClosure(arg0, arg1, 5, __wbg_adapter_19);
+    imports.wbg.__wbindgen_closure_wrapper140 = function(arg0, arg1, arg2) {
+        var ret = makeMutClosure(arg0, arg1, 8, __wbg_adapter_19);
         return addHeapObject(ret);
     };
 
