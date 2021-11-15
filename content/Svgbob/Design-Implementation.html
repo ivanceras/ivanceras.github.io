@@ -1,71 +1,6 @@
-<html><head><meta content="text/html;charset=utf-8" http-equiv="Content-Type"/><link rel="stylesheet" href="/style.css"/><style>
-.fake_buttons {
-  position: relative;
-  display: flex;
-  left: 10px;
-  top: 5px;
-}
-
-.fake_btn{
-  height: 10px;
-  width: 10px;
-  border-radius: 50%;
-  border: 1px solid #000;
-  margin: 0 2px;
-}
-
-.fake_close{
-  background-color: #ff3b47;
-  border-color: #9d252b;
-}
-
-.fake_minimize {
-  background-color: #ffc100;
-  border-color: #9d802c;
-}
-
-.fake_zoom {
-  background-color: #00d742;
-  border-color: #049931;
-}
-
-.fake_menu {
-  width: 100%;
-  box-sizing: border-box;
-  height: 25px;
-  background-color: #151515;
-  border-top-right-radius: 5px;
-  border-top-left-radius: 5px;
-}
-
-.fake_screen {
-  background-color: #151515;
-  box-sizing: border-box;
-  width: 100%;
-  padding: 20px;
-  border-bottom-left-radius: 5px;
-  border-bottom-right-radius: 5px;
-}
-
-.fake_terminal p {
-  position: relative;
-  text-align: left;
-  font-size: 0.7em;
-  font-family: monospace;
-  white-space: nowrap;
-  overflow: hidden;
-}
-
-.fake_terminal span {
-  color: #fff;
-  font-weight: bold;
-}
-
-.fake_terminal .line {
-  color: #9CD9F0;
-}
-
-    </style><style>pre,code{padding:0;margin:0;overflow-y:hidden;overflow-x:auto;}</style><title>Design Implementation</title></head><body><script type="module">
+<!doctype html>
+<html><head><meta content="text/html;charset=utf-8" http-equiv="Content-Type"/><title>Jovansonlee Cesar - Design Implementation</title><style>.fake_terminal{overflow:hidden;}.fake_buttons{position:relative;display:flex;left:10px;top:5px;}.fake_btn{height:10px;width:10px;border-radius:50%;border:1px solid #000;margin:0px 2px;}.fake_close{background-color:#ff3b47;border-color:#9d252b;}.fake_minimize{background-color:#ffc100;border-color:#9d802c;}.fake_zoom{background-color:#00d742;border-color:#049931;}.fake_menu{width:100%;box-sizing:border-box;height:25px;background-color:#151515;border-top-right-radius:5px;border-top-left-radius:5px;}.fake_screen{background-color:#151515;box-sizing:border-box;width:100%;padding:20px;border-bottom-left-radius:5px;border-bottom-right-radius:5px;}.fake_terminal p{position:relative;text-align:left;font-size:14px;font-family:monospace;white-space:nowrap;overflow:hidden;}.fake_terminal span{color:#fff;font-weight:bold;}.fake_terminal .line{color:#9CD9F0;}
+.admonition{border-radius:10px;padding:10px 20px;margin:40px 5px;font-size:14px;}.admonition .icon{margin-right:10px;}.admonition.warning{background-color:#fa383e;}.admonition.info{background-color:#54c7ec;}.admonition.note{background-color:#00a400;;}</style><style>body{max-width:1200px;margin:0 auto;}pre,code{padding:0;margin:0;overflow-y:hidden;overflow-x:auto;}.summary_content{display:flex;}.summary{padding:20px 20px;white-space:nowrap;border-right:2px solid #555;}.summary ul{list-style-type:none;counter-reset:list;}.summary ul li:before{counter-increment:list;content:counters(list, ".") ". ";}.content{padding:0px 20px;}.nav_page a{text-decoration:none;padding:10px 40px;background-color:#ccc;border-radius:5px;}a.prev_page{float:left;}a.next_page{float:right;}</style><link rel="stylesheet" href="/style.css"/></head><body><script type="module">
                              import { search, default as init } from '/tinysearch_engine.js';
                              window.search = search;
 
@@ -93,5 +28,5 @@
                                  ul.appendChild(li);
                                }
                              }
-                          </script><input id="search" class="search" placeholder="Search.." onkeyup="doSearch()" type="search"/><ul id="results"></ul><div><nav><a href="/">Home</a></nav><article><p><h1>Design Implementation</h1><p>Svgbob converts characters into a graphical element, however listing every possible combination of characters for each of the 8 neighbors<!--separator-->
-<!--separator-->would be exhausting and impractical.</p><p>For each character, we will subdivide it into 25 blocks at 5x5 cells.</p><pre><code class="bob"><svg xmlns="http://www.w3.org/2000/svg" width="160" height="208"><style>line, path, circle, rect, polygon{stroke:black;stroke-width:2;stroke-opacity:1;fill-opacity:1;stroke-linecap:round;stroke-linejoin:miter;}text{font-family:monospace;font-size:14px;}rect.backdrop{stroke:none;fill:white;}.broken{stroke-dasharray:8;}.filled{fill:black;}.bg_filled{fill:white;}.nofill{fill:white;}.end_marked_arrow{marker-end:url(#arrow);}.start_marked_arrow{marker-start:url(#arrow);}.end_marked_diamond{marker-end:url(#diamond);}.start_marked_diamond{marker-start:url(#diamond);}.end_marked_circle{marker-end:url(#circle);}.start_marked_circle{marker-start:url(#circle);}.end_marked_open_circle{marker-end:url(#open_circle);}.start_marked_open_circle{marker-start:url(#open_circle);}.end_marked_big_open_circle{marker-end:url(#big_open_circle);}.start_marked_big_open_circle{marker-start:url(#big_open_circle);}<!--separator--></style><defs><marker id="arrow" viewBox="-2 -2 8 8" refX="4" refY="2" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><polygon points="0,0 0,4 4,2 0,0"></polygon></marker><marker id="diamond" viewBox="-2 -2 8 8" refX="4" refY="2" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><polygon points="0,2 2,0 4,2 2,4 0,2"></polygon></marker><marker id="circle" viewBox="0 0 8 8" refX="4" refY="4" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><circle cx="4" cy="4" r="2" class="filled"></circle></marker><marker id="open_circle" viewBox="0 0 8 8" refX="4" refY="4" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><circle cx="4" cy="4" r="2" class="bg_filled"></circle></marker><marker id="big_open_circle" viewBox="0 0 8 8" refX="4" refY="4" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><circle cx="4" cy="4" r="3" class="bg_filled"></circle></marker></defs><rect class="backdrop" x="0" y="0" width="160" height="208"></rect><text x="74" y="44" >a</text><text x="90" y="44" >b</text><text x="106" y="44" >c</text><text x="122" y="44" >d</text><text x="138" y="44" >e</text><text x="74" y="76" >f</text><text x="90" y="76" >g</text><text x="106" y="76" >h</text><text x="122" y="76" >i</text><text x="138" y="76" >j</text><text x="74" y="108" >k</text><text x="90" y="108" >l</text><text x="106" y="108" >m</text><text x="122" y="108" >n</text><text x="138" y="108" >o</text><text x="74" y="140" >p</text><text x="90" y="140" >q</text><text x="106" y="140" >r</text><text x="122" y="140" >s</text><text x="138" y="140" >t</text><text x="74" y="172" >u</text><text x="90" y="172" >v</text><text x="106" y="172" >w</text><text x="122" y="172" >x</text><text x="138" y="172" >y</text><g><line x1="68" y1="24" x2="148" y2="24" class="solid"></line><line x1="68" y1="24" x2="68" y2="184" class="solid"></line><line x1="84" y1="24" x2="84" y2="184" class="solid"></line><line x1="100" y1="24" x2="100" y2="184" class="solid"></line><line x1="116" y1="24" x2="116" y2="184" class="solid"></line><line x1="132" y1="24" x2="132" y2="184" class="solid"></line><line x1="148" y1="24" x2="148" y2="184" class="solid"></line><line x1="68" y1="56" x2="148" y2="56" class="solid"></line><line x1="68" y1="88" x2="148" y2="88" class="solid"></line><line x1="68" y1="120" x2="148" y2="120" class="solid"></line><line x1="68" y1="152" x2="148" y2="152" class="solid"></line><line x1="68" y1="184" x2="148" y2="184" class="solid"></line></g></svg></code></pre><p>So, a character like <code>-</code> it will be line connecting from block <code>k</code> to block <code>o</code></p></p></article></div></body></html>
+                          </script><input id="search" class="search" placeholder="Search.." onkeyup="doSearch()" type="search"/><ul id="results"></ul><div><div class="summary_content"><!--hidden--><article class="content"><p><h1>Design Implementation</h1><p>Svgbob converts characters into a graphical element, however listing every possible combination of characters for each of the 8 neighbors<!--separator-->
+<!--separator-->would be exhausting and impractical.</p><p>For each character, we will subdivide it into 25 blocks at 5x5 cells.</p><code><code class="bob"><svg xmlns="http://www.w3.org/2000/svg" width="160" height="208"><style>line, path, circle, rect, polygon{stroke:black;stroke-width:2;stroke-opacity:1;fill-opacity:1;stroke-linecap:round;stroke-linejoin:miter;}text{font-family:monospace;font-size:14px;}rect.backdrop{stroke:none;fill:white;}.broken{stroke-dasharray:8;}.filled{fill:black;}.bg_filled{fill:white;}.nofill{fill:white;}.end_marked_arrow{marker-end:url(#arrow);}.start_marked_arrow{marker-start:url(#arrow);}.end_marked_diamond{marker-end:url(#diamond);}.start_marked_diamond{marker-start:url(#diamond);}.end_marked_circle{marker-end:url(#circle);}.start_marked_circle{marker-start:url(#circle);}.end_marked_open_circle{marker-end:url(#open_circle);}.start_marked_open_circle{marker-start:url(#open_circle);}.end_marked_big_open_circle{marker-end:url(#big_open_circle);}.start_marked_big_open_circle{marker-start:url(#big_open_circle);}<!--separator--></style><defs><marker id="arrow" viewBox="-2 -2 8 8" refX="4" refY="2" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><polygon points="0,0 0,4 4,2 0,0"></polygon></marker><marker id="diamond" viewBox="-2 -2 8 8" refX="4" refY="2" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><polygon points="0,2 2,0 4,2 2,4 0,2"></polygon></marker><marker id="circle" viewBox="0 0 8 8" refX="4" refY="4" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><circle cx="4" cy="4" r="2" class="filled"></circle></marker><marker id="open_circle" viewBox="0 0 8 8" refX="4" refY="4" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><circle cx="4" cy="4" r="2" class="bg_filled"></circle></marker><marker id="big_open_circle" viewBox="0 0 8 8" refX="4" refY="4" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><circle cx="4" cy="4" r="3" class="bg_filled"></circle></marker></defs><rect class="backdrop" x="0" y="0" width="160" height="208"></rect><text x="74" y="44" >a</text><text x="90" y="44" >b</text><text x="106" y="44" >c</text><text x="122" y="44" >d</text><text x="138" y="44" >e</text><text x="74" y="76" >f</text><text x="90" y="76" >g</text><text x="106" y="76" >h</text><text x="122" y="76" >i</text><text x="138" y="76" >j</text><text x="74" y="108" >k</text><text x="90" y="108" >l</text><text x="106" y="108" >m</text><text x="122" y="108" >n</text><text x="138" y="108" >o</text><text x="74" y="140" >p</text><text x="90" y="140" >q</text><text x="106" y="140" >r</text><text x="122" y="140" >s</text><text x="138" y="140" >t</text><text x="74" y="172" >u</text><text x="90" y="172" >v</text><text x="106" y="172" >w</text><text x="122" y="172" >x</text><text x="138" y="172" >y</text><g><line x1="68" y1="24" x2="148" y2="24" class="solid"></line><line x1="68" y1="24" x2="68" y2="184" class="solid"></line><line x1="84" y1="24" x2="84" y2="184" class="solid"></line><line x1="100" y1="24" x2="100" y2="184" class="solid"></line><line x1="116" y1="24" x2="116" y2="184" class="solid"></line><line x1="132" y1="24" x2="132" y2="184" class="solid"></line><line x1="148" y1="24" x2="148" y2="184" class="solid"></line><line x1="68" y1="56" x2="148" y2="56" class="solid"></line><line x1="68" y1="88" x2="148" y2="88" class="solid"></line><line x1="68" y1="120" x2="148" y2="120" class="solid"></line><line x1="68" y1="152" x2="148" y2="152" class="solid"></line><line x1="68" y1="184" x2="148" y2="184" class="solid"></line></g></svg></code></code><p>So, a character like <code>-</code> it will be line connecting from block <code>k</code> to block <code>o</code></p></p><nav class="nav_page"><a class="prev_page" href="/content/Svgbob/Architecture.html">❮</a><a class="next_page" href="/content/Sauron.html">❯</a></nav></article></div></div></body></html>

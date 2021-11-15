@@ -182,22 +182,6 @@ body {
   padding: .25rem;
 }
 
-@media (prefers-color-scheme: dark) {
-	body {
-		color: #fff;
-		background: #000
-	}
-	a:link {
-		color: #9cf
-	}
-	a:hover,
-	a:visited:hover {
-		color: #cef
-	}
-	a:visited {
-		color: #c9f
-	}
-}
 
 h1,
 h2,
@@ -302,4 +286,42 @@ div.side-to-side > div:nth-child(2) {
 
 a[href*="://"]::after, a[rel*="external"] {
     content: " " url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20class='i-external'%20viewBox='0%200%2032%2032'%20width='14'%20height='14'%20fill='none'%20stroke='%232980b9'%20stroke-linecap='round'%20stroke-linejoin='round'%20stroke-width='9.38%'%3E%3Cpath%20d='M14%209%20L3%209%203%2029%2023%2029%2023%2018%20M18%204%20L28%204%2028%2014%20M28%204%20L14%2018'/%3E%3C/svg%3E");
+}
+
+@media (prefers-color-scheme: dark) {
+    :root{
+        --code-bg: #222;
+        --quote-bg: #222;
+        --quote-border: #eaeaea;
+        --theme-color: #3498db;
+        --theme-color-accent: #2980b9;
+    }
+	body {
+		color: #fff;
+		background: #000
+	}
+	a:link {
+		color: #9cf
+	}
+	a:hover,
+	a:visited:hover {
+		color: #cef
+	}
+	a:visited {
+		color: #c9f
+	}
+
+    table th,
+    table td {
+      border: 1px solid #dfe2e5;
+    }
+
+    table tr {
+      background-color: #333;
+      border-top: 1px solid #c6cbd1;
+    }
+
+    table tr:nth-child(2n) {
+      background-color: #222;
+    }
 }
