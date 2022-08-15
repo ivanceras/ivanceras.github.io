@@ -1,0 +1,13 @@
+[Desktop Entry]
+Name=Svgbob-pro
+GenericName=Svgbob pro
+Comment=Create and edit unicode art
+MimeType=text/plain;image/svg+xml;text/english;text/x-bob;
+Categories=Utility;Development;TextEditor;Graphics;
+Exec=svgbob-pro %F
+TryExec=/usr/bin/svgbob-pro
+Icon=svgbob
+Terminal=false
+Type=Application
+X-GNOME-Gettext-Domain=svgbob-pro
+Keywords=Text;Editor;
