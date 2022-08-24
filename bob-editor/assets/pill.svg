@@ -1,0 +1,26 @@
+<svg height="36" width="36" xmlns="http://www.w3.org/2000/svg">
+    <style>line, path, circle,rect,polygon {
+                          stroke: black;
+                          stroke-width: 4;
+                          stroke-opacity: 1;
+                          fill: white;
+                          fill-opacity: 0.1;
+                          stroke-linecap: round;
+                          stroke-linejoin: miter;
+                        }
+                        </style>
+    <g transform="scale(0.5)">
+        <path d="M 20,10 A 10,10 0,0,0 12.5,15"></path>
+        <line class="solid" x1="12.5" x2="10" y1="15" y2="20"></line>
+        <line class="solid" x1="20" x2="50" y1="10" y2="10"></line>
+        <path d="M 50,10 A 10,10 0,0,1 57.5,15"></path>
+        <line class="solid" x1="57.5" x2="60" y1="15" y2="20"></line>
+        <path d="M 10,20 A 20,20 0,0,0 10,40"></path>
+        <path d="M 60,20 A 20,20 0,0,1 60,40"></path>
+        <line class="solid" x1="10" x2="12.5" y1="40" y2="45"></line>
+        <path d="M 12.5,45 A 10,10 0,0,0 20,50" ></path>
+        <line class="solid" x1="20" x2="50" y1="50" y2="50"></line>
+        <line class="solid" x1="60" x2="57.5" y1="40" y2="45"></line>
+        <path d="M 57.5,45 A 10,10 0,0,1 50,50"></path>
+    </g>
+</svg>
