@@ -964,6 +964,6 @@ async function init(input) {
 export { initSync }
 export default init;
 
-init(new URL('./pkg/client_bg.wasm', 'http://localhost')).catch(console.err);;</script>
+init(new URL('./pkg/client_bg.wasm', import.meta.url)).catch(console.err);;</script>
   </body>
 </html>
