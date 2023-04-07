@@ -8,5 +8,7 @@
   ],
   "module": "client.js",
   "types": "client.d.ts",
-  "sideEffects": false
+  "sideEffects": [
+    "./snippets/*"
+  ]
 }
