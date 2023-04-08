@@ -1,0 +1,14 @@
+{
+  "name": "client",
+  "version": "0.1.0",
+  "files": [
+    "client_bg.wasm",
+    "client.js",
+    "client.d.ts"
+  ],
+  "module": "client.js",
+  "types": "client.d.ts",
+  "sideEffects": [
+    "./snippets/*"
+  ]
+}
