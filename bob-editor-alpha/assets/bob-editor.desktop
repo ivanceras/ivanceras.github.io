@@ -1,0 +1,13 @@
+[Desktop Entry]
+Name=bob-editor
+GenericName=Bob Editor
+Comment=Create and edit unicode art
+MimeType=text/plain;image/svg+xml;text/english;text/x-bob;
+Categories=Utility;Development;TextEditor;Graphics;
+Exec=bob-editor %F
+TryExec=/usr/bin/bob-editor
+Icon=bob-editor
+Terminal=false
+Type=Application
+X-GNOME-Gettext-Domain=bob-editor
+Keywords=Text;Editor;
