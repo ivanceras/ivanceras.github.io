@@ -1,20 +1,22 @@
 {
-  "name": "ultron-web",
+  "name": "ultron-app",
   "description": "Ultron editor variant exposed as a web application",
-  "version": "0.2.4",
+  "version": "0.2.6",
   "license": "MIT",
   "repository": {
     "type": "git",
     "url": "https://github.com/ivanceras/ultron"
   },
   "files": [
-    "ultron_web_bg.wasm",
-    "ultron_web.js",
-    "ultron_web.d.ts"
+    "ultron_app_bg.wasm",
+    "ultron_app.js",
+    "ultron_app.d.ts"
   ],
-  "module": "ultron_web.js",
-  "types": "ultron_web.d.ts",
-  "sideEffects": false,
+  "module": "ultron_app.js",
+  "types": "ultron_app.d.ts",
+  "sideEffects": [
+    "./snippets/*"
+  ],
   "keywords": [
     "web",
     "editor",
