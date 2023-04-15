@@ -11,5 +11,7 @@
   ],
   "module": "svgbob_editor.js",
   "types": "svgbob_editor.d.ts",
-  "sideEffects": false
+  "sideEffects": [
+    "./snippets/*"
+  ]
 }
