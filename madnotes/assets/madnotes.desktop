@@ -1,0 +1,13 @@
+[Desktop Entry]
+Name=Madnotes
+GenericName=Madnotes
+Comment=Create shareable notes
+MimeType=text/plain;text/english;
+Categories=Utility;Development;TextEditor;
+Exec=madnotes %F
+TryExec=/usr/bin/madnotes
+Icon=madnotes
+Terminal=false
+Type=Application
+X-GNOME-Gettext-Domain=madnotes
+Keywords=Text;Editor;
