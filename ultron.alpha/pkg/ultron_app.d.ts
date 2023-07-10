@@ -45,17 +45,17 @@ export interface InitOutput {
   readonly webeditorcustomelement_connectedCallback: (a: number) => void;
   readonly webeditorcustomelement_adoptedCallback: (a: number) => void;
   readonly webeditorcustomelement_register: () => void;
-  readonly webeditorcustomelement_disconnectedCallback: (a: number) => void;
   readonly webeditorcustomelement_observedAttributes: () => number;
-  readonly __wbindgen_export_0: (a: number, b: number) => number;
-  readonly __wbindgen_export_1: (a: number, b: number, c: number, d: number) => number;
+  readonly webeditorcustomelement_disconnectedCallback: (a: number) => void;
+  readonly __wbindgen_export_0: (a: number) => number;
+  readonly __wbindgen_export_1: (a: number, b: number, c: number) => number;
   readonly __wbindgen_export_2: WebAssembly.Table;
-  readonly __wbindgen_export_3: (a: number, b: number, c: number) => void;
-  readonly __wbindgen_export_4: (a: number, b: number) => void;
+  readonly __wbindgen_export_3: (a: number, b: number) => void;
+  readonly __wbindgen_export_4: (a: number, b: number, c: number) => void;
   readonly __wbindgen_export_5: (a: number, b: number) => void;
   readonly __wbindgen_export_6: (a: number, b: number, c: number) => void;
   readonly __wbindgen_export_7: (a: number, b: number, c: number) => void;
-  readonly __wbindgen_export_8: (a: number, b: number, c: number) => void;
+  readonly __wbindgen_export_8: (a: number, b: number) => void;
   readonly __wbindgen_export_9: (a: number) => void;
   readonly __wbindgen_start: () => void;
 }
@@ -79,4 +79,4 @@ export function initSync(module: SyncInitInput): InitOutput;
 *
 * @returns {Promise<InitOutput>}
 */
-export default function __wbg_init (module_or_path?: InitInput | Promise<InitInput>): Promise<InitOutput>;
+export default function init (module_or_path?: InitInput | Promise<InitInput>): Promise<InitOutput>;
