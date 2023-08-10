@@ -1,49 +1,374 @@
-<!doctype html>
-<html><head><meta content="text/html;charset=utf-8" http-equiv="Content-Type"/><title>Jovansonlee Cesar - An h1 header</title><style>.fake_terminal{overflow:hidden;}.fake_buttons{position:relative;display:flex;left:10px;top:5px;}.fake_btn{height:10px;width:10px;border-radius:50%;border:1px solid #000;margin:0px 2px;}.fake_close{background-color:#ff3b47;border-color:#9d252b;}.fake_minimize{background-color:#ffc100;border-color:#9d802c;}.fake_zoom{background-color:#00d742;border-color:#049931;}.fake_menu{width:100%;box-sizing:border-box;height:25px;background-color:#151515;border-top-right-radius:5px;border-top-left-radius:5px;}.fake_screen{background-color:#151515;box-sizing:border-box;width:100%;padding:20px;border-bottom-left-radius:5px;border-bottom-right-radius:5px;}.fake_terminal p{position:relative;text-align:left;font-size:14px;font-family:monospace;white-space:nowrap;overflow:hidden;}.fake_terminal span{color:#fff;font-weight:bold;}.fake_terminal .line{color:#9CD9F0;}</style><style>body{max-width:1200px;margin:0 auto;}pre,code{padding:0;margin:0;overflow-y:hidden;overflow-x:auto;}.summary_content{display:flex;}.summary{padding:20px 20px;white-space:nowrap;border-right:2px solid #555;}.summary ul{list-style-type:none;counter-reset:list;}.summary ul li:before{counter-increment:list;content:counters(list, ".") ". ";}.content{padding:0px 20px;}</style><link rel="stylesheet" href="/style.css"/></head><body><script type="module">
-                             import { search, default as init } from '/tinysearch_engine.js';
-                             window.search = search;
+<!doctype html><html>
+  <head>
+    <meta content="text/html;charset=utf-8" http-equiv="Content-Type"/>
+    <title>Jovansonlee Cesar</title>
+    <style>.cell{}.cell_debug{border:2px solid green;margin:10px;padding:10px;}
+.task-list p {
+    display: inline-block;
+}
 
-                             async function run() {
-                               await init('/tinysearch_engine_bg.wasm');
-                             }
+.admonition {
+    border-radius: 10px;
+    padding: 10px 20px;
+    margin: 40px 5px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+}
+.admonition .icon {
+    margin-right: 10px;
+    vertical-align: top;
+}
+.admonition.warning {
+    border-color: rgb(255, 136, 0);
+    background-color: rgba(255, 136, 0, 0.10);
+}
+.admonition.info {
+    border-color: rgb(0, 153, 204);
+    background-color: rgba(0, 153, 204, 0.10);
+}
+.admonition.note {
+    border-color: rgb(0, 126, 51);
+    background-color: rgba(0, 126, 51, 0.10);
+}
+.admonition.danger {
+    border-color: rgb(204, 0, 0);
+    background-color: rgba(204, 0, 0, 0.10);
+}
 
-                             run();
-                            </script><script>
-                             function doSearch() {
-                               let value = document.getElementById('search').value;
-                               const arr = search(value, 10);
-                               let ul = document.getElementById('results');
-                               ul.innerHTML = '';
+table, th, td {
+    border-collapse: collapse;
+    padding: 4px 10px;
+}
+th, td {
+    border: 1px solid #000;
+}
+.fake_terminal{overflow:hidden;}.fake_buttons{position:relative;display:flex;left:10px;top:5px;}.fake_btn{height:10px;width:10px;border-radius:50%;border:1px solid #000;margin:0px 2px;}.fake_close{background-color:#ff3b47;border-color:#9d252b;}.fake_minimize{background-color:#ffc100;border-color:#9d802c;}.fake_zoom{background-color:#00d742;border-color:#049931;}.fake_menu{width:100%;box-sizing:border-box;height:25px;background-color:#151515;border-top-right-radius:5px;border-top-left-radius:5px;}.fake_screen{background-color:#151515;box-sizing:border-box;width:100%;padding:20px;border-bottom-left-radius:5px;border-bottom-right-radius:5px;}.fake_terminal p{position:relative;text-align:left;font-size:14px;font-family:monospace;white-space:nowrap;overflow:hidden;}.fake_terminal span{color:#fff;font-weight:bold;}.fake_terminal .line{color:#9CD9F0;}</style>
+    <style>body{max-width:1200px;margin:0 auto;}pre,code{padding:0;margin:0;overflow-y:hidden;overflow-x:auto;}.summary_content{display:flex;}.summary{padding:20px 20px;white-space:nowrap;border-right:2px solid #555;}.summary ul{list-style-type:none;counter-reset:list;}.summary ul li:before{counter-increment:list;content:counters(list, ".") ". ";}.content{padding:0px 20px;}.nav_page a{text-decoration:none;padding:10px 40px;background-color:#ccc;border-radius:5px;}a.prev_page{float:left;}a.next_page{float:right;}</style>
+    <link rel="stylesheet" href="/style.css"/>
+  </head>
+  <body>
+    <nav class="main_nav">
+      <a href="/" title="Home">
+        <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="-4.5 0 32 32">
+          <path fill-rule="evenodd" d="m19.47 12.6 3.62 3.3c.44.41.32.73-.28.73H20.1v8.65c0 .6-.5 1.13-1.09 1.13h-4.72v-6.07c0-.59-.53-1.12-1.12-1.12h-2.97c-.6 0-1.13.53-1.13 1.12v6.07H4.34c-.6 0-1.12-.53-1.12-1.13v-8.65H.53c-.6 0-.72-.32-.28-.72l10.6-9.63c.43-.4 1.18-.4 1.65 0l2.4 2.16V6.72c0-.6.54-1.13 1.13-1.13h2.34c.6 0 1.1.54 1.1 1.13v5.87z"></path>
+        </svg>
+        Home
+      </a>
+    </nav>
+    <input id="search" class="search" placeholder="Search.." onkeyup="doSearch()" type="search"/>
+    <ul id="results"></ul>
+    <main class="main_content">
+      <div class="summary_content">
+        <!--hidden-->
+        <article class="content">
+          <div>
+            <div class="cell_node">
+              <p>
+                An h1 header
+                
 
-                               for (i = 0; i < arr.length; i++) {
-                                 var li = document.createElement('li');
+                ============
+              </p>
+            </div>
+            <div class="cell_node">
+              <p>Paragraphs are separated by a blank line.</p>
+            </div>
+            <div class="cell_node">
+              <p>
+                2nd paragraph. 
+                <strong>Italic</strong>
+                , 
+                <strong>
+                  <strong>bold</strong>
+                </strong>
+                , and 
+                <code>monospace</code>
+                . Itemized lists
+                
 
-                                 let elem = arr[i];
-                                 let elemlink = document.createElement('a');
-                                 elemlink.innerHTML = elem[0];
-                                 elemlink.setAttribute('href', elem[1]);
-                                 li.appendChild(elemlink);
+                look like:
+              </p>
+            </div>
+            <div class="cell_node">
+              <ul tight_list="true">
+                <li>this one</li>
+                <li>that one</li>
+                <li>the other one</li>
+              </ul>
+            </div>
+            <div class="cell_node">
+              <p>
+                Note that 
+                &mdash;
+                 not considering the asterisk 
+                &mdash;
+                 the actual text
+                
 
-                                 ul.appendChild(li);
-                               }
-                             }
-                          </script><input id="search" class="search" placeholder="Search.." onkeyup="doSearch()" type="search"/><ul id="results"></ul><div><nav><a href="/">Home</a></nav><div class="summary_content"><!--hidden--><article class="content"><p><h1>An h1 header</h1><p>Paragraphs are separated by a blank line.</p><p>2nd paragraph. <em>Italic</em>, <strong>bold</strong>, and <code>monospace</code>. Itemized lists<!--separator-->
-<!--separator-->look like:</p><ul><li>this one</li><li>that one</li><li>the other one</li></ul><p>Note that --- not considering the asterisk --- the actual text<!--separator-->
-<!--separator-->content starts at 4-columns in.</p><blockquote><p>Block quotes are<!--separator-->
-<!--separator-->written like so.</p><p>They can span multiple paragraphs,<!--separator-->
-<!--separator-->if you like.</p></blockquote><p>Use 3 dashes for an em-dash. Use 2 dashes for ranges (ex., "it's all<!--separator-->
-<!--separator-->in chapters 12--14"). Three dots ... will be converted to an ellipsis.<!--separator-->
-<!--separator-->Unicode is supported. ☺</p><h2>An h2 header</h2><p>Here's a numbered list:</p><ol><li>first item</li><li>second item</li><li>third item</li></ol><p>Note again how the actual text starts at 4 columns in (4 characters<!--separator-->
-<!--separator-->from the left side). Here's a code sample:</p><code><code># Let me re-iterate ...
-</code><code>for i in 1 .. 10 { do-something(i) }
-</code></code><p>As you probably guessed, indented 4 spaces. By the way, instead of<!--separator-->
-<!--separator-->indenting the block, you can use delimited blocks, if you like:</p><code><code class=""><main><header><style type="text/css">.ultron__code_wrapper{margin:0;}.ultron__code{position:relative;font-size:14px;cursor:text;display:block;min-width:max-content;}.ultron__line_block{display:block;height:16px;}.ultron__number__line{display:flex;height:16px;}.ultron__number{flex:none;text-align:right;background-color:#002b36;padding-right:8px;height:16px;user-select:none;}.ultron__number_wide1 .ultron__number{width:8px;}.ultron__number_wide2 .ultron__number{width:16px;}.ultron__number_wide3 .ultron__number{width:24px;}.ultron__number_wide4 .ultron__number{width:32px;}.ultron__number_wide5 .ultron__number{width:40px;}.ultron__line{flex:none;height:16px;overflow:hidden;display:inline-block;}.ultron__filler{width:100%;}.ultron__line_focused{}.ultron__range{flex:none;height:16px;overflow:hidden;display:inline-block;}.ultron__line .ultron__ch{width:8px;height:16px;font-stretch:ultra-condensed;font-variant-numeric:slashed-zero;font-kerning:none;font-size-adjust:none;font-optical-sizing:none;position:relative;overflow:hidden;align-items:center;line-height:1;display:inline-block;}.ultron__line .ultron__ch::selection{background-color:rgba(44, 76, 85, 1.00);}.ultron__ch.ultron__selected{background-color:rgba(44, 76, 85, 1.00);}.ultron__virtual_cursor{position:absolute;width:8px;height:16px;background-color:rgba(238, 232, 213, 1.00);}.ultron__ch .ultron__cursor{position:absolute;left:0;width:8px;height:16px;background-color:rgba(238, 232, 213, 1.00);display:inline;animation:cursor_blink-anim 1000ms step-end infinite;}.ultron__ch.ultron__wide2 .ultron__cursor{width:16px;}.ultron__ch.ultron__wide3 .ultron__cursor{width:24px;}.ultron__thin_cursor .ultron__cursor{width:2px;}.ultron__block_cursor .ultron__cursor{width:8px;}.ultron__line .ultron__ch.ultron__wide2{width:16px;font-size:13px;}.ultron__line .ultron__ch.ultron__wide3{width:24px;font-size:13px;}@keyframes cursor_blink-anim{50%{background-color:transparent;border-color:transparent;}100%{background-color:rgba(238, 232, 213, 1.00);border-color:transparent;}50%{background-color:transparent;border-color:transparent;}100%{background-color:rgba(238, 232, 213, 1.00);border-color:transparent;}}</style></header><article><div class="ultron__code ultron__number_wide1" style="background:rgba(0, 43, 54, 1.00);"><div key="0" class="ultron__number__line ultron__line_focused"><span class="ultron__number" style="background-color:rgba(7, 54, 66, 1.00);">1</span><span class="ultron__line"><span class="ultron__range ultron__range_focused" style="color:rgba(131, 148, 150, 1.00);background-color:rgba(0, 43, 54, 1.00);"><span class="ultron__ch ultron__ch_focused">d</span><span class="ultron__ch">e</span><span class="ultron__ch">f</span><span class="ultron__ch">i</span><span class="ultron__ch">n</span><span class="ultron__ch">e</span><span class="ultron__ch">&nbsp;</span><span class="ultron__ch">f</span><span class="ultron__ch">o</span><span class="ultron__ch">o</span><span class="ultron__ch">b</span><span class="ultron__ch">a</span><span class="ultron__ch">r</span><span class="ultron__ch">(</span><span class="ultron__ch">)</span><span class="ultron__ch">&nbsp;</span><span class="ultron__ch">{</span></span></span></div><div key="1" class="ultron__number__line"><span class="ultron__number" style="background-color:rgba(7, 54, 66, 1.00);">2</span><span class="ultron__line"><span class="ultron__range" style="color:rgba(131, 148, 150, 1.00);background-color:rgba(0, 43, 54, 1.00);"><span class="ultron__ch">&nbsp;</span><span class="ultron__ch">&nbsp;</span><span class="ultron__ch">&nbsp;</span><span class="ultron__ch">&nbsp;</span><span class="ultron__ch">p</span><span class="ultron__ch">r</span><span class="ultron__ch">i</span><span class="ultron__ch">n</span><span class="ultron__ch">t</span><span class="ultron__ch">&nbsp;</span><span class="ultron__ch">"</span><span class="ultron__ch">W</span><span class="ultron__ch">e</span><span class="ultron__ch">l</span><span class="ultron__ch">c</span><span class="ultron__ch">o</span><span class="ultron__ch">m</span><span class="ultron__ch">e</span><span class="ultron__ch">&nbsp;</span><span class="ultron__ch">t</span><span class="ultron__ch">o</span><span class="ultron__ch">&nbsp;</span><span class="ultron__ch">f</span><span class="ultron__ch">l</span><span class="ultron__ch">a</span><span class="ultron__ch">v</span><span class="ultron__ch">o</span><span class="ultron__ch">r</span><span class="ultron__ch">&nbsp;</span><span class="ultron__ch">c</span><span class="ultron__ch">o</span><span class="ultron__ch">u</span><span class="ultron__ch">n</span><span class="ultron__ch">t</span><span class="ultron__ch">r</span><span class="ultron__ch">y</span><span class="ultron__ch">!</span><span class="ultron__ch">"</span><span class="ultron__ch">;</span></span></span></div><div key="2" class="ultron__number__line"><span class="ultron__number" style="background-color:rgba(7, 54, 66, 1.00);">3</span><span class="ultron__line"><span class="ultron__range" style="color:rgba(131, 148, 150, 1.00);background-color:rgba(0, 43, 54, 1.00);"><span class="ultron__ch">}</span></span></span></div></div></article></main></code></code><p>(which makes copying &amp; pasting easier). You can optionally mark the<!--separator-->
-<!--separator-->delimited block for Pandoc to syntax highlight it:</p><code><code class="python"><main><header><style type="text/css">.ultron__code_wrapper{margin:0;}.ultron__code{position:relative;font-size:14px;cursor:text;display:block;min-width:max-content;}.ultron__line_block{display:block;height:16px;}.ultron__number__line{display:flex;height:16px;}.ultron__number{flex:none;text-align:right;background-color:#002b36;padding-right:8px;height:16px;user-select:none;}.ultron__number_wide1 .ultron__number{width:8px;}.ultron__number_wide2 .ultron__number{width:16px;}.ultron__number_wide3 .ultron__number{width:24px;}.ultron__number_wide4 .ultron__number{width:32px;}.ultron__number_wide5 .ultron__number{width:40px;}.ultron__line{flex:none;height:16px;overflow:hidden;display:inline-block;}.ultron__filler{width:100%;}.ultron__line_focused{}.ultron__range{flex:none;height:16px;overflow:hidden;display:inline-block;}.ultron__line .ultron__ch{width:8px;height:16px;font-stretch:ultra-condensed;font-variant-numeric:slashed-zero;font-kerning:none;font-size-adjust:none;font-optical-sizing:none;position:relative;overflow:hidden;align-items:center;line-height:1;display:inline-block;}.ultron__line .ultron__ch::selection{background-color:rgba(44, 76, 85, 1.00);}.ultron__ch.ultron__selected{background-color:rgba(44, 76, 85, 1.00);}.ultron__virtual_cursor{position:absolute;width:8px;height:16px;background-color:rgba(238, 232, 213, 1.00);}.ultron__ch .ultron__cursor{position:absolute;left:0;width:8px;height:16px;background-color:rgba(238, 232, 213, 1.00);display:inline;animation:cursor_blink-anim 1000ms step-end infinite;}.ultron__ch.ultron__wide2 .ultron__cursor{width:16px;}.ultron__ch.ultron__wide3 .ultron__cursor{width:24px;}.ultron__thin_cursor .ultron__cursor{width:2px;}.ultron__block_cursor .ultron__cursor{width:8px;}.ultron__line .ultron__ch.ultron__wide2{width:16px;font-size:13px;}.ultron__line .ultron__ch.ultron__wide3{width:24px;font-size:13px;}@keyframes cursor_blink-anim{50%{background-color:transparent;border-color:transparent;}100%{background-color:rgba(238, 232, 213, 1.00);border-color:transparent;}50%{background-color:transparent;border-color:transparent;}100%{background-color:rgba(238, 232, 213, 1.00);border-color:transparent;}}</style></header><article><div class="ultron__code ultron__number_wide1" style="background:rgba(0, 43, 54, 1.00);"><div key="0" class="ultron__number__line ultron__line_focused"><span class="ultron__number" style="background-color:rgba(7, 54, 66, 1.00);">1</span><span class="ultron__line"><span class="ultron__range ultron__range_focused" style="color:rgba(203, 75, 22, 1.00);background-color:rgba(0, 43, 54, 1.00);"><span class="ultron__ch ultron__ch_focused">i</span><span class="ultron__ch">m</span><span class="ultron__ch">p</span><span class="ultron__ch">o</span><span class="ultron__ch">r</span><span class="ultron__ch">t</span></span><span class="ultron__range" style="color:rgba(131, 148, 150, 1.00);background-color:rgba(0, 43, 54, 1.00);"><span class="ultron__ch">&nbsp;</span></span><span class="ultron__range" style="color:rgba(131, 148, 150, 1.00);background-color:rgba(0, 43, 54, 1.00);"><span class="ultron__ch">t</span><span class="ultron__ch">i</span><span class="ultron__ch">m</span><span class="ultron__ch">e</span></span></span></div><div key="1" class="ultron__number__line"><span class="ultron__number" style="background-color:rgba(7, 54, 66, 1.00);">2</span><span class="ultron__line"><span class="ultron__range" style="color:rgba(88, 110, 117, 1.00);background-color:rgba(0, 43, 54, 1.00);"><span class="ultron__ch">#</span></span><span class="ultron__range" style="color:rgba(88, 110, 117, 1.00);background-color:rgba(0, 43, 54, 1.00);"><span class="ultron__ch">&nbsp;</span><span class="ultron__ch">Q</span><span class="ultron__ch">u</span><span class="ultron__ch">i</span><span class="ultron__ch">c</span><span class="ultron__ch">k</span><span class="ultron__ch">,</span><span class="ultron__ch">&nbsp;</span><span class="ultron__ch">c</span><span class="ultron__ch">o</span><span class="ultron__ch">u</span><span class="ultron__ch">n</span><span class="ultron__ch">t</span><span class="ultron__ch">&nbsp;</span><span class="ultron__ch">t</span><span class="ultron__ch">o</span><span class="ultron__ch">&nbsp;</span><span class="ultron__ch">t</span><span class="ultron__ch">e</span><span class="ultron__ch">n</span><span class="ultron__ch">!</span></span></span></div><div key="2" class="ultron__number__line"><span class="ultron__number" style="background-color:rgba(7, 54, 66, 1.00);">3</span><span class="ultron__line"><span class="ultron__range" style="color:rgba(88, 110, 117, 1.00);background-color:rgba(0, 43, 54, 1.00);"><span class="ultron__ch">f</span><span class="ultron__ch">o</span><span class="ultron__ch">r</span><span class="ultron__ch">&nbsp;</span><span class="ultron__ch">i</span><span class="ultron__ch">&nbsp;</span><span class="ultron__ch">i</span><span class="ultron__ch">n</span><span class="ultron__ch">&nbsp;</span><span class="ultron__ch">r</span><span class="ultron__ch">a</span><span class="ultron__ch">n</span><span class="ultron__ch">g</span><span class="ultron__ch">e</span><span class="ultron__ch">(</span><span class="ultron__ch">1</span><span class="ultron__ch">0</span><span class="ultron__ch">)</span><span class="ultron__ch">:</span></span></span></div><div key="3" class="ultron__number__line"><span class="ultron__number" style="background-color:rgba(7, 54, 66, 1.00);">4</span><span class="ultron__line"><span class="ultron__range" style="color:rgba(88, 110, 117, 1.00);background-color:rgba(0, 43, 54, 1.00);"><span class="ultron__ch">&nbsp;</span><span class="ultron__ch">&nbsp;</span><span class="ultron__ch">&nbsp;</span><span class="ultron__ch">&nbsp;</span><span class="ultron__ch">#</span><span class="ultron__ch">&nbsp;</span><span class="ultron__ch">(</span><span class="ultron__ch">b</span><span class="ultron__ch">u</span><span class="ultron__ch">t</span><span class="ultron__ch">&nbsp;</span><span class="ultron__ch">n</span><span class="ultron__ch">o</span><span class="ultron__ch">t</span><span class="ultron__ch">&nbsp;</span><span class="ultron__ch">*</span><span class="ultron__ch">t</span><span class="ultron__ch">o</span><span class="ultron__ch">o</span><span class="ultron__ch">*</span><span class="ultron__ch">&nbsp;</span><span class="ultron__ch">q</span><span class="ultron__ch">u</span><span class="ultron__ch">i</span><span class="ultron__ch">c</span><span class="ultron__ch">k</span><span class="ultron__ch">)</span></span></span></div><div key="4" class="ultron__number__line"><span class="ultron__number" style="background-color:rgba(7, 54, 66, 1.00);">5</span><span class="ultron__line"><span class="ultron__range" style="color:rgba(88, 110, 117, 1.00);background-color:rgba(0, 43, 54, 1.00);"><span class="ultron__ch">&nbsp;</span><span class="ultron__ch">&nbsp;</span><span class="ultron__ch">&nbsp;</span><span class="ultron__ch">&nbsp;</span><span class="ultron__ch">t</span><span class="ultron__ch">i</span><span class="ultron__ch">m</span><span class="ultron__ch">e</span><span class="ultron__ch">.</span><span class="ultron__ch">s</span><span class="ultron__ch">l</span><span class="ultron__ch">e</span><span class="ultron__ch">e</span><span class="ultron__ch">p</span><span class="ultron__ch">(</span><span class="ultron__ch">0</span><span class="ultron__ch">.</span><span class="ultron__ch">5</span><span class="ultron__ch">)</span></span></span></div><div key="5" class="ultron__number__line"><span class="ultron__number" style="background-color:rgba(7, 54, 66, 1.00);">6</span><span class="ultron__line"><span class="ultron__range" style="color:rgba(88, 110, 117, 1.00);background-color:rgba(0, 43, 54, 1.00);"><span class="ultron__ch">&nbsp;</span><span class="ultron__ch">&nbsp;</span><span class="ultron__ch">&nbsp;</span><span class="ultron__ch">&nbsp;</span><span class="ultron__ch">p</span><span class="ultron__ch">r</span><span class="ultron__ch">i</span><span class="ultron__ch">n</span><span class="ultron__ch">t</span><span class="ultron__ch">(</span><span class="ultron__ch">i</span><span class="ultron__ch">)</span></span></span></div></div></article></main></code></code><h3>An h3 header</h3><p>Now a nested list:</p><ol><li><p>First, get these ingredients:</p><ul><li>carrots</li><li>celery</li><li>lentils</li></ul></li><li><p>Boil some water.</p></li><li><p>Dump everything in the pot and follow<!--separator-->
-<!--separator-->this algorithm:</p><code><code>find wooden spoon
-</code><code>uncover pot
-</code><code>stir
-</code><code>cover pot
-</code><code>balance wooden spoon precariously on pot handle
-</code><code>wait 10 minutes
-</code><code>goto first step (or shut off burner when done)
-</code></code></li></ol><h4>Tables</h4><table><tr><th>Option</th><th>Description</th></tr><tr><td>data</td><td>path to data files to supply the data that will be passed into templates.</td></tr><tr><td>engine</td><td>engine to be used for processing templates. Handlebars is the default.</td></tr><tr><td>ext</td><td>extension to be used for dest files.</td></tr></table><p><a href="/content/Spongedown.html" title="">Back to Spongedown</a></p></p></article></div></div></body></html>
+                content starts at 4-columns in.
+              </p>
+            </div>
+            <div class="cell_node">
+              <blockquote>
+                <p>
+                  Block quotes are
+                  
+
+                  written like so.
+                </p>
+                <p>
+                  They can span multiple paragraphs,
+                  
+
+                  if you like.
+                </p>
+              </blockquote>
+            </div>
+            <div class="cell_node">
+              <p>
+                Use 3 dashes for an em-dash. Use 2 dashes for ranges (ex., 
+                &ldquo;
+                it
+                &rsquo;
+                s all
+                
+
+                in chapters 12
+                &ndash;
+                14
+                &rdquo;
+                ). Three dots 
+                &hellip;
+                 will be converted to an ellipsis.
+                
+
+                Unicode is supported. ☺
+              </p>
+            </div>
+            <div class="cell_node">
+              <p>
+                An h2 header
+                
+
+                &mdash;
+                &mdash;
+                &mdash;
+                &mdash;
+              </p>
+            </div>
+            <div class="cell_node">
+              <p>
+                Here
+                &rsquo;
+                s a numbered list:
+              </p>
+            </div>
+            <div class="cell_node">
+              <ol tight_list="true">
+                <li>first item</li>
+                <li>second item</li>
+                <li>third item</li>
+              </ol>
+            </div>
+            <div class="cell_node">
+              <p>
+                Note again how the actual text starts at 4 columns in (4 characters
+                
+
+                from the left side). Here
+                &rsquo;
+                s a code sample:
+              </p>
+            </div>
+            <section>
+              <div class="cell_node">
+                <h1 id="Let-me-re-iterate--for-i-in-1-10-do-somethingi">
+                  Let me re-iterate 
+                  &hellip;
+                  
+
+                  for i in 1 .. 10 { do-something(i) }
+                </h1>
+              </div>
+              <div class="cell_node">
+                <p>
+                  As you probably guessed, indented 4 spaces. By the way, instead of
+                  
+
+                  indenting the block, you can use delimited blocks, if you like:
+                </p>
+              </div>
+              <div class="ssg__code" style="background:rgba(250, 250, 250, 1.00);font-family:monospace;">
+                <div class="ssg__line" style="line-height:1;">
+                  <span class="ssg__number" style="user-select:none;-webkit-user-select:none;display:inline-block;background-color:rgba(250, 250, 250, 1.00);color:rgba(34, 34, 34, 1.00);width:1ch;padding-right:1ch;">1</span>
+                  <span style="color:rgba(97, 103, 108, 1.00);">define foobar() {</span>
+                </div>
+                <div class="ssg__line" style="line-height:1;">
+                  <span class="ssg__number" style="user-select:none;-webkit-user-select:none;display:inline-block;background-color:rgba(250, 250, 250, 1.00);color:rgba(34, 34, 34, 1.00);width:1ch;padding-right:1ch;">2</span>
+                  <span style="color:rgba(97, 103, 108, 1.00);">    print "Welcome to flavor country!";</span>
+                </div>
+                <div class="ssg__line" style="line-height:1;">
+                  <span class="ssg__number" style="user-select:none;-webkit-user-select:none;display:inline-block;background-color:rgba(250, 250, 250, 1.00);color:rgba(34, 34, 34, 1.00);width:1ch;padding-right:1ch;">3</span>
+                  <span style="color:rgba(97, 103, 108, 1.00);">}</span>
+                </div>
+              </div>
+              <div class="cell_node">
+                <p>
+                  (which makes copying & pasting easier). You can optionally mark the
+                  
+
+                  delimited block for Pandoc to syntax highlight it:
+                </p>
+              </div>
+              <div class="ssg__code" style="background:rgba(250, 250, 250, 1.00);font-family:monospace;">
+                <div class="ssg__line" style="line-height:1;">
+                  <span class="ssg__number" style="user-select:none;-webkit-user-select:none;display:inline-block;background-color:rgba(250, 250, 250, 1.00);color:rgba(34, 34, 34, 1.00);width:1ch;padding-right:1ch;">1</span>
+                  <span style="color:rgba(250, 110, 50, 1.00);">import</span>
+                  <span style="color:rgba(97, 103, 108, 1.00);"> </span>
+                  <span style="color:rgba(97, 103, 108, 1.00);">time</span>
+                </div>
+                <div class="ssg__line" style="line-height:1;">
+                  <span class="ssg__number" style="user-select:none;-webkit-user-select:none;display:inline-block;background-color:rgba(250, 250, 250, 1.00);color:rgba(34, 34, 34, 1.00);width:1ch;padding-right:1ch;">2</span>
+                  <span style="color:rgba(171, 176, 182, 1.00);">#</span>
+                  <span style="color:rgba(171, 176, 182, 1.00);"> Quick, count to ten!</span>
+                </div>
+                <div class="ssg__line" style="line-height:1;">
+                  <span class="ssg__number" style="user-select:none;-webkit-user-select:none;display:inline-block;background-color:rgba(250, 250, 250, 1.00);color:rgba(34, 34, 34, 1.00);width:1ch;padding-right:1ch;">3</span>
+                  <span style="color:rgba(171, 176, 182, 1.00);">for i in range(10):</span>
+                </div>
+                <div class="ssg__line" style="line-height:1;">
+                  <span class="ssg__number" style="user-select:none;-webkit-user-select:none;display:inline-block;background-color:rgba(250, 250, 250, 1.00);color:rgba(34, 34, 34, 1.00);width:1ch;padding-right:1ch;">4</span>
+                  <span style="color:rgba(171, 176, 182, 1.00);">    # (but not *too* quick)</span>
+                </div>
+                <div class="ssg__line" style="line-height:1;">
+                  <span class="ssg__number" style="user-select:none;-webkit-user-select:none;display:inline-block;background-color:rgba(250, 250, 250, 1.00);color:rgba(34, 34, 34, 1.00);width:1ch;padding-right:1ch;">5</span>
+                  <span style="color:rgba(171, 176, 182, 1.00);">    time.sleep(0.5)</span>
+                </div>
+                <div class="ssg__line" style="line-height:1;">
+                  <span class="ssg__number" style="user-select:none;-webkit-user-select:none;display:inline-block;background-color:rgba(250, 250, 250, 1.00);color:rgba(34, 34, 34, 1.00);width:1ch;padding-right:1ch;">6</span>
+                  <span style="color:rgba(171, 176, 182, 1.00);">    print(i)</span>
+                </div>
+              </div>
+              <section>
+                <div class="cell_node">
+                  <h3 id="An-h3-header">An h3 header ###</h3>
+                </div>
+                <div class="cell_node">
+                  <p>Now a nested list:</p>
+                </div>
+                <div class="cell_node">
+                  <ol tight_list="false">
+                    <li>
+                      <p>First, get these ingredients:</p>
+                      <ul tight_list="true">
+                        <li>carrots</li>
+                        <li>celery</li>
+                        <li>lentils</li>
+                      </ul>
+                    </li>
+                    <li>
+                      <p>Boil some water.</p>
+                    </li>
+                    <li>
+                      <p>
+                        Dump everything in the pot and follow
+                        
+
+                        this algorithm:
+                      </p>
+                      <p>
+                        find wooden spoon
+                        
+
+                        uncover pot
+                        
+
+                        stir
+                        
+
+                        cover pot
+                        
+
+                        balance wooden spoon precariously on pot handle
+                        
+
+                        wait 10 minutes
+                        
+
+                        goto first step (or shut off burner when done)
+                      </p>
+                    </li>
+                  </ol>
+                </div>
+                <section>
+                  <div class="cell_node">
+                    <h4 id="Tables">Tables</h4>
+                  </div>
+                  <div class="cell_node">
+                    <table>
+                      <tr class="head-row">
+                        <th>Option</th>
+                        <th>Description</th>
+                      </tr>
+                      <tr>
+                        <td>data</td>
+                        <td>path to data files to supply the data that will be passed into templates.</td>
+                      </tr>
+                      <tr>
+                        <td>engine</td>
+                        <td>engine to be used for processing templates. Handlebars is the default.</td>
+                      </tr>
+                      <tr>
+                        <td>ext</td>
+                        <td>extension to be used for dest files.</td>
+                      </tr>
+                    </table>
+                  </div>
+                  <div class="cell_node">
+                    <p>
+                      <a href="/content/Spongedown.html">Back to Spongedown</a>
+                    </p>
+                  </div>
+                </section>
+              </section>
+            </section>
+          </div>
+          <nav class="nav_page">
+            <!--no prev_page-->
+            <!--no next_page-->
+          </nav>
+        </article>
+      </div>
+    </main>
+    <script type="module">
+                                 import { search, default as init } from '/tinysearch_engine.js';
+                                 window.search = search;
+
+                                 async function run() {
+                                   await init('/tinysearch_engine_bg.wasm');
+                                 }
+
+                                 run();
+                                </script>
+    <script>
+                                 function doSearch() {
+                                   let value = document.getElementById('search').value;
+                                   const arr = search(value, 10);
+                                   let ul = document.getElementById('results');
+                                   ul.innerHTML = '';
+
+                                   for (i = 0; i < arr.length; i++) {
+                                     var li = document.createElement('li');
+
+                                     let elem = arr[i];
+                                     let elemlink = document.createElement('a');
+                                     elemlink.innerHTML = elem[0];
+                                     elemlink.setAttribute('href', elem[1]);
+                                     li.appendChild(elemlink);
+
+                                     ul.appendChild(li);
+                                   }
+                                 }
+                              </script>
+  </body>
+</html>
