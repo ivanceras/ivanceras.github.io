@@ -1,13 +1,13 @@
 {
-  "name": "client",
+  "name": "bob-editor-app",
   "version": "0.1.0",
   "files": [
-    "client_bg.wasm",
-    "client.js",
-    "client.d.ts"
+    "bob_editor_app_bg.wasm",
+    "bob_editor_app.js",
+    "bob_editor_app.d.ts"
   ],
-  "module": "client.js",
-  "types": "client.d.ts",
+  "module": "bob_editor_app.js",
+  "types": "bob_editor_app.d.ts",
   "sideEffects": [
     "./snippets/*"
   ]
